@@ -25,6 +25,11 @@ class AccountManager : ObservableObject {
         }
     }
     
+    public func setAccount(account: Account) {
+        self.account = account
+        self.objectWillChange.send()
+    }
+    
     public func logout(){
         account = nil
         self.objectWillChange.send()

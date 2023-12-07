@@ -22,9 +22,7 @@ class ProfileViewModel : ObservableObject {
     }
     
     private func getAccount(uid: String) -> Account?{
-        return Mock.accounts.first { account in
-            account.id == uid
-        }
+        return AccountManager.shared.account
     }
     
     public func getBackgroundIndex(background : Background) -> Int {

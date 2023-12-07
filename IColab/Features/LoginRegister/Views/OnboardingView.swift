@@ -35,7 +35,7 @@ struct OnboardingView: View {
                     }
                 }else{
                     NavigationLink {
-                        LoginView(showSignIn: $showSignIn)
+                        LoginView(lvm: LoginViewModel(showSignIn: $showSignIn))
                     } label: {
                         Text("Login")
                             .frame(width: 320)
@@ -48,7 +48,7 @@ struct OnboardingView: View {
             }
             .padding()
             .navigationDestination(isPresented: $nextView) {
-                LoginView(showSignIn: $showSignIn)
+                LoginView(lvm: LoginViewModel(showSignIn: $showSignIn))
             }
         }
         .accentColor(.primary)

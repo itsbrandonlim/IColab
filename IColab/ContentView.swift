@@ -45,7 +45,7 @@ struct ContentView: View {
         }
         .fullScreenCover(isPresented: $showSignIn) {
             NavigationStack{
-                LoginView(showSignIn: $showSignIn)
+                LoginView(lvm: LoginViewModel(showSignIn: $showSignIn))
             }
         }
         .onChange(of: showSignIn) { _ in

@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @StateObject var rvm = RegisterViewModel()
-    @Binding var showSignIn: Bool
+    @StateObject var rvm : RegisterViewModel
     var body: some View {
         VStack {
             Spacer()
@@ -25,9 +24,6 @@ struct RegisterView: View {
             VStack {
                 ButtonComponent(title: "Register", width: 320) {
                     rvm.register()
-                    if !rvm.showError {
-                        showSignIn.toggle()
-                    }
                 }
                 .padding(.bottom, 10)
                 Button {
@@ -50,7 +46,7 @@ struct RegisterView: View {
         }
         
         .navigationDestination(isPresented: $rvm.signIn, destination: {
-            LoginView(showSignIn: $showSignIn)
+            LoginView(lvm: LoginViewModel(showSignIn: $rvm.showSignIn))
         })
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.large)

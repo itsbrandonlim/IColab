@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @StateObject var lvm : LoginViewModel = LoginViewModel()
-    @Binding var showSignIn : Bool
+    @StateObject var lvm : LoginViewModel
     var body: some View {
         NavigationStack {
             VStack {
@@ -24,9 +23,6 @@ struct LoginView: View {
                 VStack {
                     Button {
                         lvm.login()
-                        if !lvm.showAlert {
-                            showSignIn.toggle()
-                        }
                     } label: {
                         Text("Sign In")
                             .frame(width: 330)
@@ -58,7 +54,7 @@ struct LoginView: View {
                 print("Account dengan Overdue Project : \(account.accountDetail.name)")
             }
             .navigationDestination(isPresented: $lvm.createAccount) {
-                RegisterView(showSignIn: $showSignIn)
+                RegisterView(rvm: RegisterViewModel(showSignIn: $lvm.showSignIn))
             }
         }
         .navigationBarBackButtonHidden()

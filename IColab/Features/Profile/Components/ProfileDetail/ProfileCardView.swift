@@ -66,7 +66,9 @@ struct ProfileCardView: View {
                             }
                             Button("Logout", role: .destructive){
                                 AccountManager.shared.logout()
+                                AuthenticationManager.shared.logoutUser()
                                 showSignIn = true
+                                
                             }
                         }
                     } message: {
