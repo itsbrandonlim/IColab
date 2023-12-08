@@ -9,8 +9,6 @@ import SwiftUI
 import Foundation
 import FirebaseAuth
 
-
-
 class RegisterViewModel : ObservableObject {
     @Published var username : String
     @Published var email : String
@@ -18,6 +16,7 @@ class RegisterViewModel : ObservableObject {
     @Published var phoneNumber : String
     @Published var region : String
     @Published var signIn = false
+    @Published var isLoading = false
     @Binding var showSignIn : Bool
     
     @Published var error : RegisterError?
@@ -36,21 +35,25 @@ class RegisterViewModel : ObservableObject {
     }
     
     public func register(){
+        self.isLoading = true
         if registrationValidation() {
             AuthenticationManager.shared.createUser(email: self.email, password: self.password) { authDataResult, error in
                 if let error = error {
                     self.showError(error: .firebaseError(error))
+                    self.isLoading = false
                 }else{
                     let profileChangeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
                     profileChangeRequest?.displayName = self.username
                     profileChangeRequest?.commitChanges(completion: { error in
                         if let error = error {
+                            self.isLoading = false
                             self.showError(error: .firebaseError(error))
                         }else if let result = authDataResult{
                             let accountDetail = AccountDetail(name: result.user.displayName!, desc: "", location: self.region, bankAccount: "", cvLink: "")
                             let account = Account(email: result.user.email!, password: self.password, accountDetail: accountDetail)
                             Mock.accounts.append(account)
                             AccountManager.shared.getAccount(uid: account.id)
+                            self.isLoading = false
                             self.showSignIn = false
                         }
                     })
@@ -81,7 +84,6 @@ class RegisterViewModel : ObservableObject {
         }
         
         if let double = Double(phoneNumber) {
-            print("The string is numeric: \(double)")
         }else{
             showError(error: .phoneNotNumber)
             return false

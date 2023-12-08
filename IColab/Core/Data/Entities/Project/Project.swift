@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class Project : Identifiable, Searchable {
-    let id = UUID().uuidString
+    var id : String
     var title : String
-    var owner : Account?
+    weak var owner : Account?
     var members: [Member]?
     var role : String
     var requirements : [String]
@@ -21,8 +23,9 @@ class Project : Identifiable, Searchable {
     var milestones : [Milestone]
     var requests : [Request] = []
     var projectState : ProjectState
-    
-    init(title: String, owner: Account? = nil, members: [Member]? = nil, role: String, requirements: [String], tags: [String], startDate: Date, endDate: Date, desc: String, milestones: [Milestone], projectState: ProjectState = .notStarted) {
+
+    init(id: String = UUID().uuidString, title: String, owner: Account? = nil, members: [Member]? = nil, role: String, requirements: [String], tags: [String], startDate: Date, endDate: Date, desc: String, milestones: [Milestone], projectState: ProjectState = .notStarted) {
+        self.id = id
         self.title = title
         self.owner = owner
         self.members = members

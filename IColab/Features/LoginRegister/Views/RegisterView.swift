@@ -22,10 +22,24 @@ struct RegisterView: View {
             .padding(.vertical)
             Spacer()
             VStack {
-                ButtonComponent(title: "Register", width: 320) {
-                    rvm.register()
+                if rvm.isLoading {
+                    Button(action: {}, label: {
+                        LoadingView()
+                            .frame(width: 320, height: 30)
+                    })
+                    .buttonStyle(.borderedProminent)
+                    .buttonBorderShape(.roundedRectangle(radius: 12))
+                    .tint(Color(.purple))
+                    .disabled(rvm.isLoading)
+                    .padding(.bottom, 10)
+                } else{
+                    ButtonComponent(title: "Register", width: 320) {
+                        rvm.register()
+                    }
+                    .padding(.bottom, 10)
+                    
+
                 }
-                .padding(.bottom, 10)
                 Button {
                     rvm.signIn.toggle()
                 } label: {
@@ -38,7 +52,6 @@ struct RegisterView: View {
         }
         .padding()
         .navigationTitle("Register")
-        
         .alert(isPresented: $rvm.showError, error: rvm.error) { error in
             Button { print("Dismiss") } label: { Text("Dismiss") }
         } message: { error in

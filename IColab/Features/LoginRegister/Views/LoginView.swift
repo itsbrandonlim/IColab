@@ -24,11 +24,19 @@ struct LoginView: View {
                     Button {
                         lvm.login()
                     } label: {
-                        Text("Sign In")
-                            .frame(width: 330)
-                            .padding(.vertical, 10)
-                            .border(.primary)
+                        if lvm.isLoading {
+                            LoadingView()
+                                .frame(width: 330, height: 20)
+                                .padding(.vertical, 10)
+                                .border(.primary)
+                        } else{
+                            Text("Sign In")
+                                .frame(width: 330, height: 20)
+                                .padding(.vertical, 10)
+                                .border(.primary)
+                        }
                     }
+                    .disabled(lvm.isLoading)
                     .buttonStyle(.plain)
                     Text("Forgot Password?")
                     ButtonComponent(title: "Create Account", width: 320) {

@@ -26,7 +26,7 @@ struct ButtonComponent: View {
             Text("\(title)")
                 .font(.callout)
                 .fontWeight(.bold)
-                .frame(width: width)
+                .frame(width: width, height: 30)
         }
         .buttonStyle(.borderedProminent)
         .buttonBorderShape(.roundedRectangle(radius: 12))

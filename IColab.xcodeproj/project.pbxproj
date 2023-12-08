@@ -104,6 +104,8 @@
 		D80BC3132ABD49950086558D /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BC3122ABD49950086558D /* NavigationManager.swift */; };
 		D819F7B92B22C0A200287D60 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819F7B82B22C0A200287D60 /* LoginError.swift */; };
 		D819F7BB2B22C25500287D60 /* RegisterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819F7BA2B22C25500287D60 /* RegisterError.swift */; };
+		D819F7BF2B22F1A700287D60 /* FireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819F7BE2B22F1A700287D60 /* FireStoreManager.swift */; };
+		D819F7C12B2304A100287D60 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819F7C02B2304A100287D60 /* LoadingView.swift */; };
 		D81DCE242AC34EE600D65604 /* SkillEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81DCE232AC34EE600D65604 /* SkillEditView.swift */; };
 		D81DCE282AC3FAE900D65604 /* EditSkillFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81DCE272AC3FAE900D65604 /* EditSkillFormView.swift */; };
 		D82C0D532AB976E1009802D9 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82C0D522AB976E1009802D9 /* NotificationViewModel.swift */; };
@@ -286,6 +288,8 @@
 		D80BC3122ABD49950086558D /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		D819F7B82B22C0A200287D60 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		D819F7BA2B22C25500287D60 /* RegisterError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterError.swift; sourceTree = "<group>"; };
+		D819F7BE2B22F1A700287D60 /* FireStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreManager.swift; sourceTree = "<group>"; };
+		D819F7C02B2304A100287D60 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		D81DCE232AC34EE600D65604 /* SkillEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillEditView.swift; sourceTree = "<group>"; };
 		D81DCE272AC3FAE900D65604 /* EditSkillFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSkillFormView.swift; sourceTree = "<group>"; };
 		D82C0D522AB976E1009802D9 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
@@ -788,6 +792,23 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
+		D819F7BC2B22F18800287D60 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				D85D1CB82B219E850074AB98 /* AuthenticationManager.swift */,
+				D8385A512AD51D860013D90F /* AccountManager.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		D819F7BD2B22F19200287D60 /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				D819F7BE2B22F1A700287D60 /* FireStoreManager.swift */,
+			);
+			path = Firestore;
+			sourceTree = "<group>";
+		};
 		D82C0D542AB976E5009802D9 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -824,8 +845,8 @@
 		D8385A502AD51D790013D90F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				D8385A512AD51D860013D90F /* AccountManager.swift */,
-				D85D1CB82B219E850074AB98 /* AuthenticationManager.swift */,
+				D819F7BD2B22F19200287D60 /* Firestore */,
+				D819F7BC2B22F18800287D60 /* Authentication */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -868,6 +889,7 @@
 				D80BC3122ABD49950086558D /* NavigationManager.swift */,
 				D89DCFC72ACA87BB00FF248F /* GridView.swift */,
 				6C69F9CF2AD64E9B00AAF602 /* EmptyDataView.swift */,
+				D819F7C02B2304A100287D60 /* LoadingView.swift */,
 			);
 			path = GlobalComponents;
 			sourceTree = "<group>";
@@ -1383,6 +1405,7 @@
 				6C745EA82AC97A4200646574 /* Role.swift in Sources */,
 				6C3B2D992AD1585B0049FE41 /* AddGoalView.swift in Sources */,
 				6C7DAFE72ACD16D000DC7D8B /* Randomizeable.swift in Sources */,
+				D819F7C12B2304A100287D60 /* LoadingView.swift in Sources */,
 				D8A3AF222AA3239D00AC06C9 /* ProjectCard.swift in Sources */,
 				D81DCE242AC34EE600D65604 /* SkillEditView.swift in Sources */,
 				B7965D892AD57C3B00D10505 /* PickMemberView.swift in Sources */,
@@ -1435,6 +1458,7 @@
 				D85D1CB92B219E850074AB98 /* AuthenticationManager.swift in Sources */,
 				6C726A112AC82FD600E14230 /* ChatListViewModel.swift in Sources */,
 				6C3B2D972AD1109F0049FE41 /* ProjectMemberContactCardView.swift in Sources */,
+				D819F7BF2B22F1A700287D60 /* FireStoreManager.swift in Sources */,
 				D87A67BA2AA766CD000586A1 /* Milestone.swift in Sources */,
 				D8A3AF272AA326B200AC06C9 /* Project.swift in Sources */,
 				6C745EAC2AC97AF300646574 /* MockProjects.swift in Sources */,
