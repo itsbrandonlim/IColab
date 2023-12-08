@@ -42,7 +42,7 @@ struct RegisterView: View {
         .alert(isPresented: $rvm.showError, error: rvm.error) { error in
             Button { print("Dismiss") } label: { Text("Dismiss") }
         } message: { error in
-            Text("\(error.errorSuggestion ?? "Unknown Error Occured")")
+            Text("\(error.recoverySuggestion ?? "Unknown Error Occured")")
         }
         
         .navigationDestination(isPresented: $rvm.signIn, destination: {

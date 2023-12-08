@@ -9,43 +9,7 @@ import SwiftUI
 import Foundation
 import FirebaseAuth
 
-enum RegisterError : LocalizedError{
-    case formIncomplete
-    case shortUsername
-    case notEmailFormat
-    case passwordLessThan8
-    case phoneNotNumber
-    
-    var errorDescription: String? {
-        switch self {
-        case .formIncomplete:
-            return "Form not Filled"
-        case .shortUsername:
-            return "Short Username"
-        case .notEmailFormat:
-            return "Email Format Required"
-        case .passwordLessThan8:
-            return "Short Password"
-        case .phoneNotNumber:
-            return "Phone Number contains letters"
-        }
-    }
-    
-    var errorSuggestion: String? {
-        switch self {
-        case .formIncomplete:
-            return "Make sure all form is filled."
-        case .shortUsername:
-            return "Username must be more than 8 characters."
-        case .notEmailFormat:
-            return "Email must have @ character."
-        case .passwordLessThan8:
-            return "Password must contain more than 8 characters."
-        case .phoneNotNumber:
-            return "Make sure phone number is filled with numbers only."
-        }
-    }
-}
+
 
 class RegisterViewModel : ObservableObject {
     @Published var username : String
@@ -75,13 +39,13 @@ class RegisterViewModel : ObservableObject {
         if registrationValidation() {
             AuthenticationManager.shared.createUser(email: self.email, password: self.password) { authDataResult, error in
                 if let error = error {
-                    print("Error creating user to firebase: \(error)")
+                    self.showError(error: .firebaseError(error))
                 }else{
                     let profileChangeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
                     profileChangeRequest?.displayName = self.username
                     profileChangeRequest?.commitChanges(completion: { error in
                         if let error = error {
-                            print("Error commiting changes for profile change : \(error)")
+                            self.showError(error: .firebaseError(error))
                         }else if let result = authDataResult{
                             let accountDetail = AccountDetail(name: result.user.displayName!, desc: "", location: self.region, bankAccount: "", cvLink: "")
                             let account = Account(email: result.user.email!, password: self.password, accountDetail: accountDetail)

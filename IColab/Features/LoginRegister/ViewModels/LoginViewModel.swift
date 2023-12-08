@@ -8,30 +8,6 @@
 import Foundation
 import SwiftUI
 
-enum LoginError : LocalizedError{
-    case invalidPassword
-    case incompleteForm
-    
-    
-    var errorDescription: String {
-        switch self {
-        case .invalidPassword:
-            return "Invalid Username or Password"
-        case .incompleteForm:
-            return "Username or Password is empty"
-        }
-    }
-    
-    var errorSuggestion : String {
-        switch self {
-        case .invalidPassword:
-            return "Try filling the right username or password."
-        case .incompleteForm:
-            return "Cannot login when username or password is empty."
-        }
-    }
-}
-
 class LoginViewModel: ObservableObject {
     @Published var email : String
     @Published var password : String
@@ -61,14 +37,14 @@ class LoginViewModel: ObservableObject {
         
         AuthenticationManager.shared.loginUser(email: self.email, password: self.password) { authDataResult, error in
             if let error = error {
-                print(error)
+                self.error = .firebaseError(error)
+                self.showAlert = true
             }
             if let result = authDataResult {
                 let accountDetail = AccountDetail(name: result.user.displayName!, desc: "", location: "", bankAccount: "", cvLink: "")
                 let account = Account(email: result.user.email!, password: self.password, accountDetail: accountDetail)
                 AccountManager.shared.setAccount(account: account)
                 self.showSignIn = false
-                print("Login Success")
             }
         }
     }
