@@ -61,29 +61,21 @@ struct ProfileCardView: View {
                     }
                     .alert("Logout", isPresented: $showAlert) {
                         HStack{
-                            Button("Cancel", role: .cancel){
-                                
-                            }
+                            Button("Cancel", role: .cancel){}
                             Button("Logout", role: .destructive){
                                 AccountManager.shared.logout()
-                                AuthenticationManager.shared.logoutUser()
                                 showSignIn = true
-                                
                             }
                         }
                     } message: {
                         Text("Are you sure you want to logout?")
                     }
-
                 }
-                
             }
         } else {
             Text("No Account to be displayed")
         }
-        
     }
-    
 }
 
 struct ProfileCardView_Previews : PreviewProvider{

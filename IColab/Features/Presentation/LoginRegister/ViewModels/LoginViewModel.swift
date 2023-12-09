@@ -16,6 +16,8 @@ class LoginViewModel: ObservableObject {
     @Published var createAccount : Bool
     @Binding var showSignIn : Bool
     @Published var isLoading : Bool
+    var fetchCollection = FetchCollectionUseCase()
+    var accountDetailConstants = FireStoreConstant.AccountDetailConstants()
     
     init(email: String = "", password: String = "", error: LoginError? = nil, showAlert: Bool = false, createAccount: Bool = false, showSignIn: Binding<Bool>) {
         self.email = email
@@ -40,18 +42,14 @@ class LoginViewModel: ObservableObject {
         }
         
         AuthenticationManager.shared.loginUser(email: self.email, password: self.password) { authDataResult, error in
-            if let error = error {
-                self.error = .firebaseError(error)
-                self.showAlert = true
-                self.isLoading = false
-            }
-            if let result = authDataResult {
-                let accountDetail = AccountDetail(name: result.user.displayName!, desc: "", location: "", bankAccount: "", cvLink: "")
-                let account = Account(email: result.user.email!, password: self.password, accountDetail: accountDetail)
-                AccountManager.shared.setAccount(account: account)
-                self.isLoading = false
-                self.showSignIn = false
-            }
+            AccountManager.shared.getAccount()
+            self.isLoading = false
+            self.showSignIn = false
         }
+    }
+    
+    private func showError(error: LoginError) {
+        self.error = error
+        showAlert = true
     }
 }

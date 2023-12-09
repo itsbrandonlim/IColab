@@ -52,7 +52,6 @@ struct ContentView: View {
             if showSignIn {
                 selectedTabBar = .home
             }
-            
         }
     }
 }

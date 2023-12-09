@@ -19,6 +19,8 @@ class RegisterViewModel : ObservableObject {
     @Published var isLoading = false
     @Binding var showSignIn : Bool
     
+    var accountDetailConstant = FireStoreConstant.AccountDetailConstants()
+    var setData = SetFireStoreDataUseCase()
     @Published var error : RegisterError?
     @Published var showError : Bool
     
@@ -42,21 +44,20 @@ class RegisterViewModel : ObservableObject {
                     self.showError(error: .firebaseError(error))
                     self.isLoading = false
                 }else{
-                    let profileChangeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-                    profileChangeRequest?.displayName = self.username
-                    profileChangeRequest?.commitChanges(completion: { error in
-                        if let error = error {
-                            self.isLoading = false
-                            self.showError(error: .firebaseError(error))
-                        }else if let result = authDataResult{
-                            let accountDetail = AccountDetail(name: result.user.displayName!, desc: "", location: self.region, bankAccount: "", cvLink: "")
-                            let account = Account(email: result.user.email!, password: self.password, accountDetail: accountDetail)
-                            Mock.accounts.append(account)
-                            AccountManager.shared.getAccount(uid: account.id)
+                    if let result = authDataResult {
+                        let accountDetail = AccountDetail(accountID: result.user.uid, name: self.username, desc: "", location: self.region, bankAccount: "", cvLink: "")
+                        let account = Account(email: result.user.email!, password: self.password, accountDetail: accountDetail)
+                        switch self.setData.call(collectionName: self.accountDetailConstant.collectionName, element: accountDetail) {
+                        case .success(_):
+                            AccountManager.shared.getAccount()
                             self.isLoading = false
                             self.showSignIn = false
+                        case .failure(let failure):
+                            self.showError(error: .firebaseError(failure))
                         }
-                    })
+                        
+                    }
+                    
                 }
             }
         }

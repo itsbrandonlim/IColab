@@ -28,4 +28,14 @@ class FireStoreManager {
         }
     }
     
+    func setData<T: Codable>(collectionName : String, element: T) -> Result<Bool, Error>{
+        do {
+            let dataReference = db.collection(collectionName).document()
+            try dataReference.setData(from: element)
+            return .success(true)
+        }catch let error {
+            return .failure(error)
+        }
+    }
+    
 }

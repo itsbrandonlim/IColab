@@ -12,7 +12,7 @@ struct PortofolioView: View {
     var body: some View {
         GridView(rows: (pvm.account?.projectsOwned?.count ?? 0) / 2 + 1, columns: 2) { row, column in
             let objectIndex = row * 2 + column
-            if objectIndex < pvm.account!.projectsOwned!.count {
+            if objectIndex < pvm.account?.projectsOwned?.count ?? 0 {
                 PortofolioCard(project: pvm.account!.projectsOwned![objectIndex])
             } else {
                 EmptyView()

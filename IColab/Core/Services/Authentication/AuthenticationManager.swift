@@ -11,9 +11,7 @@ import Foundation
 class AuthenticationManager {
     static let shared = AuthenticationManager()
     
-    private init() {
-        
-    }
+    private init(){}
     
     func createUser(email: String, password: String, completion: @escaping (AuthDataResult?, Error?) -> Void){
         Auth.auth().createUser(withEmail: email, password: password, completion: completion)
@@ -30,5 +28,9 @@ class AuthenticationManager {
         }catch let error {
             print(error.localizedDescription)
         }
+    }
+    
+    var userSignedIn : Bool {
+        return Auth.auth().currentUser != nil
     }
 }

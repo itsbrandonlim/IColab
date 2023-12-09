@@ -15,4 +15,8 @@ class Experience : Background {
     override init(copyFrom other: Background) {
         super.init(copyFrom: other)
     }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
+    }
 }
