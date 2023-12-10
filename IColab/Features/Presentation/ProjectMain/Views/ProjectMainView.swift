@@ -18,7 +18,7 @@ struct ProjectMainView: View {
                         .font(.largeTitle)
                         .bold()
                     NavigationLink {
-                        CreateProjectView(vm: CreateProjectViewModel(uid: vm.account.id, needRefresh: $vm.needRefresh))
+                        CreateProjectView(vm: CreateProjectViewModel(needRefresh: $vm.needRefresh))
                     } label: {
                         Image(systemName: "plus.circle")
                             .font(.largeTitle)

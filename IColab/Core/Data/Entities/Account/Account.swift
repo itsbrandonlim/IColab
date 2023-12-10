@@ -14,12 +14,12 @@ class Account: Identifiable {
     
     var accountDetail : AccountDetail
     
-    var projectsOwned : [Project]?
-    var projectsJoined : [Project]?
+    var projectsOwned : [Project]
+    var projectsJoined : [Project]
     var notifications : [Notification]?
     var chats: [Chat]?
     
-    init(email: String, password: String, accountDetail: AccountDetail, projectsOwned: [Project]? = nil, projectsJoined: [Project]? = nil, notifications: [Notification]? = nil, chats: [Chat]? = nil) {
+    init(email: String, password: String, accountDetail: AccountDetail, projectsOwned: [Project] = [], projectsJoined: [Project] = [], notifications: [Notification]? = nil, chats: [Chat]? = nil) {
         self.email = email
         self.password = password
         self.accountDetail = accountDetail
@@ -27,10 +27,6 @@ class Account: Identifiable {
         self.projectsJoined = projectsJoined
         self.notifications = notifications
         self.chats = chats
-    }
-    
-    public func addProject(project : Project){
-        projectsOwned?.append(project)
     }
 }
 
