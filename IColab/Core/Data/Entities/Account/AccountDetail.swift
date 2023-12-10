@@ -10,7 +10,6 @@ import Foundation
 
 class AccountDetail: Identifiable, Equatable, Codable{
     @DocumentID var id: String?
-    var accountID : String
     var name : String
     var desc : String
     var location : String
@@ -20,8 +19,7 @@ class AccountDetail: Identifiable, Equatable, Codable{
     var educations : [Education] = []
     var experiences : [Experience] = []
     
-    init(accountID: String, name: String, desc: String, location: String, bankAccount: String, cvLink: String, skills: [String] = [], educations: [Education] = [], experiences: [Experience] = []) {
-        self.accountID = accountID
+    init(name: String, desc: String, location: String, bankAccount: String, cvLink: String, skills: [String] = [], educations: [Education] = [], experiences: [Experience] = []) {
         self.name = name
         self.desc = desc
         self.location = location

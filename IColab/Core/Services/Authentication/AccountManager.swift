@@ -15,26 +15,17 @@ class AccountManager : ObservableObject {
 
     @Published var account : Account?
     var fetch = FetchCollectionUseCase()
+    var fetchDocument = FetchDocumentFromID()
     var accountDetailConstants = FireStoreConstant.AccountDetailConstants()
     
     public func getAccount() {
         if let user = Auth.auth().currentUser {
-            fetch.call(collectionName: "accountDetails") { querySnapShot, error in
-                if let error = error {
-                    print("Error fetching collection : \(error.localizedDescription)")
-                }
-                guard let qss = querySnapShot else {
-                    return
-                }
-                qss.documents.forEach { doc in
-                    if doc.data()[self.accountDetailConstants.accountID] as? String == user.uid {
-                        do{
-                            let accountDetail = try doc.data(as: AccountDetail.self)
-                            self.account = Account(email: user.email!, password: "", accountDetail: accountDetail)
-                        } catch let error {
-                            print("Error parsing account detail : \(error.localizedDescription)")
-                        }
-                    }
+            fetchDocument.call(collectionName: accountDetailConstants.collectionName, id: user.uid) { doc in
+                do {
+                    let accountDetail = try doc.data(as: AccountDetail.self)
+                    self.account = Account(email: user.email!, password: "", accountDetail: accountDetail)
+                } catch let error {
+                    print("Error parsing account Detail : \(error.localizedDescription)")
                 }
             }
         }

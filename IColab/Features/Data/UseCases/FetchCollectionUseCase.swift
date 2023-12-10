@@ -11,7 +11,7 @@ import Foundation
 struct FetchCollectionUseCase {
     var repository = FireStoreRepository()
     
-    func call(collectionName : String, completion: @escaping (QuerySnapshot?, Error?) -> Void){
+    func call(collectionName : String, completion: @escaping (QuerySnapshot) -> Void){
         repository.getCollection(collectionName: collectionName, completion: completion)
     }
 }
