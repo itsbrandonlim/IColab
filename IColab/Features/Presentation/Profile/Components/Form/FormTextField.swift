@@ -19,7 +19,6 @@ struct FormTextField: View {
                 .multilineTextAlignment(.leading)
             HStack{
                 TextField(title, text: $textField, axis: .vertical)
-                    .font(.caption)
                     .autocorrectionDisabled()
                     .submitLabel(.continue)
                 Button(action: { textField = "" }, label: {
@@ -41,7 +40,6 @@ struct FormTextField: View {
                 letterCount = value
             })
         }
-        .padding(.horizontal, 20)
     }
 }
 

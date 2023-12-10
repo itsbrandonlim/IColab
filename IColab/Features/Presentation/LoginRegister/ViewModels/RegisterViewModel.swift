@@ -45,9 +45,9 @@ class RegisterViewModel : ObservableObject {
                     self.isLoading = false
                 }else{
                     if let result = authDataResult {
-                        let accountDetail = AccountDetail(accountID: result.user.uid, name: self.username, desc: "", location: self.region, bankAccount: "", cvLink: "")
+                        let accountDetail = AccountDetail(name: self.username, desc: "", location: self.region, bankAccount: "", cvLink: "")
                         let account = Account(email: result.user.email!, password: self.password, accountDetail: accountDetail)
-                        switch self.setData.call(collectionName: self.accountDetailConstant.collectionName, element: accountDetail) {
+                        switch self.setData.call(collectionName: self.accountDetailConstant.collectionName, element: accountDetail, id: result.user.uid) {
                         case .success(_):
                             AccountManager.shared.getAccount()
                             self.isLoading = false

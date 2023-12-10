@@ -17,6 +17,22 @@ class Education : Background{
     }
     
     required init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let title = try container.decode(String.self, forKey: .title)
+        let company = try container.decode(String.self, forKey: .company)
+        let startDate = try container.decode(Date.self, forKey: .startDate)
+        let endDate = try container.decode(Date.self, forKey: .endDate)
+        let desc = try container.decode(String.self, forKey: .desc)
+
+        super.init(title: title, company: company, startDate: startDate, endDate: endDate, desc: desc)
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case title
+        case company
+        case startDate
+        case endDate
+        case desc
     }
 }

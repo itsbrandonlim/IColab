@@ -13,6 +13,8 @@ class ProfileViewModel : ObservableObject {
     @Published var pickerSelection : PickerItem = .overview
     @Published var showEdit : Bool = false
     @Published var loggedInAccountIsViewed : Bool = false
+    @Published var update = UpdateCollectionWithIDUseCase()
+    var accountDetailsConstant = FireStoreConstant.AccountDetailConstants()
     let pickerItems : [PickerItem] = [.overview, .portofolio]
     init(uid: String){
         self.account = getAccount(uid: uid)
@@ -46,6 +48,7 @@ class ProfileViewModel : ObservableObject {
         withAnimation {
             objectWillChange.send()
         }
+        self.saveToFireStore()
     }
     
     public func addBackground(background : Background) {
@@ -57,6 +60,7 @@ class ProfileViewModel : ObservableObject {
         withAnimation {
             objectWillChange.send()
         }
+        self.saveToFireStore()
     }
     
     public func deleteBackground(background : Background) {
@@ -71,7 +75,7 @@ class ProfileViewModel : ObservableObject {
         withAnimation {
             objectWillChange.send()
         }
-        
+        self.saveToFireStore()
     }
     
     public func getSkillIndex(skill: String) -> Int{
@@ -81,13 +85,16 @@ class ProfileViewModel : ObservableObject {
     public func addSkills(skill : String){
         account?.accountDetail.skills.append(skill)
         objectWillChange.send()
+        self.saveToFireStore()
     }
     
     public func editSkills(skill : String, index : Int){
         account?.accountDetail.skills[index] = skill
+        self.saveToFireStore()
         withAnimation {
             objectWillChange.send()
         }
+        
     }
     
     public func deleteSkills(skill : String){
@@ -98,12 +105,23 @@ class ProfileViewModel : ObservableObject {
                 objectWillChange.send()
             }
         }
+        self.saveToFireStore()
     }
     
     public func editProfile(name: String, role: String, region: String, desc: String){
         account?.accountDetail.name = name
         account?.accountDetail.location = region
         account?.accountDetail.desc = desc
+        self.saveToFireStore()
         objectWillChange.send()
+    }
+    
+    public func saveToFireStore(){
+        do{
+           try update.call(collectionName: accountDetailsConstant.collectionName, id: AuthenticationManager.shared.getLoggedInUser()!.uid, element: account?.accountDetail)
+        } catch let error {
+            print("Error saving to firestore: \(error.localizedDescription)")
+        }
+        
     }
 }

@@ -21,6 +21,10 @@ class AuthenticationManager {
         Auth.auth().signIn(withEmail: email, password: password, completion: completion)
     }
     
+    func getLoggedInUser() -> User?{
+        return Auth.auth().currentUser
+    }
+    
     func logoutUser(){
         do {
             try Auth.auth().signOut()

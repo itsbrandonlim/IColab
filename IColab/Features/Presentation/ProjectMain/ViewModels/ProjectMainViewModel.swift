@@ -21,24 +21,21 @@ class ProjectMainViewModel: ObservableObject {
     @Published var needRefresh : Bool = false
     
     init(uid: String){
-        self.account = getAccount(uid: uid)!
-        
-        self.projectJoined = account.projectsJoined!
-        self.projectOwned = account.projectsOwned!
+        self.account = getAccount()
+        self.projectJoined = account.projectsJoined ?? []
+        self.projectOwned = account.projectsOwned ?? []
     }
     
-    private func getAccount(uid: String) -> Account?{
-        return Mock.accounts.first { account in
-            account.id == uid
-        }
+    private func getAccount() -> Account{
+        return AccountManager.shared.account!
     }
     
     func getProjectsByType(picker: ProjectMainViewPicker) -> [Project] {
         switch picker {
             case .projectOwned:
-                return account.projectsOwned!
+                return account.projectsOwned ?? []
             case .projectJoined:
-                return account.projectsJoined!
+                return account.projectsJoined ?? []
         }
     }
 }

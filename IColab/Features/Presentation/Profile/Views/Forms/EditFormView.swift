@@ -44,6 +44,7 @@ struct EditFormView: View {
                 
                 Spacer()
                 ButtonComponent(title: "Save", width: 300) {
+                    print("Saving")
                     pvm.saveBackground(background: editedBackground, index: self.index)
                     self.presentationMode.wrappedValue.dismiss()
                 }

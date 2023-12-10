@@ -14,7 +14,6 @@ struct MockRequest {
                             password: "kevin@123",
                             accountDetail:
                                 AccountDetail(
-                                    accountID: "", 
                                     name: "Kevin",
                                     desc: "Description",
                                     location: "Location",
@@ -27,7 +26,6 @@ struct MockRequest {
                             password: "kevin@123",
                             accountDetail:
                                 AccountDetail(
-                                    accountID: "",
                                     name: "Raymond",
                                     desc: "",
                                     location: "",
@@ -40,7 +38,6 @@ struct MockRequest {
                             password: "kevin@123",
                             accountDetail:
                                 AccountDetail(
-                                    accountID: "",
                                     name: "",
                                     desc: "",
                                     location: "",
