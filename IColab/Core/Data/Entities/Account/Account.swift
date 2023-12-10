@@ -8,7 +8,7 @@
 import Foundation
 
 class Account: Identifiable {
-    let id = UUID().uuidString
+    var id = UUID().uuidString
     var email : String
     var password : String
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Education : Background {
+class Education : Background{
     override init(title: String, company: String, startDate: Date, endDate: Date, desc: String) {
         super.init(title: title, company: company, startDate: startDate, endDate: endDate, desc: desc)
     }
@@ -16,4 +16,7 @@ class Education : Background {
         super.init(copyFrom: other)
     }
     
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
+    }
 }

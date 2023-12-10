@@ -27,6 +27,7 @@ struct MockAccountDetails: Randomizeable {
         var accountDetails : [AccountDetail] = []
         for name in names {
             let accountDetail = AccountDetail(
+                accountID: "", 
                 name: name,
                 desc: "Lorem ipsum dolor sit amet consectetur. Lobortis sit aliquam est lorem leo. Sollicitudin risus ornare sapien.",
                 location: "Indonesia",
