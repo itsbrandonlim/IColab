@@ -31,7 +31,7 @@ struct FireStoreRepository : FireStoreRepositoryProtocol {
         }
     }
     
-    func getDocumentFormID(collectionName: String, id: String, completion: @escaping (DocumentSnapshot) -> Void) {
+    func getDocumentFromID(collectionName: String, id: String, completion: @escaping (DocumentSnapshot) -> Void) {
         firestoreDataSource.getDocumentFromID(collectionName: collectionName, id: id) { documentSnapShot, error in
             if let error = error {
                 fatalError("Error getting firebase document from id: \(error)")

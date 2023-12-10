@@ -12,6 +12,6 @@ struct FetchDocumentFromIDUseCase {
     var repository = FireStoreRepository()
     
     public func call(collectionName: String, id: String, completion: @escaping (DocumentSnapshot)-> Void) {
-        repository.getDocumentFormID(collectionName: collectionName, id: id, completion: completion)
+        repository.getDocumentFromID(collectionName: collectionName, id: id, completion: completion)
     }
 }
