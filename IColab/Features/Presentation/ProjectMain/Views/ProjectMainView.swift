@@ -44,7 +44,6 @@ struct ProjectMainView: View {
                         )
                     )
                 }
-                
                 Picker("Project Picker", selection: $vm.picker) {
                     ForEach(ProjectMainViewPicker.allCases, id: \.self) { picker in
                         Text(picker.rawValue).tag(picker)
@@ -52,7 +51,12 @@ struct ProjectMainView: View {
                 }
                 .pickerStyle(.segmented)
                 .padding(.vertical)
-                
+                if vm.getProjectsByType(picker: vm.picker).isEmpty{
+                    Image(systemName: "book.closed")
+                        .font(.system(size: 32))
+                    Text("No Projects to be Shown")
+                        .font(.title3.bold())
+                }
                 ScrollView {
                     ForEach(vm.getProjectsByType(picker: vm.picker)) { project in
                         NavigationLink {

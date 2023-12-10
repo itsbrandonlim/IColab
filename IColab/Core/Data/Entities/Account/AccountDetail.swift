@@ -55,6 +55,9 @@ class AccountDetail: Identifiable, Equatable, Codable{
     }
     
     static func == (lhs: AccountDetail, rhs: AccountDetail) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.id == rhs.id &&
+        lhs.skills == rhs.skills &&
+        lhs.educations == rhs.educations &&
+        lhs.experiences == rhs.experiences
     }
 }

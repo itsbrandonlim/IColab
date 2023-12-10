@@ -14,7 +14,7 @@ struct LoginView: View {
             VStack {
                 Spacer()
                 Group {
-                    TextFieldView(input: $lvm.email, icon: "person", text: "Username")
+                    TextFieldView(input: $lvm.email, icon: "person", text: "Email")
                     TextFieldView(input: $lvm.password, icon: "key", text: "Password", textfieldStyle: .password)
                 }
                 .padding(.vertical)

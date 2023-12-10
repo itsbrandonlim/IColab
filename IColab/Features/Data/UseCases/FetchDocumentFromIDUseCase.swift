@@ -8,7 +8,7 @@
 import FirebaseFirestore
 import Foundation
 
-struct FetchDocumentFromID {
+struct FetchDocumentFromIDUseCase {
     var repository = FireStoreRepository()
     
     public func call(collectionName: String, id: String, completion: @escaping (DocumentSnapshot)-> Void) {

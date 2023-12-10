@@ -41,4 +41,12 @@ struct FireStoreRepository : FireStoreRepositoryProtocol {
             }
         }
     }
+    
+    func updateDocument<T>(collectionName: String, id: String, element: T) throws where T : Decodable, T : Encodable {
+        do {
+            try firestoreDataSource.updateDocument(collectionName: collectionName, id: id, element: element)
+        } catch let error {
+            throw error
+        }
+    }
 }

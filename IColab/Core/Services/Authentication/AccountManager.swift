@@ -15,7 +15,7 @@ class AccountManager : ObservableObject {
 
     @Published var account : Account?
     var fetch = FetchCollectionUseCase()
-    var fetchDocument = FetchDocumentFromID()
+    var fetchDocument = FetchDocumentFromIDUseCase()
     var accountDetailConstants = FireStoreConstant.AccountDetailConstants()
     
     public func getAccount() {

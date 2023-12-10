@@ -20,7 +20,7 @@ struct AddProfileView: View {
                 }.buttonStyle(.plain)
                 
                 NavigationLink{
-                    NewFormView(backgroundType: .education)
+                    NewFormView(backgroundType: .experience)
                         .environmentObject(pvm)
                 } label: {
                     ProfileSectionCard(title: "Experience", symbol: "case.fill")

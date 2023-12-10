@@ -9,7 +9,6 @@ import FirebaseFirestore
 import Foundation
 
 struct FireStoreDataSource : FireStoreDataSourceProtocol {
-    
     private let db = Firestore.firestore()
     
     func getCollection(collectionName: String, completion: @escaping (QuerySnapshot?, Error?) -> Void) {
@@ -35,6 +34,15 @@ struct FireStoreDataSource : FireStoreDataSourceProtocol {
             if let document = documentSnapShot, documentSnapShot!.exists {
                 completion(document, nil)
             }
+        }
+    }
+    
+    func updateDocument<T:Codable>(collectionName: String, id: String, element: T) throws {
+        let docReference = db.collection(collectionName).document(id)
+        do{
+            try docReference.setData(from: element)
+        } catch let error{
+            throw error
         }
     }
 }
