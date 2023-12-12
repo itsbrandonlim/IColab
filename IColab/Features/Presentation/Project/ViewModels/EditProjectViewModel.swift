@@ -21,22 +21,31 @@ class EditProjectViewModel: ObservableObject {
     @Published var desc: String = ""
     @Published var dueDate: Date = Date.now
     @Published var tasks: [Task] = []
+    @Published var nextView : Bool = false
+    
+    func addTask(title: String) {
+        let task = Task(title: title)
+        tasks.append(task)
+        self.objectWillChange.send()
+    }
     
     func deleteTask(task: Task) {
         let index = tasks.firstIndex(of: task)!
         tasks.remove(at: index)
+        self.objectWillChange.send()
     }
     
     func getMilestone(role: Role) -> Milestone {
-        let index = self.milestones.firstIndex(where: {$0.role == role})
+        let index = self.project.milestones.firstIndex(where: {$0.role == role})
         
-        return self.milestones[index!]
+        return self.project.milestones[index!]
     }
     
     func addGoal(role: Role) {
         let index = self.milestones.firstIndex(where: {$0.role == role})
         
         project.milestones[index!].goals.append(Goal(name: title, nominal: nominal, desc: desc, endDate: dueDate, isAchieved: false, tasks: tasks))
+        self.objectWillChange.send()
     }
     
     func editGoal(role: Role, goal: Goal) {
@@ -48,6 +57,7 @@ class EditProjectViewModel: ObservableObject {
         project.milestones[index!].goals[goalIndex!] = Goal(name: title, nominal: nominal, desc: desc, endDate: dueDate, isAchieved: goal.isAchieved, tasks: tasks)
         
         self.milestones = self.project.milestones
+        self.objectWillChange.send()
     }
     
     func deleteGoal(role: Role, goal: Goal) {
@@ -57,5 +67,6 @@ class EditProjectViewModel: ObservableObject {
         project.milestones[index!].goals.remove(at: goalIndex)
         
         self.milestones = self.project.milestones
+        self.objectWillChange.send()
     }
 }

@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct InputTagsView: View {
-    @EnvironmentObject var vm: ProjectOverviewViewModel
     @Binding var tags: [String]
-    
     @State var popupToggle: Bool = false
     
     var body: some View {
@@ -28,14 +26,21 @@ struct InputTagsView: View {
                         Image(systemName: "plus.circle.fill")
                     }
                     .buttonStyle(.plain)
-
                 }
-                
                 HStack {
-//                    ForEach(vm.getProject().tags, id: \.self) { tag in
-//                        TagItem(tagText: tag)
-//                    }
-                    
+                    ForEach(tags, id: \.self) { tag in
+                        Button(action: {
+                            let index = tags.firstIndex(of: tag)
+                            if let idx = index {
+                                withAnimation(.easeInOut) {
+                                    tags.remove(at: idx)
+                                }
+                            }
+                        }, label: {
+                            TagItem(tagText: tag)
+                        })
+                        
+                    }
                 }
                 Divider()
                     .foregroundColor(.white)
@@ -44,12 +49,6 @@ struct InputTagsView: View {
                 InputTagPopupView(tag: $tags, popupToggle: $popupToggle)
                     .presentationDetents([.fraction(0.3)])
             })
-    
-//            if popupToggle {
-//                InputTagPopupView(popupToggle: $popupToggle)
-//                    .transition(.opacity)
-//                    .zIndex(1)
-//            }
         }
         
     }

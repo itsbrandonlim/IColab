@@ -13,4 +13,5 @@ protocol FireStoreDataSourceProtocol {
     func setData<T: Codable>(collectionName : String, element: T, id: String) -> Result<Bool, Error>
     func getDocumentFromID(collectionName: String, id: String, completion: @escaping (DocumentSnapshot?, Error?)-> Void)
     func updateDocument<T: Codable>(collectionName: String, id: String, element: T) throws
+    
 }

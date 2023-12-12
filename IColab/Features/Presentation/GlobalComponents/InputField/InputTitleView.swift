@@ -17,14 +17,14 @@ struct InputTitleView: View {
                 .font(.headline)
             HStack {
                 TextField("Example Title", text: $text)
+                    .foregroundColor(.gray.opacity(0.75))
+                    .autocorrectionDisabled()
                 Spacer()
                 Button {
                     text = ""
                 } label: {
                     Image(systemName: "x.circle")
                 }
-
-                
             }
             Divider()
                 .foregroundColor(.white)

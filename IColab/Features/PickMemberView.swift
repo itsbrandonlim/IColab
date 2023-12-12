@@ -15,14 +15,6 @@ struct PickMemberView: View {
         VStack(content: {
             InputMemberView()
                 .environmentObject(vm)
-//            NavigationLink {
-//                //Initialize all the project into account
-//                //And then
-//                //Need to go back to main project page
-//            } label: {
-//                Text("Confirm")
-//            }
-
         })
     }
 }

@@ -41,7 +41,12 @@ struct ContentView: View {
         }
         .accentColor(.primary)
         .onAppear {
-            self.showSignIn = true
+            if AuthenticationManager.shared.getLoggedInUser() != nil {
+                AccountManager.shared.getAccount()
+                self.showSignIn = false
+            } else {
+                self.showSignIn = true
+            }
         }
         .fullScreenCover(isPresented: $showSignIn) {
             NavigationStack{

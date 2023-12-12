@@ -18,4 +18,19 @@ struct FireStoreConstant {
         let phoneNumber = "phoneNumber"
         let skills = "skills"
     }
+    
+    struct ProjectConstants {
+        let collectionName = "projects"
+        let desc = "desc"
+        let endDate = "endDate"
+        let members = "members"
+        let milestones = "milestones"
+        let ownerID = "ownerID"
+        let projectState = "projectState"
+        let request = "request"
+        let requirements = "requirements"
+        let role = "role"
+        let startDate = "startDate"
+        let tags = "tags"
+    }
 }

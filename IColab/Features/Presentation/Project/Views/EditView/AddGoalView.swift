@@ -8,24 +8,26 @@
 import SwiftUI
 
 struct AddGoalView: View {
-    @EnvironmentObject var vm: EditProjectViewModel
+    @ObservedObject var vm: EditProjectViewModel
+    @Environment(\.presentationMode) var presentationMode
     
     var role: Role
     
     var body: some View {
         VStack {
-            InputTitleView(title: "Title", text: $vm.title)
+            InputTitleView(title: "Goal Title", text: $vm.title)
             InputNumberView(title: "Nominal", nominal: $vm.nominal)
-            InputDescriptionView(title: "Description", text: $vm.desc)
+            InputDescriptionView(title: "Goal's Description", text: $vm.desc)
             InputDateView(date: $vm.dueDate)
             InputTaskView()
-//            InputTaskView(tasks: $vm.tasks)
             ButtonComponent(title: "Add Goal", width: 320) {
                 vm.addGoal(role: role)
+                self.presentationMode.wrappedValue.dismiss()
             }
         }
+        .padding(.horizontal)
         .environmentObject(vm)
-        .padding(32)
+        .navigationTitle("Add Goal")
     }
 }
 

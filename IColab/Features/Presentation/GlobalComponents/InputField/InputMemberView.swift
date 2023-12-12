@@ -65,6 +65,13 @@ struct InputMemberView: View {
                 .frame(height: 2)
                 .foregroundColor(.white)
         }
+        .alert(isPresented: $vm.showAlert, error: vm.error) { error in
+            Button("Dismiss"){
+                
+            }
+        } message: { error in
+            Text("\(vm.error?.recoverySuggestion ?? "")")
+        }
         .sheet(isPresented: $sheet, content: {
             VStack(content: {
                 LazyVGrid(columns: columns, spacing: 20) {
@@ -75,8 +82,6 @@ struct InputMemberView: View {
                 Spacer()
                 ButtonComponent(title: "Add", width: 320) {
                     vm.project.milestones.append(Milestone(role: rolePick, goals: []))
-//                    $vm.members.append(Member(role: rolePick))
-                    
                     vm.objectWillChange.send()
                     sheet.toggle()
                 }

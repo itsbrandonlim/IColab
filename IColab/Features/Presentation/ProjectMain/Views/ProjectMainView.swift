@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProjectMainView: View {
-    @StateObject var vm: ProjectMainViewModel = ProjectMainViewModel(uid: AccountManager.shared.account?.id ?? "")
+    @StateObject var vm: ProjectMainViewModel = ProjectMainViewModel()
     
     var body: some View {
         VStack {

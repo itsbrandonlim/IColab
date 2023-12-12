@@ -112,6 +112,8 @@
 		D82C0D532AB976E1009802D9 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82C0D522AB976E1009802D9 /* NotificationViewModel.swift */; };
 		D82C0D592ABACFD2009802D9 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82C0D582ABACFD2009802D9 /* EditView.swift */; };
 		D82C0D5B2ABC0741009802D9 /* EditFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82C0D5A2ABC0741009802D9 /* EditFormView.swift */; };
+		D82F3EF82B280A2500A5E303 /* CreateProjectError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F3EF72B280A2500A5E303 /* CreateProjectError.swift */; };
+		D82F3EFB2B280C1F00A5E303 /* AnyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F3EFA2B280C1F00A5E303 /* AnyTransition.swift */; };
 		D83479AD2AA9D5B800E16739 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83479AC2AA9D5B800E16739 /* SearchBar.swift */; };
 		D83605452AE17045003CDF80 /* RequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83605442AE17045003CDF80 /* RequestView.swift */; };
 		D83605472AE173B9003CDF80 /* MockRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83605462AE173B9003CDF80 /* MockRequest.swift */; };
@@ -305,6 +307,8 @@
 		D82C0D522AB976E1009802D9 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		D82C0D582ABACFD2009802D9 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		D82C0D5A2ABC0741009802D9 /* EditFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFormView.swift; sourceTree = "<group>"; };
+		D82F3EF72B280A2500A5E303 /* CreateProjectError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectError.swift; sourceTree = "<group>"; };
+		D82F3EFA2B280C1F00A5E303 /* AnyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyTransition.swift; sourceTree = "<group>"; };
 		D83479AC2AA9D5B800E16739 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		D83605442AE17045003CDF80 /* RequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestView.swift; sourceTree = "<group>"; };
 		D83605462AE173B9003CDF80 /* MockRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRequest.swift; sourceTree = "<group>"; };
@@ -799,6 +803,7 @@
 			children = (
 				D819F7B82B22C0A200287D60 /* LoginError.swift */,
 				D819F7BA2B22C25500287D60 /* RegisterError.swift */,
+				D82F3EF72B280A2500A5E303 /* CreateProjectError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -834,6 +839,14 @@
 				D8C2BE9D2AB88D5B003969D8 /* NotificationView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D82F3EF92B280C1300A5E303 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D82F3EFA2B280C1F00A5E303 /* AnyTransition.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D83605432AE17038003CDF80 /* Request */ = {
@@ -1066,6 +1079,7 @@
 		D8A3AF232AA3269600AC06C9 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				D82F3EF92B280C1300A5E303 /* Extensions */,
 				D86D75C22B232B7D00830A8B /* Constants */,
 				D8A3AF2D2AA330DA00AC06C9 /* Config */,
 				D85D1CA12B2192740074AB98 /* Resources */,
@@ -1516,6 +1530,7 @@
 				B7965D892AD57C3B00D10505 /* PickMemberView.swift in Sources */,
 				D88B632E2B24447A0058C944 /* FireStoreRepositoryProtocol.swift in Sources */,
 				D88B63292B2443520058C944 /* ProjectMainViewModel.swift in Sources */,
+				D82F3EF82B280A2500A5E303 /* CreateProjectError.swift in Sources */,
 				D8A3AF2C2AA32AE200AC06C9 /* TagItem.swift in Sources */,
 				D80BC30F2ABD38690086558D /* FormTextField.swift in Sources */,
 				B7EE98C82ACA977A00C9B428 /* DotIndicator.swift in Sources */,
@@ -1559,6 +1574,7 @@
 				6C74DB8B2AC0199D00FD5D3F /* MilestonesView.swift in Sources */,
 				6CCF86002AC167260090D1B3 /* Task.swift in Sources */,
 				6C74DB8F2AC01A4E00FD5D3F /* MilestoneCardView.swift in Sources */,
+				D82F3EFB2B280C1F00A5E303 /* AnyTransition.swift in Sources */,
 				6C745EB42AC97F6400646574 /* MockAccountDetails.swift in Sources */,
 				B7F3A2A62ACB05370034EACF /* RegisterViewModel.swift in Sources */,
 				6C726A152AC82FDB00E14230 /* ChatView.swift in Sources */,
