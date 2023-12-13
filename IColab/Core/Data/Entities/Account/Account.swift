@@ -8,25 +8,17 @@
 import Foundation
 
 class Account: Identifiable {
-    var id = UUID().uuidString
+    var id : String
     var email : String
     var password : String
     
     var accountDetail : AccountDetail
     
-    var projectsOwned : [Project]
-    var projectsJoined : [Project]
-    var notifications : [Notification]?
-    var chats: [Chat]?
-    
-    init(email: String, password: String, accountDetail: AccountDetail, projectsOwned: [Project] = [], projectsJoined: [Project] = [], notifications: [Notification]? = nil, chats: [Chat]? = nil) {
+    init(id: String = UUID().uuidString, email: String, password: String, accountDetail: AccountDetail, projectsOwned: [Project] = [], projectsJoined: [Project] = [], notifications: [Notification]? = nil, chats: [Chat]? = nil) {
+        self.id = id
         self.email = email
         self.password = password
         self.accountDetail = accountDetail
-        self.projectsOwned = projectsOwned
-        self.projectsJoined = projectsJoined
-        self.notifications = notifications
-        self.chats = chats
     }
 }
 

@@ -22,8 +22,8 @@ class ProjectMainViewModel: ObservableObject {
     
     init(){
         self.account = getAccount()
-        self.projectJoined = account.projectsJoined 
-        self.projectOwned = account.projectsOwned 
+        self.projectJoined = account.accountDetail.projectsJoined
+        self.projectOwned = account.accountDetail.projectsOwned
     }
     
     private func getAccount() -> Account{
@@ -33,9 +33,9 @@ class ProjectMainViewModel: ObservableObject {
     func getProjectsByType(picker: ProjectMainViewPicker) -> [Project] {
         switch picker {
             case .projectOwned:
-                return account.projectsOwned
+            return account.accountDetail.projectsOwned
             case .projectJoined:
-                return account.projectsJoined
+            return account.accountDetail.projectsJoined
         }
     }
 }

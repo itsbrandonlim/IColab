@@ -31,9 +31,7 @@ class CreateProjectViewModel: ObservableObject {
         if validateProjectMilestones() {
             project.owner = account
             project.members = []
-            
-            Mock.projects.append(self.project)
-            self.account.projectsOwned.append(self.project)
+            self.account.accountDetail.projectsOwned.append(self.project)
             do{
                 try addDatatoFireStore.call(collectionName: projectConstants.collectionName, element: project)
             } catch let error {

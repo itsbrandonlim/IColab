@@ -51,6 +51,14 @@ struct FireStoreRepository : FireStoreRepositoryProtocol {
     }
     
     func addProject(collectionName: String, element: Project) throws {
-        try firestoreDataSource.addProject(collectionName: collectionName, element: element)
+        try firestoreDataSource.addProject(collectionName: collectionName, project: element)
+    }
+    
+    func addAccountDetail(accountDetail: AccountDetail, id: String, completion: @escaping (Error?) -> Void) {
+        firestoreDataSource.addAccountDetail(accountDetail: accountDetail, id: id, completion: completion)
+    }
+    
+    func updateProject(project: Project, completion: @escaping (Error?) -> Void) {
+        firestoreDataSource.updateProject(project: project, completion: completion)
     }
 }

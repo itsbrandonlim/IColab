@@ -59,14 +59,14 @@ class ProjectOverviewViewModel: ObservableObject {
     }
     
     func rejectRequest(worker: Account){
-        worker.notifications?.append(Notification(desc: "Request Rejected", projectName: project.title, date: Date.now))
+        worker.accountDetail.notifications?.append(Notification(desc: "Request Rejected", projectName: project.title, date: Date.now))
         
     }
     
     func acceptRequest(request : Request){
         let member = Member(account: request.worker, role: request.role)
         project.members?.append(member)
-        request.worker.notifications?.append(Notification(desc: "Request Accepted", projectName: project.title, date: Date.now))
+        request.worker.accountDetail.notifications?.append(Notification(desc: "Request Accepted", projectName: project.title, date: Date.now))
     }
     
     func deleteRequest(request : Request){

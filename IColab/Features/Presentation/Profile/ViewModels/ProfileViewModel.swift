@@ -118,7 +118,7 @@ class ProfileViewModel : ObservableObject {
     
     public func saveToFireStore(){
         do{
-           try update.call(collectionName: accountDetailsConstant.collectionName, id: AuthenticationManager.shared.getLoggedInUser()!.uid, element: account?.accountDetail)
+//           try update.call(collectionName: accountDetailsConstant.collectionName, id: AuthenticationManager.shared.getLoggedInUser()!.uid, element: account?.accountDetail)
         } catch let error {
             print("Error saving to firestore: \(error.localizedDescription)")
         }

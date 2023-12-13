@@ -12,13 +12,20 @@ class HomeViewModel : ObservableObject{
     @Published var searchText : String = ""
     @Published var searchPressed : Bool = false
     @Published var filters : [String] = []
+    var fetchProject = FetchCollectionUseCase()
     
     init(){
         projects = getProjects()
     }
     
     private func getProjects() -> [Project]{
-        let allProjects = Mock.projects
+        var projectConstants = FireStoreConstant.ProjectConstants()
+        var allProjects : [Project] = []
+        fetchProject.call(collectionName: projectConstants.collectionName) { querySnapShot in
+            querySnapShot.documents.forEach { doc in
+                // Fetch Project
+            }
+        }
         let filteredProjects = allProjects.filter { project in
             project.owner?.accountDetail.name != AccountManager.shared.account?.accountDetail.name
         }

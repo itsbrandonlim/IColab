@@ -46,8 +46,29 @@ struct FireStoreDataSource : FireStoreDataSourceProtocol {
         }
     }
     
-    func addProject(collectionName: String, element: Project) throws {
-        let docReference = db.collection(collectionName).document()
-        docReference.setData(element.toDict())
+    func addProject(collectionName: String, project: Project) throws {
+        let docReference = db.collection(collectionName).document(project.id)
+        docReference.setData(project.toDict())
+    }
+    
+    func addAccountDetail(accountDetail: AccountDetail, id: String, completion: @escaping (Error?) -> Void) {
+        var detailConstants = FireStoreConstant.AccountDetailConstants()
+        let docReference = db.collection(detailConstants.collectionName).document(id)
+        docReference.setData(accountDetail.toDict()) { error in
+            if let error = error {
+                completion(error)
+            } else{
+                completion(nil)
+            }
+        }
+    }
+    
+    func updateProject(project: Project, completion: @escaping (Error?) -> Void) {
+        var projectConstants = FireStoreConstant.ProjectConstants()
+        let docReference = db.collection(projectConstants.collectionName).document(project.id)
+        
+        docReference.setData(project.toDict()) { error in
+            completion(error)
+        }
     }
 }

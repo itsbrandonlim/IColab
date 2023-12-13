@@ -13,6 +13,7 @@ struct OverviewView: View {
     @State var showAlert: Bool = false
     @Environment(\.presentationMode) var presentationMode
     @State var role : Role = .frontend
+    var updateProject = UpdateProjectUseCase()
     
     var body: some View {
         VStack{
@@ -76,6 +77,11 @@ struct OverviewView: View {
             ButtonComponent(title: "Apply", width: 200) {
                 let request = Request(worker: accountManager.account!, role: role, date: Date.now)
                 project.requests.append(request)
+                updateProject.call(project: project) { error in
+                    if let error = error {
+                        print("error updating project to firestore : \(error.localizedDescription)")
+                    }
+                }
                 showAlert.toggle()
             }
             .padding(.bottom, 30)

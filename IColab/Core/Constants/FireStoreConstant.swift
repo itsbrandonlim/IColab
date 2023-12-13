@@ -12,11 +12,13 @@ struct FireStoreConstant {
         let collectionName = "accountDetails"
         let accountID = "accountID"
         let bankAccount = "bankAccount"
-        let desc = "description"
+        let desc = "desc"
         let location = "location"
         let name = "name"
         let phoneNumber = "phoneNumber"
         let skills = "skills"
+        let educations = "educations"
+        let experiences = "experiences"
     }
     
     struct ProjectConstants {

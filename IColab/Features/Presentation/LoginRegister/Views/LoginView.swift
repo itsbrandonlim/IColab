@@ -55,12 +55,6 @@ struct LoginView: View {
             } message: { error in
                 Text("\(lvm.error?.recoverySuggestion ?? "")")
             }
-            .onAppear {
-                guard let account = Mock.accounts.first(where: {$0.projectsOwned.contains(where: {$0.projectState == .overdue})}) else {
-                    return
-                }
-                print("Account dengan Overdue Project : \(account.accountDetail.name)")
-            }
             .navigationDestination(isPresented: $lvm.createAccount) {
                 RegisterView(rvm: RegisterViewModel(showSignIn: $lvm.showSignIn))
             }

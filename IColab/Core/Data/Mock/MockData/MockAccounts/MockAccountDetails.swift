@@ -31,7 +31,7 @@ struct MockAccountDetails: Randomizeable {
                 desc: "Lorem ipsum dolor sit amet consectetur. Lobortis sit aliquam est lorem leo. Sollicitudin risus ornare sapien.",
                 location: "Indonesia",
                 bankAccount: "bankaccount",
-                cvLink: "CVLink",
+                phoneNumber: "phoneNumber",
                 skills: ["SwiftUI", "CoreML", "Vision"],
                 educations: [
                     Education(title: "BINUS University", company: "", startDate: Date.now, endDate: Date.now, desc: "Bachelor of Science - Data Science and Analytics"),
