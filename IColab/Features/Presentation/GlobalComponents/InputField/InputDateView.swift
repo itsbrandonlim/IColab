@@ -9,11 +9,16 @@ import SwiftUI
 
 struct InputDateView: View {
     @Binding var date: Date
+    var title : String
     
+    init(date: Binding<Date>, title: String = "Input Date") {
+        self._date = date
+        self.title = title
+    }
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-                Text("Input Date")
+                Text(self.title)
                     .font(.headline)
                 HStack {
                     DatePicker("Date Picker", selection: $date, displayedComponents: .date)

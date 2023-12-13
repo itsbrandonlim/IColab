@@ -11,11 +11,11 @@ import Foundation
 struct FireStoreDataSource : FireStoreDataSourceProtocol {
     private let db = Firestore.firestore()
     
-    func getCollection(collectionName: String, completion: @escaping (QuerySnapshot?, Error?) -> Void) {
+    func getCollection(collectionName: String, completion: @escaping (QuerySnapshot?, Error?) -> Void){
         db.collection(collectionName).getDocuments(completion: completion)
     }
     
-    func setData<T>(collectionName: String, element: T, id: String) -> Result<Bool, Error> where T : Codable {
+    func setDataWithID<T>(collectionName: String, element: T, id: String) -> Result<Bool, Error> where T : Codable {
         let dataReference = db.collection(collectionName).document(id)
         do{
             try dataReference.setData(from: element)
@@ -44,5 +44,10 @@ struct FireStoreDataSource : FireStoreDataSourceProtocol {
         } catch let error{
             throw error
         }
+    }
+    
+    func addProject(collectionName: String, element: Project) throws {
+        let docReference = db.collection(collectionName).document()
+        docReference.setData(element.toDict())
     }
 }

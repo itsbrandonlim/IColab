@@ -7,18 +7,27 @@
 
 import Foundation
 
-struct Task: Identifiable, Equatable {
-    let id = UUID().uuidString
+struct Task: Identifiable, Equatable{
+    var id = UUID().uuidString
     
-    var title: String = ""
+    var title: String
     var status: TaskStatus = .notCompleted
     
     mutating func setStatus(status: TaskStatus) {
         self.status = status
     }
+    
+    public func toDict() -> [String: Any] {
+        var dictionary : [String : Any] = [:]
+        dictionary = [
+            "title" : self.title,
+            "status" : self.status.rawValue
+        ]
+        return dictionary
+    }
 }
 
-enum TaskStatus: String, CaseIterable {
+enum TaskStatus: String, CaseIterable, Codable {
     case notCompleted = "Not Completed",
          onReview = "On Review",
          completed = "Completed"

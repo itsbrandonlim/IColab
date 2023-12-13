@@ -15,6 +15,8 @@ class CreateProjectViewModel: ObservableObject {
     @Published var error: CreateProjectError?
     @Binding var needRefresh : Bool
     @Published var showAlert : Bool = false
+    var addDatatoFireStore = AddDatatoFireStoreUseCase()
+    var projectConstants = FireStoreConstant.ProjectConstants()
     
     init(needRefresh: Binding<Bool>){
         self._needRefresh = needRefresh
@@ -25,13 +27,19 @@ class CreateProjectViewModel: ObservableObject {
         return AccountManager.shared.account!
     }
     
-    func createProject()-> Bool {
+    func createProject() -> Bool {
         if validateProjectMilestones() {
             project.owner = account
             project.members = []
             
             Mock.projects.append(self.project)
             self.account.projectsOwned.append(self.project)
+            do{
+                try addDatatoFireStore.call(collectionName: projectConstants.collectionName, element: project)
+            } catch let error {
+                print("Error adding data to firestore : \(error.localizedDescription)")
+            }
+            
             self.needRefresh.toggle()
             self.objectWillChange.send()
             return true

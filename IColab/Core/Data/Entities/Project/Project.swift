@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-class Project : Identifiable, Searchable {
+class Project : Identifiable, Searchable{
     var id : String
     var title : String
     weak var owner : Account?
@@ -63,6 +63,26 @@ class Project : Identifiable, Searchable {
     
     public func addMilestone(milestone : Milestone){
         milestones.append(milestone)
+    }
+    
+    public func toDict() -> [String: Any] {
+        var dictionary = [String: Any]()
+        var projectConstants = FireStoreConstant.ProjectConstants()
+        dictionary = [
+            projectConstants.title : self.title,
+            projectConstants.ownerID : self.owner?.id ?? "",
+            projectConstants.members : [],
+            projectConstants.role : self.role,
+            projectConstants.requirements : self.requirements,
+            projectConstants.tags : self.tags,
+            projectConstants.startDate: Timestamp(date: self.startDate),
+            projectConstants.endDate : Timestamp(date: self.endDate),
+            projectConstants.desc : self.desc,
+            projectConstants.milestones : self.milestones.map({$0.toDict()}),
+            projectConstants.request : self.requests,
+            projectConstants.projectState : self.projectState.rawValue
+        ]
+        return dictionary
     }
 }
 

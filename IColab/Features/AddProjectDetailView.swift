@@ -22,7 +22,8 @@ struct AddProjectDetailView: View {
                 InputTitleView(title: "Project Title", text: $vm.project.title)
                 InputDescriptionView(title: "Project Short Summary", text: $vm.project.desc)
                 InputTagsView(tags: $vm.project.tags)
-                InputDateView(date: $vm.project.startDate)
+                InputDateView(date: $vm.project.startDate, title: "Input Start Date")
+                Spacer()
                 ButtonComponent(title: "Next", width: 240) {
                     withAnimation() {
                         if vm.validateProjectDetail() {
@@ -32,8 +33,6 @@ struct AddProjectDetailView: View {
                 }
             }
             .padding()
-            Spacer()
-            
         }
         .alert(isPresented: $vm.showAlert, error: vm.error) { error in
             Button("Dismiss"){

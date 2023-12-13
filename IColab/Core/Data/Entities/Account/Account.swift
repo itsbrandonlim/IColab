@@ -34,14 +34,12 @@ extension Account: Hashable{
     static func == (lhs: Account, rhs: Account) -> Bool {
         return lhs.id == rhs.id &&
         lhs.email == rhs.email &&
-        lhs.password == rhs.password &&
-        lhs.projectsOwned == rhs.projectsOwned
+        lhs.password == rhs.password
     }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
         hasher.combine(email)
         hasher.combine(password)
-        hasher.combine(projectsOwned)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Milestone: Identifiable, Hashable {
+struct Milestone: Identifiable, Hashable{
     let id = UUID().uuidString
     var role: Role
     var goals: [Goal]
@@ -19,5 +19,12 @@ struct Milestone: Identifiable, Hashable {
     static func == (lhs: Milestone, rhs: Milestone) -> Bool {
         return lhs.id == rhs.id &&
         lhs.role == rhs.role
+    }
+    
+    public func toDict() -> [String : Any] {
+        return [
+            "role" : self.role.rawValue,
+            "goals" : self.goals.map({$0.toDict()})
+        ]
     }
 }

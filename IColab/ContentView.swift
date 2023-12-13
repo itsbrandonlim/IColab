@@ -11,9 +11,10 @@ struct ContentView: View {
     @State var selectedTabBar : TabBarType = .home
     @ObservedObject var accountManager = AccountManager.shared
     @State var showSignIn : Bool = false
+    @State var isLoading : Bool = false
     var body: some View {
         ZStack{
-            if !showSignIn {
+            if !isLoading {
                 NavigationStack {
                     ScrollView{
                         VStack{
@@ -37,16 +38,20 @@ struct ContentView: View {
                 }
                 .navigationBarBackButtonHidden()
                 .navigationBarTitleDisplayMode(.large)
+            } else{
+                LoadingView()
             }
         }
         .accentColor(.primary)
         .onAppear {
+            self.isLoading = true
             if AuthenticationManager.shared.getLoggedInUser() != nil {
                 AccountManager.shared.getAccount()
                 self.showSignIn = false
             } else {
                 self.showSignIn = true
             }
+            self.isLoading = false
         }
         .fullScreenCover(isPresented: $showSignIn) {
             NavigationStack{

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Request {
+struct Request{
     var id = UUID().uuidString
     var worker : Account
     var role : Role

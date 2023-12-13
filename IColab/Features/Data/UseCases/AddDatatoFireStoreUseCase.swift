@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct AddDatatoFireStoreUseCase {
+    var repository = FireStoreRepository()
+    
+    func call(collectionName: String, element: Project) throws {
+        try repository.addProject(collectionName: collectionName, element: element)
+    }
+}

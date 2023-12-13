@@ -22,8 +22,8 @@ struct FireStoreRepository : FireStoreRepositoryProtocol {
         }
     }
     
-    func setData<T>(collectionName: String, element: T, id: String) -> Result<Bool, Error> where T : Decodable, T : Encodable {
-        switch firestoreDataSource.setData(collectionName: collectionName, element: element, id: id) {
+    func setDataWithID<T>(collectionName: String, element: T, id: String) -> Result<Bool, Error> where T : Decodable, T : Encodable {
+        switch firestoreDataSource.setDataWithID(collectionName: collectionName, element: element, id: id) {
             case .success(let boolean) :
                 return .success(boolean)
             case .failure(let error) :
@@ -48,5 +48,9 @@ struct FireStoreRepository : FireStoreRepositoryProtocol {
         } catch let error {
             throw error
         }
+    }
+    
+    func addProject(collectionName: String, element: Project) throws {
+        try firestoreDataSource.addProject(collectionName: collectionName, element: element)
     }
 }
