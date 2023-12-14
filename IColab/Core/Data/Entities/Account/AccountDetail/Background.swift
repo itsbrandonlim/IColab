@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-class Background : Hashable, Codable{
+class Background : Hashable{
     var title : String
     var company : String
     var startDate : Date
@@ -53,25 +53,5 @@ class Background : Hashable, Codable{
         lhs.startDate == rhs.endDate &&
         lhs.endDate == rhs.endDate &&
         lhs.desc == rhs.desc
-    }
-    
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        title = try container.decode(String.self, forKey: .title)
-        company = try container.decode(String.self, forKey: .company)
-        startDate = try container.decode(Date.self, forKey: .startDate)
-        endDate = try container.decode(Date.self, forKey: .endDate)
-        desc = try container.decode(String.self, forKey: .desc)
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-
-        try container.encode(title, forKey: .title)
-        try container.encode(company, forKey: .company)
-        try container.encode(startDate, forKey: .startDate)
-        try container.encode(endDate, forKey: .endDate)
-        try container.encode(desc, forKey: .desc)
     }
 }

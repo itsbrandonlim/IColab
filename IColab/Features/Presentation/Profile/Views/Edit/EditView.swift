@@ -93,7 +93,7 @@ struct EditView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
             EditView(backgroundType: .skill)
-                .environmentObject(ProfileViewModel(uid: Mock.accounts[0].id))
+                .environmentObject(ProfileViewModel())
         }
     }
 }

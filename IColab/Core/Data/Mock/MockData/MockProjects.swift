@@ -26,7 +26,7 @@ struct MockProjects: Randomizeable {
         MockProjects.initArray(count: title.count) {
             Project(
                 title: title.randomElement()!,
-                owner: MockAccounts.array.randomElement()!,
+                owner: "Owner",
                 members: MockMembers.array,
                 role: Role.allCases.randomElement()!.rawValue,
                 requirements: ["3 years SwiftUI experience", "3 years UIKit experience"],

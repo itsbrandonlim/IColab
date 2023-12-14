@@ -64,7 +64,7 @@ class ProjectOverviewViewModel: ObservableObject {
     }
     
     func acceptRequest(request : Request){
-        let member = Member(account: request.worker, role: request.role)
+        let member = Member(accountDetail: request.worker.accountDetail, role: request.role)
         project.members?.append(member)
         request.worker.accountDetail.notifications?.append(Notification(desc: "Request Accepted", projectName: project.title, date: Date.now))
     }

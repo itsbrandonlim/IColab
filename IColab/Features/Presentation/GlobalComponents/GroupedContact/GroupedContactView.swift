@@ -10,7 +10,7 @@ import SwiftUI
 struct GroupedContactView: View {
     var projects: [Project]
     
-    var members: [Account] = Mock.accounts
+    var members: [Account] = []
     
     var body: some View {
         VStack {
@@ -24,6 +24,6 @@ struct GroupedContactView: View {
 
 struct GroupedContactView_Previews: PreviewProvider {
     static var previews: some View {
-        GroupedContactView(projects: Mock.projects)
+        GroupedContactView(projects: [])
     }
 }

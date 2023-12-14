@@ -30,8 +30,8 @@ struct RequestView: View {
                     }
                 }
                 .navigationDestination(isPresented: $showProfile) {
-                    ProfileView(pvm: ProfileViewModel(uid: vm.project.requests[chosenIndex].worker.id), showSignIn: .constant(false))
-                        .environmentObject(ProfileViewModel(uid: vm.project.requests[chosenIndex].worker.id))
+                    ProfileView(pvm: ProfileViewModel(), showSignIn: .constant(false))
+                        .environmentObject(ProfileViewModel())
                 }
             }
             

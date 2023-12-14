@@ -19,6 +19,10 @@ struct FireStoreConstant {
         let skills = "skills"
         let educations = "educations"
         let experiences = "experiences"
+        let projectsOwned = "projectsOwned"
+        let projectsJoined = "projectsJoined"
+        let notifications = "notifications"
+        let chats = "chats"
     }
     
     struct ProjectConstants {

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class CreateProjectViewModel: ObservableObject {
-    @Published var account: Account = Mock.accounts[0]
+    @Published var account: Account!
     @Published var project: Project = Project(title: "", role: "", requirements: [], tags: [], startDate: Date.now, endDate: Date.now, desc: "Short Summary", milestones: [])
     @Published var roles: [Role] = []
     @Published var error: CreateProjectError?
@@ -29,7 +29,7 @@ class CreateProjectViewModel: ObservableObject {
     
     func createProject() -> Bool {
         if validateProjectMilestones() {
-            project.owner = account
+            project.owner = account.id
             project.members = []
             self.account.accountDetail.projectsOwned.append(self.project)
             do{

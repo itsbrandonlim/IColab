@@ -16,7 +16,7 @@ struct ContentView: View {
         ZStack{
             if !isLoading {
                 NavigationStack {
-                    ScrollView{
+                    VStack{
                         VStack{
                             switch selectedTabBar {
                             case .home:
@@ -28,7 +28,7 @@ struct ContentView: View {
                             case .notifications:
                                 NotificationView()
                             case .profile:
-                                let pvm = ProfileViewModel(uid: accountManager.account?.id ?? "")
+                                let pvm = ProfileViewModel()
                                 ProfileView(pvm: pvm, showSignIn: $showSignIn)
                                     .environmentObject(pvm)
                             }
@@ -46,12 +46,18 @@ struct ContentView: View {
         .onAppear {
             self.isLoading = true
             if AuthenticationManager.shared.getLoggedInUser() != nil {
-                AccountManager.shared.getAccount()
+                AccountManager.shared.getAccount {
+                    withAnimation {
+                        self.isLoading = false
+                    }
+                }
                 self.showSignIn = false
             } else {
-                self.showSignIn = true
+                withAnimation {
+                    self.isLoading = false
+                    self.showSignIn = true
+                }
             }
-            self.isLoading = false
         }
         .fullScreenCover(isPresented: $showSignIn) {
             NavigationStack{

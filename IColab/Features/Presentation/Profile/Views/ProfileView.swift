@@ -51,7 +51,7 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(pvm: ProfileViewModel(uid: Mock.accounts[0].id), showSignIn: .constant(false))
-            .environmentObject(ProfileViewModel(uid: Mock.accounts[0].id))
+        ProfileView(pvm: ProfileViewModel(), showSignIn: .constant(false))
+            .environmentObject(ProfileViewModel())
     }
 }

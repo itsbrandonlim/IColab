@@ -17,26 +17,6 @@ class Experience : Background {
         super.init(copyFrom: other)
     }
     
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        let title = try container.decode(String.self, forKey: .title)
-        let company = try container.decode(String.self, forKey: .company)
-        let startDate = try container.decode(Date.self, forKey: .startDate)
-        let endDate = try container.decode(Date.self, forKey: .endDate)
-        let desc = try container.decode(String.self, forKey: .desc)
-
-        super.init(title: title, company: company, startDate: startDate, endDate: endDate, desc: desc)
-    }
-    
-    private enum CodingKeys: String, CodingKey {
-        case title
-        case company
-        case startDate
-        case endDate
-        case desc
-    }
-    
     public func toDict() -> [String : Any] {
         return [
             "title" : self.title,
@@ -47,22 +27,18 @@ class Experience : Background {
         ]
     }
     
-    static func decode(from data: [[String: Any]]) -> [Experience]{
-        var experiences = [Experience]()
-        for experienceData in data {
-            let title = experienceData["title"] as! String
-            let company = experienceData["company"] as! String
+    static func decode(from data: [String: Any]) -> Experience{
+        let title = data["title"] as! String
+        let company = data["company"] as! String
 
-            let startDateTimestamp = experienceData["startDate"] as! Timestamp
-            let startDate = startDateTimestamp.dateValue()
-            let endDateTimestamp = experienceData["endDate"] as! Timestamp
-            let endDate = endDateTimestamp.dateValue()
+        let startDateTimestamp = data["startDate"] as! Timestamp
+        let startDate = startDateTimestamp.dateValue()
+        let endDateTimestamp = data["endDate"] as! Timestamp
+        let endDate = endDateTimestamp.dateValue()
 
-            let desc = experienceData["desc"] as! String
+        let desc = data["desc"] as! String
 
-            let experience = Experience(title: title, company: company, startDate: startDate, endDate: endDate, desc: desc)
-            experiences.append(experience)
-        }
-        return experiences
+        let experience = Experience(title: title, company: company, startDate: startDate, endDate: endDate, desc: desc)
+        return experience
     }
 }

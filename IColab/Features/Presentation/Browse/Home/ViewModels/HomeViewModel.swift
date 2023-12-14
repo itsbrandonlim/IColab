@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 class HomeViewModel : ObservableObject{
     @Published var projects : [Project] = []
@@ -14,22 +15,21 @@ class HomeViewModel : ObservableObject{
     @Published var filters : [String] = []
     var fetchProject = FetchCollectionUseCase()
     
-    init(){
-        projects = getProjects()
-    }
-    
-    private func getProjects() -> [Project]{
-        var projectConstants = FireStoreConstant.ProjectConstants()
+    public func getProjects(completion: @escaping ()->Void){
+        let projectConstants = FireStoreConstant.ProjectConstants()
         var allProjects : [Project] = []
         fetchProject.call(collectionName: projectConstants.collectionName) { querySnapShot in
             querySnapShot.documents.forEach { doc in
-                // Fetch Project
+                let project = Project.decode(from: doc.data())
+                allProjects.append(project)
             }
+            let filteredProjects = allProjects.filter { project in
+                project.owner != AccountManager.shared.account?.id
+            }
+            self.projects = filteredProjects
+            self.objectWillChange.send()
+            completion()
         }
-        let filteredProjects = allProjects.filter { project in
-            project.owner?.accountDetail.name != AccountManager.shared.account?.accountDetail.name
-        }
-        return filteredProjects
     }
     
     private func getSearchProjects(searchTitle: String) -> [Project] {

@@ -24,17 +24,14 @@ class ChatListViewModel: ObservableObject {
     
     @Published var filterType: ChatFilterType = .all
     
-    init(uid: String){
-        self.account = getAccount(uid: uid)
+    init(){
+        self.account = getAccount()
         self.chats = self.getChats()
         self.projects = self.getProjects()
-        
     }
     
-    private func getAccount(uid: String) -> Account?{
-        return Mock.accounts.first { account in
-            account.id == uid
-        }
+    private func getAccount() -> Account?{
+        return AccountManager.shared.account
     }
     
     func getProjects() -> [Project] {

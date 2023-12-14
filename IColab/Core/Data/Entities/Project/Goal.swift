@@ -40,5 +40,16 @@ struct Goal: Identifiable, Equatable{
             "tasks" : self.tasks.map({$0.toDict()})
         ]
     }
+    
+    static func decode(from data: [String:Any]) -> Goal {
+        let name = data["name"] as! String
+        let nominal = data["nominal"] as! Int
+        let desc = data["desc"] as! String
+        let endDate = (data["endDate"] as! Timestamp).dateValue()
+        let isAchieved = data["isAchieved"] as! Bool
+        let tasks = (data["tasks"] as? [[String:Any]] ?? []).map({Task.decode(from: $0)})
+        
+        return Goal(name: name, nominal: nominal, desc: desc, endDate: endDate, isAchieved: isAchieved, tasks: tasks)
+    }
 
 }

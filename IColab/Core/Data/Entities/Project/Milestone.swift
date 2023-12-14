@@ -27,4 +27,13 @@ struct Milestone: Identifiable, Hashable{
             "goals" : self.goals.map({$0.toDict()})
         ]
     }
+    
+    static func decode(from data: [String : Any]) -> Milestone {
+        let roleData = data["role"] as! String
+        let role = Role(rawValue: roleData)
+        
+        let goalsData = (data["goals"] as? [[String:Any]] ?? []).map({Goal.decode(from: $0)})
+        
+        return Milestone(role: role!, goals: goalsData)
+    }
 }

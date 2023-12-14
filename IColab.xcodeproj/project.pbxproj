@@ -936,6 +936,13 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		D88125DE2B2A0AC9002A4E0B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		D88B63212B243CAE0058C944 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1088,6 +1095,7 @@
 		D8A3AF232AA3269600AC06C9 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				D88125DE2B2A0AC9002A4E0B /* Protocols */,
 				D82F3EF92B280C1300A5E303 /* Extensions */,
 				D86D75C22B232B7D00830A8B /* Constants */,
 				D8A3AF2D2AA330DA00AC06C9 /* Config */,

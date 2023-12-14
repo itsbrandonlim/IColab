@@ -50,7 +50,7 @@ struct LoginView: View {
             .padding()
             .alert(isPresented: $lvm.showAlert, error: lvm.error) { error in
                 Button("Dismiss"){
-                    print("Dismiss")
+                    lvm.isLoading = false
                 }
             } message: { error in
                 Text("\(lvm.error?.recoverySuggestion ?? "")")

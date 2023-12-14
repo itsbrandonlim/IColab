@@ -25,6 +25,13 @@ struct Task: Identifiable, Equatable{
         ]
         return dictionary
     }
+    
+    static func decode(from data: [String : Any]) -> Task {
+        let title = data["title"] as! String
+        let status = TaskStatus(rawValue: (data["status"] as! String))
+        
+        return Task(title: title, status: status!)
+    }
 }
 
 enum TaskStatus: String, CaseIterable, Codable {

@@ -14,13 +14,14 @@ struct LoadingView: View {
         VStack {
             Circle()
                 .trim(from: 0, to: 0.7)
-                .stroke(Color.white, lineWidth: 4)
+                .stroke(Color.primary, lineWidth: 4)
                 .rotationEffect(Angle(degrees: isLoading ? 360 : 0))
                 .onAppear {
                     withAnimation(Animation.linear(duration: 1).repeatForever(autoreverses: false)) {
                         self.isLoading = true
                     }
                 }
+                .frame(width: 200)
         }
     }
 }

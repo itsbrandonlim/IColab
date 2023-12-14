@@ -16,14 +16,14 @@ class ProfileViewModel : ObservableObject {
     @Published var update = UpdateCollectionWithIDUseCase()
     var accountDetailsConstant = FireStoreConstant.AccountDetailConstants()
     let pickerItems : [PickerItem] = [.overview, .portofolio]
-    init(uid: String){
-        self.account = getAccount(uid: uid)
+    init(){
+        self.account = getAccount()
         if account == AccountManager.shared.account {
             loggedInAccountIsViewed = true
         }
     }
     
-    private func getAccount(uid: String) -> Account?{
+    private func getAccount() -> Account?{
         return AccountManager.shared.account
     }
     

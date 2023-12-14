@@ -37,8 +37,6 @@ struct RegisterView: View {
                         rvm.register()
                     }
                     .padding(.bottom, 10)
-                    
-
                 }
                 Button {
                     rvm.signIn.toggle()
@@ -53,7 +51,7 @@ struct RegisterView: View {
         .padding()
         .navigationTitle("Register")
         .alert(isPresented: $rvm.showError, error: rvm.error) { error in
-            Button { print("Dismiss") } label: { Text("Dismiss") }
+            Button { rvm.isLoading = false } label: { Text("Dismiss") }
         } message: { error in
             Text("\(error.recoverySuggestion ?? "Unknown Error Occured")")
         }

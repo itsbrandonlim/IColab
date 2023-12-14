@@ -12,7 +12,7 @@ import FirebaseFirestoreSwift
 class Project : Identifiable, Searchable{
     var id : String
     var title : String
-    weak var owner : Account?
+    var owner : String?
     var members: [Member]?
     var role : String
     var requirements : [String]
@@ -24,7 +24,7 @@ class Project : Identifiable, Searchable{
     var requests : [Request] = []
     var projectState : ProjectState
 
-    init(id: String = UUID().uuidString, title: String, owner: Account? = nil, members: [Member]? = nil, role: String, requirements: [String], tags: [String], startDate: Date, endDate: Date, desc: String, milestones: [Milestone], projectState: ProjectState = .notStarted) {
+    init(id: String = UUID().uuidString, title: String, owner: String? = nil, members: [Member]? = [], role: String, requirements: [String] = [], tags: [String] = [], startDate: Date, endDate: Date, desc: String, milestones: [Milestone], projectState: ProjectState = .notStarted) {
         self.id = id
         self.title = title
         self.owner = owner
@@ -45,7 +45,7 @@ class Project : Identifiable, Searchable{
         self.desc = desc
     }
     
-    public func setOwner(owner : Account){
+    public func setOwner(owner : String){
         self.owner = owner
     }
     
@@ -70,7 +70,7 @@ class Project : Identifiable, Searchable{
         var projectConstants = FireStoreConstant.ProjectConstants()
         dictionary = [
             projectConstants.title : self.title,
-            projectConstants.ownerID : self.owner?.id ?? "",
+            projectConstants.ownerID : self.owner,
             projectConstants.members : [],
             projectConstants.role : self.role,
             projectConstants.requirements : self.requirements,
@@ -83,6 +83,27 @@ class Project : Identifiable, Searchable{
             projectConstants.projectState : self.projectState.rawValue
         ]
         return dictionary
+    }
+    
+    static func decode(from data: [String : Any]) -> Project {
+        var projectConstants = FireStoreConstant.ProjectConstants()
+        let title = data[projectConstants.title] as! String
+        let ownerID = data[projectConstants.ownerID] as! String
+        let members = (data[projectConstants.members] as? [[String:Any]] ?? []).map({Member.decode(from: $0)})
+        let role = data[projectConstants.role] as! String
+        let requirements = data[projectConstants.requirements] as! [String]
+        let tags = data[projectConstants.tags] as! [String]
+        
+        let startDateData = data[projectConstants.startDate] as! Timestamp
+        let startDate = startDateData.dateValue()
+        
+        let endDateData = data[projectConstants.endDate] as! Timestamp
+        let endDate = endDateData.dateValue()
+        
+        let desc = data[projectConstants.desc] as! String
+        let milestones = (data[projectConstants.milestones] as? [[String:Any]] ?? []).map({Milestone.decode(from: $0)})
+        let projectState = ProjectState(rawValue: (data[projectConstants.projectState] as! String))
+        return Project(title: title, owner: ownerID, members: members, role: role, requirements: requirements, tags: tags, startDate: startDate, endDate: endDate, desc: desc, milestones: milestones, projectState: projectState!)
     }
 }
 
