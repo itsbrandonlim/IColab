@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum ChatType: CaseIterable {
+enum ChatType: CaseIterable, Codable {
     case personal
     case owner
     case group
 }
 
-struct Chat: Identifiable, Equatable, Searchable {
-    let id: UUID = UUID()
+struct Chat: Identifiable, Equatable, Searchable, Codable {
+    var id: UUID = UUID()
     
     var title: String
     var messages: [Message]

@@ -34,7 +34,7 @@ struct FilterSheetView: View {
                         Text("End Date")
                             .fontWeight(.bold)
                         DatePicker(selection: $endDate, displayedComponents: .date) {
-                            Text("asd")
+                            Text("endDate")
                         }.labelsHidden()
                     }
                 }.padding(.bottom, 20)

@@ -15,40 +15,32 @@ struct AddProjectDetailView: View {
     
     
     var body: some View {
-        VStack {
-            VStack {
+        VStack(alignment: .leading) {
+            Text("Create Project")
+                .font(.largeTitle.bold())
+            VStack(alignment: .center) {
                 InputTitleView(title: "Project Title", text: $vm.project.title)
                 InputDescriptionView(title: "Project Short Summary", text: $vm.project.desc)
                 InputTagsView(tags: $vm.project.tags)
-                InputDateView(date: $vm.project.startDate)
+                InputDateView(date: $vm.project.startDate, title: "Input Start Date")
+                Spacer()
+                ButtonComponent(title: "Next", width: 240) {
+                    withAnimation() {
+                        if vm.validateProjectDetail() {
+                            pageIndex = 1
+                        }
+                    }
+                }
             }
             .padding()
-            
-            ButtonComponent(title: "Next", width: 240) {
-                pageIndex = 1
-            }
-            //
-            //            NavigationLink {
-            //                PickMemberView()
-            //                    .environmentObject(vm)
-            //
-            //            } label: {
-            //                Text("Submit")
-            //                    .padding()
-            //                    .padding(.horizontal)
-            //                    .background(.purple)
-            //                    .cornerRadius(12)
-            //            }
-            
-            //            ButtonComponent(title: "Submit", width: 320) {
-            //                vm.editProjectDetail(title: title, summary: summary, tags: tags)
-            //
-            //                vm.objectWillChange.send()
-            //                self.presentationMode.wrappedValue.dismiss()
-            //            }
-            Spacer()
         }
-        .padding()
+        .alert(isPresented: $vm.showAlert, error: vm.error) { error in
+            Button("Dismiss"){
+                
+            }
+        } message: { error in
+            Text("\(vm.error?.recoverySuggestion ?? "")")
+        }
     }
     
 

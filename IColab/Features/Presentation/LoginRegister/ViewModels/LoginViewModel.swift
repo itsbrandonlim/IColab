@@ -42,9 +42,15 @@ class LoginViewModel: ObservableObject {
         }
         
         AuthenticationManager.shared.loginUser(email: self.email, password: self.password) { authDataResult, error in
-            AccountManager.shared.getAccount()
-            self.isLoading = false
-            self.showSignIn = false
+            if let error = error {
+                self.showError(error: .firebaseError(error))
+                return
+            } else{
+                AccountManager.shared.getAccount{
+                    self.isLoading = false
+                    self.showSignIn = false
+                }
+            }
         }
     }
     

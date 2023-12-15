@@ -24,7 +24,6 @@ struct VerticalStepIndicator: View {
                         .foregroundColor(.purple)
                     Spacer()
                 }
-                
                 VStack {
                     ForEach(0..<vm.getMilestone(role: role).goals.count, id: \.self) { index in
                         HStack {
@@ -43,18 +42,14 @@ struct VerticalStepIndicator: View {
                                     .frame(width: 32)
                                     .foregroundColor(.purple)
                             }
-                                
                             NavigationLink {
                                 MilestoneDetailView(milestone: vm.getMilestone(role: role), goal: vm.getMilestone(role: role).goals[index])
                                     .environmentObject(vm)
                             } label: {
                                 MilestoneCardView(goal: vm.getMilestone(role: role).goals[index])
                             }
-
-                            
                         }
                     }
-                    
                 }
             }
             .padding()
@@ -69,7 +64,7 @@ struct MilestoneLineView: View {
 
     var body: some View {
         VStack {
-            if vm.milestones.isEmpty {
+            if vm.getMilestone(role: role).goals.isEmpty {
                 Image(systemName: "target")
                     .font(.largeTitle)
                 Text("No goals yet, add some")
@@ -78,19 +73,13 @@ struct MilestoneLineView: View {
             else {
                 VerticalStepIndicator(vm: vm, role: role, currentStepIndex: currentStepIndex)
             }
-            NavigationLink {
-                AddGoalView(role: role)
-                    .environmentObject(vm)
-            } label: {
-                Text("Add Goals")
-                    .padding()
-                    .background(.purple)
-                    .padding(.horizontal)
+            ButtonComponent(title: "Add Goals", width: 330) {
+                vm.nextView = true
             }
-
         }
-        
-        
+        .navigationDestination(isPresented: $vm.nextView) {
+            AddGoalView(vm: vm, role: role)
+        }
     }
 }
 

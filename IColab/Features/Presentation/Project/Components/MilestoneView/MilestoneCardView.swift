@@ -9,6 +9,11 @@ import SwiftUI
 
 struct MilestoneCardView: View {
     var goal: Goal
+    let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
     
     var body: some View {
         HStack {
@@ -20,7 +25,7 @@ struct MilestoneCardView: View {
                     .multilineTextAlignment(.leading)
                 HStack {
                     Spacer()
-                    Text("Rp. 1.500.000")
+                    Text("Rp. \(goal.nominal.formatted())")
                     Spacer()
                 }
                 .padding(.vertical, 12)

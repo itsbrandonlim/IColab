@@ -15,6 +15,6 @@ class NotificationViewModel {
     }
     
     private func getNotifications() -> [Notification]?{
-        return AccountManager.shared.account?.notifications
+        return AccountManager.shared.account?.accountDetail.notifications
     }
 }

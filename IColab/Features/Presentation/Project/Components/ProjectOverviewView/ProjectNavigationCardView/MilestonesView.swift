@@ -42,8 +42,7 @@ struct MilestonesView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
-                        AddGoalView(role: picker)
-                            .environmentObject(vm)
+                        AddGoalView(vm: vm, role: picker)
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .font(.title)

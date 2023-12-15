@@ -12,11 +12,12 @@ struct RequestSheet: View {
     @EnvironmentObject var vm : ProjectOverviewViewModel
     @Binding var showSheet : Bool
     @Binding var showProfile : Bool
+    @State var isLoading : Bool = false
     var body: some View {
         VStack{
             Circle()
                 .frame(width: 64)
-            Text(request.worker.accountDetail.name)
+            Text(request.name)
             Text(request.role.rawValue)
                 .padding(.bottom, 20)
             
@@ -27,7 +28,7 @@ struct RequestSheet: View {
             
             HStack(spacing: 15){
                 ButtonComponent(title: "Reject", width: 140, tint: .gray) {
-                    vm.rejectRequest(worker: request.worker)
+                    vm.rejectRequest(request: request)
                     showSheet.toggle()
                     vm.deleteRequest(request: request)
                 }
@@ -38,6 +39,7 @@ struct RequestSheet: View {
                 }
             }
         }
+        
     }
 }
 

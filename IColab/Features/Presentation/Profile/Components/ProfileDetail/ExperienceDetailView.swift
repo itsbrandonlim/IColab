@@ -65,9 +65,9 @@ struct ExperienceDetailView_Previews: PreviewProvider {
     static var previews: some View {
         VStack{
             ExperienceDetailView(showAlert: .constant(false), background: MockAccountDetails.array[0].experiences[0], editMode: false)
-                .environmentObject(ProfileViewModel(uid: Mock.accounts[0].id))
+                .environmentObject(ProfileViewModel())
             ExperienceDetailView(showAlert: .constant(false), background: MockAccountDetails.array[0].experiences[0], editMode: true)
-                .environmentObject(ProfileViewModel(uid: Mock.accounts[0].id))
+                .environmentObject(ProfileViewModel())
         }
         
     }

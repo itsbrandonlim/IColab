@@ -45,11 +45,11 @@ struct ProjectOverviewView: View {
                         }
                     }
                     Text(vm.project.desc)
+                        .lineLimit(3)
                 }
                 .padding()
                 .padding(.top, 32)
                 .background(Color(.purple))
-                
                 VStack {
                     switch vm.project.projectState {
                     case .notStarted:

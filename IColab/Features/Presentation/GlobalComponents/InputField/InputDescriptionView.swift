@@ -17,7 +17,9 @@ struct InputDescriptionView: View {
                 .font(.headline)
             HStack {
                 TextEditor(text: $text)
+                    .autocorrectionDisabled()
                     .frame(height: 120)
+                    .foregroundColor(.gray.opacity(0.75))
                 Spacer()
                 Button {
                     text = ""

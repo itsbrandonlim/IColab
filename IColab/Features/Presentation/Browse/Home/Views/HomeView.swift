@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @StateObject var homeViewModel = HomeViewModel()
     @FocusState var isInputActive: Bool
+    @State var isLoading = true
     var body: some View {
         VStack{
             HStack{
@@ -25,25 +26,38 @@ struct HomeView: View {
                         .foregroundColor(.primary)
                 }
             }
-            if homeViewModel.projects.isEmpty{
-                VStack{
-                    Spacer()
-                    Image(systemName: "menucard")
-                        .font(.system(size: 64))
-                    Text("No Projects to be shown")
-                        .font(.callout.bold())
-                    Spacer()
-                }
-            }else{
-                ScrollView{
-                    ForEach(homeViewModel.projects){ project in
-                        NavigationLink {
-                            ProjectDetailView(project: project)
-                        } label: {
-                            ProjectCard(project: project)
+            if !isLoading {
+                if homeViewModel.projects.isEmpty{
+                    VStack(spacing: 10){
+                        Spacer()
+                        Image(systemName: "menucard")
+                            .font(.system(size: 64))
+                        Text("No Projects to be shown")
+                            .font(.title3.bold())
+                        Spacer()
+                        Spacer()
+                    }
+                }else{
+                    ScrollView{
+                        ForEach(homeViewModel.projects){ project in
+                            NavigationLink {
+                                ProjectDetailView(project: project)
+                            } label: {
+                                ProjectCard(project: project)
+                            }
                         }
                     }
                 }
+            } else {
+                Spacer()
+                LoadingView()
+                Spacer()
+                Spacer()
+                    .onAppear(perform: {
+                        self.homeViewModel.getProjects {
+                            self.isLoading = false
+                        }
+                    })
             }
         }
         .padding(.horizontal, 20)

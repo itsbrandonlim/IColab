@@ -42,7 +42,7 @@ struct AddProfileView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
             AddProfileView()
-                .environmentObject(ProfileViewModel(uid: Mock.accounts[0].id))
+                .environmentObject(ProfileViewModel())
         }
         
     }

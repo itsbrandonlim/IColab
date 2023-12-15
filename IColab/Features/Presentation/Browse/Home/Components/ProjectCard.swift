@@ -21,6 +21,7 @@ struct ProjectCard: View {
                 .font(.caption)
             Text("\(project.desc)")
                 .multilineTextAlignment(.leading)
+                .lineLimit(3)
                 .padding(.top, 1)
                 .font(.caption)
             HStack{

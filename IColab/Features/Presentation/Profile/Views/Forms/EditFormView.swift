@@ -70,7 +70,7 @@ struct EditFormView: View {
 struct EditFormView_Previews: PreviewProvider {
     static var previews: some View {
         EditFormView(background: MockAccountDetails.array[0].educations[0], index: 1)
-            .environmentObject(ProfileViewModel(uid: Mock.accounts[0].id))
+            .environmentObject(ProfileViewModel())
             .environmentObject(NavigationManager())
     }
 }

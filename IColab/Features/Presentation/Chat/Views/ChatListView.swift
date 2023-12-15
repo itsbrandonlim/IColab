@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatListView: View {
-    @StateObject var vm = ChatListViewModel(uid: Mock.accounts[1].id)
+    @StateObject var vm = ChatListViewModel()
     
     @State var filterToggle: Bool = false
     
