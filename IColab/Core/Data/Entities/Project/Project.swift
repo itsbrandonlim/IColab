@@ -68,10 +68,11 @@ class Project : Identifiable, Searchable{
     
     public func toDict() -> [String: Any] {
         var dictionary = [String: Any]()
-        var projectConstants = FireStoreConstant.ProjectConstants()
+        let projectConstants = FireStoreConstant.ProjectConstants()
         dictionary = [
+            projectConstants.id : self.id,
             projectConstants.title : self.title,
-            projectConstants.ownerID : self.owner,
+            projectConstants.ownerID : self.owner!,
             projectConstants.members : [],
             projectConstants.role : self.role,
             projectConstants.requirements : self.requirements,
@@ -87,8 +88,9 @@ class Project : Identifiable, Searchable{
     }
     
     static func decode(from data: [String : Any]) -> Project {
-        var projectConstants = FireStoreConstant.ProjectConstants()
+        let projectConstants = FireStoreConstant.ProjectConstants()
         
+        let id = data[projectConstants.id] as! String
         let title = data[projectConstants.title] as! String
         let ownerID = data[projectConstants.ownerID] as! String
         let members = (data[projectConstants.members] as? [[String:Any]] ?? []).map({Member.decode(from: $0)})
@@ -107,7 +109,7 @@ class Project : Identifiable, Searchable{
         let desc = data[projectConstants.desc] as! String
         let milestones = (data[projectConstants.milestones] as? [[String:Any]] ?? []).map({Milestone.decode(from: $0)})
         let projectState = ProjectState(rawValue: (data[projectConstants.projectState] as! String))
-        return Project(title: title, owner: ownerID, members: members, role: role, requirements: requirements, tags: tags, startDate: startDate, endDate: endDate, desc: desc, milestones: milestones, requests: requests, projectState: projectState!)
+        return Project(id: id, title: title, owner: ownerID, members: members, role: role, requirements: requirements, tags: tags, startDate: startDate, endDate: endDate, desc: desc, milestones: milestones, requests: requests, projectState: projectState!)
         
     }
 }

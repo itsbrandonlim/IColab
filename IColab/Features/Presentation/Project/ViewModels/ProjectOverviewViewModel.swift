@@ -62,7 +62,7 @@ class ProjectOverviewViewModel: ObservableObject {
     func rejectRequest(request: Request){
         fetchOwner.call(collectionName: "accountDetails", id: request.workerID) { document in
             if let doc = document.data() {
-                var accountDetail = AccountDetail.decode(from: doc)
+                let accountDetail = AccountDetail.decode(from: doc)
                 accountDetail.notifications?.append(Notification(desc: "Request Rejected", projectName: self.project.title, date: Date.now))
             }
         }
@@ -71,7 +71,7 @@ class ProjectOverviewViewModel: ObservableObject {
     func acceptRequest(request : Request){
         fetchOwner.call(collectionName: "accountDetails", id: request.workerID) { document in
             if let doc = document.data() {
-                var accountDetail = AccountDetail.decode(from: doc)
+                let accountDetail = AccountDetail.decode(from: doc)
                 accountDetail.projectsJoined.append(self.project)
                 accountDetail.notifications?.append(Notification(desc: "Request Accepted", projectName: self.project.title, date: Date.now))
                 

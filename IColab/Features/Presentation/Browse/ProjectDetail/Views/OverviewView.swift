@@ -73,7 +73,7 @@ struct OverviewView: View {
                 let request = Request(workerID: accountManager.account!.id, name: accountManager.account!.accountDetail.name, role: role, date: Date.now)
                 fetchOwner.call(collectionName: "accountDetails", id: project.owner!) { document in
                     if let doc = document.data() {
-                        var accountDetail = AccountDetail.decode(from: doc)
+                        let accountDetail = AccountDetail.decode(from: doc)
                         let index = accountDetail.projectsOwned.firstIndex(where: {$0.owner == document.documentID})
                         accountDetail.projectsOwned[index!].requests.append(request)
                         project.requests.append(request)

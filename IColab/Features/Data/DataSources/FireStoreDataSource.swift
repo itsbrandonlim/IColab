@@ -10,7 +10,8 @@ import Foundation
 
 struct FireStoreDataSource : FireStoreDataSourceProtocol {
     private let db = Firestore.firestore()
-    
+    let projectConstants = FireStoreConstant.ProjectConstants()
+    let detailConstants = FireStoreConstant.AccountDetailConstants()
     func getCollection(collectionName: String, completion: @escaping (QuerySnapshot?, Error?) -> Void){
         db.collection(collectionName).getDocuments(completion: completion)
     }
@@ -52,7 +53,6 @@ struct FireStoreDataSource : FireStoreDataSourceProtocol {
     }
     
     func addAccountDetail(accountDetail: AccountDetail, id: String, completion: @escaping (Error?) -> Void) {
-        var detailConstants = FireStoreConstant.AccountDetailConstants()
         let docReference = db.collection(detailConstants.collectionName).document(id)
         docReference.setData(accountDetail.toDict()) { error in
             if let error = error {
@@ -64,11 +64,22 @@ struct FireStoreDataSource : FireStoreDataSourceProtocol {
     }
     
     func updateProject(project: Project, completion: @escaping (Error?) -> Void) {
-        var projectConstants = FireStoreConstant.ProjectConstants()
         let docReference = db.collection(projectConstants.collectionName).document(project.id)
         
         docReference.setData(project.toDict()) { error in
             completion(error)
+        }
+    }
+    
+    func addMembertoProject(project: Project, completion: @escaping (QuerySnapshot?, Error?) -> Void) {
+        let query = db.collection(projectConstants.collectionName).whereField(projectConstants.title, isEqualTo: project.title)
+        query.getDocuments { querySnapShot, error in
+            if let error = error {
+                completion(nil, error)
+            }
+            else if let qss = querySnapShot {
+                completion(qss, nil)
+            }
         }
     }
 }

@@ -18,4 +18,5 @@ protocol FireStoreRepositoryProtocol {
     
     func updateDocument<T: Codable>(collectionName: String, id: String, element: T) throws
     func updateProject(project: Project, completion: @escaping (Error?) -> Void)
+    func addMembertoProject(project: Project, completion: @escaping (Error?) -> Void)
 }

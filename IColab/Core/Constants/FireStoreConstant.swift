@@ -27,6 +27,7 @@ struct FireStoreConstant {
     
     struct ProjectConstants {
         let collectionName = "projects"
+        let id = "id"
         let title = "title"
         let desc = "desc"
         let endDate = "endDate"

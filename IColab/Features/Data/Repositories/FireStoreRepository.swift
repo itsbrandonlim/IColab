@@ -61,4 +61,14 @@ struct FireStoreRepository : FireStoreRepositoryProtocol {
     func updateProject(project: Project, completion: @escaping (Error?) -> Void) {
         firestoreDataSource.updateProject(project: project, completion: completion)
     }
+    
+    func addMembertoProject(project: Project, completion: @escaping (Error?) -> Void) {
+        firestoreDataSource.addMembertoProject(project: project) { querySnapShot, error in
+            if let error = error {
+                completion(error)
+            } else{
+                
+            }
+        }
+    }
 }

@@ -28,7 +28,6 @@ class AuthenticationManager {
     func logoutUser(){
         do {
             try Auth.auth().signOut()
-            print("Logout")
         }catch let error {
             print(error.localizedDescription)
         }

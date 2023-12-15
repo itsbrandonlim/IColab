@@ -14,7 +14,7 @@ enum ChatType: CaseIterable, Codable {
 }
 
 struct Chat: Identifiable, Equatable, Searchable, Codable {
-    let id: UUID = UUID()
+    var id: UUID = UUID()
     
     var title: String
     var messages: [Message]

@@ -47,7 +47,6 @@ class RegisterViewModel : ObservableObject {
                 }
                 if let result = authDataResult {
                     let accountDetail = AccountDetail(name: self.username, desc: "", location: self.region, bankAccount: "", phoneNumber: self.phoneNumber)
-                    let account = Account(email: result.user.email!, password: self.password, accountDetail: accountDetail)
                     self.addAccountDetailtoFireStore.call(accountDetail: accountDetail, id: result.user.uid) { error in
                         if let error = error {
                             self.showError(error: .firebaseError(error))
@@ -84,7 +83,7 @@ class RegisterViewModel : ObservableObject {
             return false
         }
         
-        if let double = Double(phoneNumber) {
+        if Double(phoneNumber) != nil {
         }else{
             showError(error: .phoneNotNumber)
             return false

@@ -67,7 +67,7 @@ class AccountDetail: Identifiable, Equatable{
     }
     
     public func toDict() -> [String: Any] {
-        var detailConstants = FireStoreConstant.AccountDetailConstants()
+        let detailConstants = FireStoreConstant.AccountDetailConstants()
         return [
             detailConstants.name : self.name,
             detailConstants.desc : self.desc,
@@ -85,7 +85,7 @@ class AccountDetail: Identifiable, Equatable{
     }
     
     static func decode(from data: [String : Any]) -> AccountDetail {
-        var detailConstants = FireStoreConstant.AccountDetailConstants()
+        let detailConstants = FireStoreConstant.AccountDetailConstants()
         
         let name = data[detailConstants.name] as! String
         let phoneNumber = data[detailConstants.phoneNumber] as! String
@@ -101,7 +101,6 @@ class AccountDetail: Identifiable, Equatable{
         let experiencesData = data[detailConstants.experiences] as? [[String:Any]] ?? [[:]]
         experiences = experiencesData.map({Experience.decode(from: $0)})
         let projectsOwnedData = (data[detailConstants.projectsOwned] as? [[String:Any]] ?? [[:]])
-        print(projectsOwnedData)
         var projectsOwned = [Project]()
         if !projectsOwnedData.isEmpty{
             projectsOwned = projectsOwnedData.map({Project.decode(from: $0)})
