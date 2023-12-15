@@ -13,7 +13,7 @@ class ProfileViewModel : ObservableObject {
     @Published var pickerSelection : PickerItem = .overview
     @Published var showEdit : Bool = false
     @Published var loggedInAccountIsViewed : Bool = false
-    @Published var update = UpdateCollectionWithIDUseCase()
+    @Published var update = AddAccountDetailUseCase()
     var accountDetailsConstant = FireStoreConstant.AccountDetailConstants()
     let pickerItems : [PickerItem] = [.overview, .portofolio]
     init(){
@@ -117,11 +117,8 @@ class ProfileViewModel : ObservableObject {
     }
     
     public func saveToFireStore(){
-        do{
-//           try update.call(collectionName: accountDetailsConstant.collectionName, id: AuthenticationManager.shared.getLoggedInUser()!.uid, element: account?.accountDetail)
-        } catch let error {
-            print("Error saving to firestore: \(error.localizedDescription)")
+        update.call(accountDetail: self.account!.accountDetail, id: AuthenticationManager.shared.getLoggedInUser()!.uid) { error in
+            print("Error saving to firestore: \(String(describing: error?.localizedDescription))")
         }
-        
     }
 }

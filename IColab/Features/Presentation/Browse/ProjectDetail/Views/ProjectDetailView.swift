@@ -31,7 +31,7 @@ struct ProjectDetailView: View {
                         .padding(.leading, 20)
                         .padding(.bottom, 20)
                 }
-                OwnerNameView(name: owner.name ?? "Name", showSheet: $showSheet)
+                OwnerNameView(name: owner.name, showSheet: $showSheet)
                     .offset(y: -10)
                 PickerView(pickerSelection: $pickerSelection, allItems: pickerItems)
                     .padding(.horizontal, 10)

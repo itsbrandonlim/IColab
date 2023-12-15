@@ -15,29 +15,32 @@ struct ContentView: View {
     var body: some View {
         ZStack{
             if !isLoading {
-                NavigationStack {
-                    VStack{
+                if !showSignIn {
+                    NavigationStack {
                         VStack{
-                            switch selectedTabBar {
-                            case .home:
-                                HomeView()
-                            case .projects:
-                                ProjectMainView()
-                            case .chats:
-                                ChatListView()
-                            case .notifications:
-                                NotificationView()
-                            case .profile:
-                                let pvm = ProfileViewModel()
-                                ProfileView(pvm: pvm, showSignIn: $showSignIn)
-                                    .environmentObject(pvm)
+                            VStack{
+                                switch selectedTabBar {
+                                case .home:
+                                    HomeView()
+                                case .projects:
+                                    ProjectMainView()
+                                case .chats:
+                                    ChatListView()
+                                case .notifications:
+                                    NotificationView()
+                                case .profile:
+                                    let pvm = ProfileViewModel()
+                                    ProfileView(pvm: pvm, showSignIn: $showSignIn)
+                                        .environmentObject(pvm)
+                                }
                             }
                         }
+                        TabBarView(selectedTabItem: $selectedTabBar)
                     }
-                    TabBarView(selectedTabItem: $selectedTabBar)
+                    .navigationBarBackButtonHidden()
+                    .navigationBarTitleDisplayMode(.large)
                 }
-                .navigationBarBackButtonHidden()
-                .navigationBarTitleDisplayMode(.large)
+                
             } else{
                 LoadingView()
             }

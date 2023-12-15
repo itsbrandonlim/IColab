@@ -41,3 +41,7 @@ struct FireStoreConstant {
         let tags = "tags"
     }
 }
+
+var accountDetail = FireStoreConstant.AccountDetailConstants()
+var notifications = accountDetail.notifications
+

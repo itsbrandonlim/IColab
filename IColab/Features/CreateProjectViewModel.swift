@@ -17,6 +17,7 @@ class CreateProjectViewModel: ObservableObject {
     @Published var showAlert : Bool = false
     var addDatatoFireStore = AddDatatoFireStoreUseCase()
     var projectConstants = FireStoreConstant.ProjectConstants()
+    var updateAccountDetail = AddAccountDetailUseCase()
     
     init(needRefresh: Binding<Bool>){
         self._needRefresh = needRefresh
@@ -37,7 +38,14 @@ class CreateProjectViewModel: ObservableObject {
             } catch let error {
                 print("Error adding data to firestore : \(error.localizedDescription)")
             }
-            
+            updateAccountDetail.call(accountDetail: self.account.accountDetail, id: account.id) { error in
+                if let error = error {
+                    self.showError(error: .firestoreError(error))
+                }
+            }
+            if showAlert {
+                return false
+            }
             self.needRefresh.toggle()
             self.objectWillChange.send()
             return true

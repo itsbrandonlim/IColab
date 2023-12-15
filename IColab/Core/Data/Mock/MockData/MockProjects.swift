@@ -33,7 +33,7 @@ struct MockProjects: Randomizeable {
                 tags: ["SwiftUI", "CoreML", "Vision"],
                 startDate: Date.now,
                 endDate: Calendar.current.date(byAdding: .day, value: 5, to: Date.now)!,
-                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                desc: "Lorem ipsum dolor sit amet",
                 milestones: MockMilestones.array,
                 projectState: ProjectState.allCases.randomElement()!
             )

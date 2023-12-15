@@ -24,7 +24,7 @@ class Project : Identifiable, Searchable{
     var requests : [Request] = []
     var projectState : ProjectState
 
-    init(id: String = UUID().uuidString, title: String, owner: String? = nil, members: [Member]? = [], role: String, requirements: [String] = [], tags: [String] = [], startDate: Date, endDate: Date, desc: String, milestones: [Milestone], projectState: ProjectState = .notStarted) {
+    init(id: String = UUID().uuidString, title: String, owner: String? = nil, members: [Member]? = [], role: String, requirements: [String] = [], tags: [String] = [], startDate: Date, endDate: Date, desc: String, milestones: [Milestone], requests : [Request] = [], projectState: ProjectState = .notStarted) {
         self.id = id
         self.title = title
         self.owner = owner
@@ -36,6 +36,7 @@ class Project : Identifiable, Searchable{
         self.endDate = endDate
         self.desc = desc
         self.milestones = milestones
+        self.requests = requests
         self.projectState = projectState
     }
     
@@ -79,7 +80,7 @@ class Project : Identifiable, Searchable{
             projectConstants.endDate : Timestamp(date: self.endDate),
             projectConstants.desc : self.desc,
             projectConstants.milestones : self.milestones.map({$0.toDict()}),
-            projectConstants.request : self.requests,
+            projectConstants.request : self.requests.map({$0.toDict()}),
             projectConstants.projectState : self.projectState.rawValue
         ]
         return dictionary
@@ -87,6 +88,7 @@ class Project : Identifiable, Searchable{
     
     static func decode(from data: [String : Any]) -> Project {
         var projectConstants = FireStoreConstant.ProjectConstants()
+        
         let title = data[projectConstants.title] as! String
         let ownerID = data[projectConstants.ownerID] as! String
         let members = (data[projectConstants.members] as? [[String:Any]] ?? []).map({Member.decode(from: $0)})
@@ -100,10 +102,13 @@ class Project : Identifiable, Searchable{
         let endDateData = data[projectConstants.endDate] as! Timestamp
         let endDate = endDateData.dateValue()
         
+        let requests = (data[projectConstants.request] as! [[String:Any]]).map({Request.decode(from: $0)})
+        
         let desc = data[projectConstants.desc] as! String
         let milestones = (data[projectConstants.milestones] as? [[String:Any]] ?? []).map({Milestone.decode(from: $0)})
         let projectState = ProjectState(rawValue: (data[projectConstants.projectState] as! String))
-        return Project(title: title, owner: ownerID, members: members, role: role, requirements: requirements, tags: tags, startDate: startDate, endDate: endDate, desc: desc, milestones: milestones, projectState: projectState!)
+        return Project(title: title, owner: ownerID, members: members, role: role, requirements: requirements, tags: tags, startDate: startDate, endDate: endDate, desc: desc, milestones: milestones, requests: requests, projectState: projectState!)
+        
     }
 }
 

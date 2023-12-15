@@ -75,8 +75,8 @@ class AccountDetail: Identifiable, Equatable{
             detailConstants.bankAccount : self.bankAccount,
             detailConstants.phoneNumber : self.phoneNumber,
             detailConstants.skills : self.skills,
-            detailConstants.educations : self.educations,
-            detailConstants.experiences : self.experiences,
+            detailConstants.educations : self.educations.map({$0.toDict()}),
+            detailConstants.experiences : self.experiences.map({$0.toDict()}),
             detailConstants.projectsOwned : self.projectsOwned.map({$0.toDict()}),
             detailConstants.projectsJoined : self.projectsJoined.map({$0.toDict()}),
             detailConstants.notifications : [Notification](),
@@ -101,6 +101,7 @@ class AccountDetail: Identifiable, Equatable{
         let experiencesData = data[detailConstants.experiences] as? [[String:Any]] ?? [[:]]
         experiences = experiencesData.map({Experience.decode(from: $0)})
         let projectsOwnedData = (data[detailConstants.projectsOwned] as? [[String:Any]] ?? [[:]])
+        print(projectsOwnedData)
         var projectsOwned = [Project]()
         if !projectsOwnedData.isEmpty{
             projectsOwned = projectsOwnedData.map({Project.decode(from: $0)})
