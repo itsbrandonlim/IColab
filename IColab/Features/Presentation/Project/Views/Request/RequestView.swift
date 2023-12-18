@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RequestView: View {
     @EnvironmentObject var vm : ProjectOverviewViewModel
-    @State var chosenIndex = 0
+    @State var chosenIndex : Int = 0
     @State var showSheet = false
     @State var showProfile = false
     var body: some View {
@@ -20,21 +20,21 @@ struct RequestView: View {
                 Text("No Requests")
                     .font(.title3).bold()
             }else{
-                ForEach(0..<vm.project.requests.count) { idx in
+                ForEach(vm.project.requests, id: \.id) { request in
                     Button {
-                        chosenIndex = idx
-                        showSheet.toggle()
+                        self.chosenIndex = vm.project.requests.firstIndex(of: request) ?? 0
+                        showSheet = true
                     } label: {
-                        RequestCard(request: vm.project.requests[idx])
+                        RequestCard(request: request)
                             .environmentObject(vm)
                     }
+
                 }
                 .navigationDestination(isPresented: $showProfile) {
                     ProfileView(pvm: ProfileViewModel(), showSignIn: .constant(false))
                         .environmentObject(ProfileViewModel())
                 }
             }
-            
         }
         .sheet(isPresented: $showSheet, content: {
             VStack{

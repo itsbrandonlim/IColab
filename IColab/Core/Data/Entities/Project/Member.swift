@@ -10,16 +10,21 @@ import Foundation
 struct Member: Identifiable, Equatable{
     let id: UUID = UUID()
     
-    var accountDetail: AccountDetail
+    var workerID : String
     var role: Role
     
-    mutating func setAccount(accountDetail: AccountDetail) {
-        self.accountDetail = accountDetail
-    }
+    
     
     static func decode(from data: [String:Any]) -> Member {
-        let accountDetail = AccountDetail.decode(from: (data["accountDetail"] as? [String:Any] ?? [:]))
+        let workerID = data["workerID"] as! String
         let role = Role(rawValue: (data["role"] as! String))
-        return Member(accountDetail: accountDetail, role: role!)
+        return Member(workerID: workerID, role: role!)
+    }
+    
+    func toDict() -> [String:Any]{
+        return [
+            "workerID" : self.workerID,
+            "role" : self.role.rawValue
+        ]
     }
 }

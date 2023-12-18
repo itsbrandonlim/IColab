@@ -30,12 +30,10 @@ struct RequestSheet: View {
                 ButtonComponent(title: "Reject", width: 140, tint: .gray) {
                     vm.rejectRequest(request: request)
                     showSheet.toggle()
-                    vm.deleteRequest(request: request)
                 }
                 ButtonComponent(title: "Accept", width: 140) {
                     vm.acceptRequest(request: request)
                     showSheet.toggle()
-                    vm.deleteRequest(request: request)
                 }
             }
         }

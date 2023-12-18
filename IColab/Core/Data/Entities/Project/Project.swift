@@ -13,7 +13,7 @@ class Project : Identifiable, Searchable{
     var id : String
     var title : String
     var owner : String?
-    var members: [Member]?
+    var members: [Member]
     var role : String
     var requirements : [String]
     var tags : [String]
@@ -24,7 +24,7 @@ class Project : Identifiable, Searchable{
     var requests : [Request] = []
     var projectState : ProjectState
 
-    init(id: String = UUID().uuidString, title: String, owner: String? = nil, members: [Member]? = [], role: String, requirements: [String] = [], tags: [String] = [], startDate: Date, endDate: Date, desc: String, milestones: [Milestone], requests : [Request] = [], projectState: ProjectState = .notStarted) {
+    init(id: String = UUID().uuidString, title: String, owner: String? = nil, members: [Member] = [], role: String, requirements: [String] = [], tags: [String] = [], startDate: Date, endDate: Date, desc: String, milestones: [Milestone], requests : [Request] = [], projectState: ProjectState = .notStarted) {
         self.id = id
         self.title = title
         self.owner = owner
@@ -73,7 +73,7 @@ class Project : Identifiable, Searchable{
             projectConstants.id : self.id,
             projectConstants.title : self.title,
             projectConstants.ownerID : self.owner!,
-            projectConstants.members : [],
+            projectConstants.members : self.members.map({$0.toDict()}),
             projectConstants.role : self.role,
             projectConstants.requirements : self.requirements,
             projectConstants.tags : self.tags,
@@ -116,16 +116,7 @@ class Project : Identifiable, Searchable{
 
 extension Project: Hashable{
     static func == (lhs: Project, rhs: Project) -> Bool {
-        return lhs.id == rhs.id &&
-        lhs.title == rhs.title &&
-        lhs.owner == rhs.owner &&
-        lhs.role == rhs.role &&
-        lhs.requirements == rhs.requirements &&
-        lhs.tags == rhs.tags &&
-        lhs.startDate == rhs.startDate &&
-        lhs.endDate == rhs.endDate &&
-        lhs.desc == rhs.desc &&
-        lhs.milestones == rhs.milestones
+        return lhs.id == rhs.id
     }
     
     func hash(into hasher: inout Hasher) {

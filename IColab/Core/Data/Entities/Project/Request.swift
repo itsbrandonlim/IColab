@@ -8,8 +8,8 @@
 import Foundation
 import FirebaseFirestore
 
-struct Request{
-    var id = UUID().uuidString
+struct Request : Equatable{
+    var id : String
     var workerID : String
     var name: String
     var role : Role
@@ -17,6 +17,7 @@ struct Request{
     
     public func toDict() -> [String : Any] {
         return [
+            "id" : self.id,
             "workerID" : self.workerID,
             "name" : self.name,
             "role" : self.role.rawValue,
@@ -25,11 +26,12 @@ struct Request{
     }
     
     static func decode(from data: [String:Any]) -> Request {
+        let id = data["id"] as! String
         let workerID = data["workerID"] as! String
         let role = Role(rawValue: (data["role"] as! String))
         let name = data["name"] as! String
         let date = (data["date"] as! Timestamp).dateValue()
-        return Request(workerID: workerID, name: name, role: role!, date: date)
+        return Request(id: id, workerID: workerID, name: name, role: role!, date: date)
     }
 }
 

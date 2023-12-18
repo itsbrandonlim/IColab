@@ -70,7 +70,7 @@ struct OverviewView: View {
             .padding(.horizontal, 20)
             
             ButtonComponent(title: "Apply", width: 200) {
-                let request = Request(workerID: accountManager.account!.id, name: accountManager.account!.accountDetail.name, role: role, date: Date.now)
+                let request = Request(id: UUID().uuidString, workerID: accountManager.account!.id, name: accountManager.account!.accountDetail.name, role: role, date: Date.now)
                 fetchOwner.call(collectionName: "accountDetails", id: project.owner!) { document in
                     if let doc = document.data() {
                         let accountDetail = AccountDetail.decode(from: doc)
