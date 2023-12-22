@@ -22,8 +22,8 @@ struct FireStoreRepository : FireStoreRepositoryProtocol {
         }
     }
     
-    func setData<T>(collectionName: String, element: T, id: String) -> Result<Bool, Error> where T : Decodable, T : Encodable {
-        switch firestoreDataSource.setData(collectionName: collectionName, element: element, id: id) {
+    func setDataWithID<T>(collectionName: String, element: T, id: String) -> Result<Bool, Error> where T : Decodable, T : Encodable {
+        switch firestoreDataSource.setDataWithID(collectionName: collectionName, element: element, id: id) {
             case .success(let boolean) :
                 return .success(boolean)
             case .failure(let error) :
@@ -47,6 +47,28 @@ struct FireStoreRepository : FireStoreRepositoryProtocol {
             try firestoreDataSource.updateDocument(collectionName: collectionName, id: id, element: element)
         } catch let error {
             throw error
+        }
+    }
+    
+    func addProject(collectionName: String, element: Project) throws {
+        try firestoreDataSource.addProject(collectionName: collectionName, project: element)
+    }
+    
+    func addAccountDetail(accountDetail: AccountDetail, id: String, completion: @escaping (Error?) -> Void) {
+        firestoreDataSource.addAccountDetail(accountDetail: accountDetail, id: id, completion: completion)
+    }
+    
+    func updateProject(project: Project, completion: @escaping (Error?) -> Void) {
+        firestoreDataSource.updateProject(project: project, completion: completion)
+    }
+    
+    func addMembertoProject(project: Project, completion: @escaping (Error?) -> Void) {
+        firestoreDataSource.addMembertoProject(project: project) { querySnapShot, error in
+            if let error = error {
+                completion(error)
+            } else{
+                
+            }
         }
     }
 }

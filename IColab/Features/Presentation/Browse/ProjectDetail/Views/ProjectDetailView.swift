@@ -13,42 +13,59 @@ struct ProjectDetailView: View {
     @State var pickerSelection : PickerItem = .overview
     @State var showSheet = false
     @State var showProfile = false
+    @State var isLoading = true
+    @State var owner : AccountDetail!
+    var fetchOwner = FetchDocumentFromIDUseCase()
     let pickerItems : [PickerItem] = [.overview, .milestone]
     var body: some View {
-        ScrollView{
-            ZStack(alignment: .bottomLeading){
-                Image("purple")
-                    .resizable()
-                    .frame(height: 200)
-                Text("\(project.title)")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .padding(.leading, 20)
-                    .padding(.bottom, 20)
+        if !isLoading {
+            ScrollView{
+                ZStack(alignment: .bottomLeading){
+                    Image("purple")
+                        .resizable()
+                        .frame(height: 200)
+                    Text("\(project.title)")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding(.leading, 20)
+                        .padding(.bottom, 20)
+                }
+                OwnerNameView(name: owner.name, showSheet: $showSheet)
+                    .offset(y: -10)
+                PickerView(pickerSelection: $pickerSelection, allItems: pickerItems)
+                    .padding(.horizontal, 10)
+                switch pickerSelection {
+                case .overview:
+                    OverviewView(project: project)
+                case .milestone:
+                    MilestoneView(milestones: project.milestones)
+                default:
+                    EmptyView()
+                }
             }
-            OwnerNameView(name: project.owner?.accountDetail.name ?? "Name", showSheet: $showSheet)
-                .offset(y: -10)
-            PickerView(pickerSelection: $pickerSelection, allItems: pickerItems)
-                .padding(.horizontal, 10)
-            switch pickerSelection {
-            case .overview:
-                OverviewView(project: project)
-            case .milestone:
-                MilestoneView(milestones: project.milestones)
-            default:
-                EmptyView()
+            .ignoresSafeArea()
+            .sheet(isPresented: $showSheet, content: {
+                OwnerProfileSheet(owner: owner, showSheet: $showSheet, showProfile: $showProfile)
+                    .presentationDragIndicator(.visible)
+                .presentationDetents([.fraction(0.45), .large])
+            })
+            .navigationDestination(isPresented: $showProfile) {
+                ProfileView(pvm: ProfileViewModel(), showSignIn: .constant(false))
+                    .environmentObject(ProfileViewModel())
             }
+        } else {
+            LoadingView()
+                .onAppear{
+                    self.fetchOwner.call(collectionName: "accountDetails", id: project.owner!, completion: { doc in
+                        if let document = doc.data() {
+                            let accountDetail = AccountDetail.decode(from: document)
+                            self.owner = accountDetail
+                            self.isLoading = false
+                        }
+                    })
+                }
         }
-        .ignoresSafeArea()
-        .sheet(isPresented: $showSheet, content: {
-            OwnerProfileSheet(owner: project.owner!, showSheet: $showSheet, showProfile: $showProfile)
-                .presentationDragIndicator(.visible)
-            .presentationDetents([.fraction(0.45), .large])
-        })
-        .navigationDestination(isPresented: $showProfile) {
-            ProfileView(pvm: ProfileViewModel(uid: project.owner!.id), showSignIn: .constant(false))
-                .environmentObject(ProfileViewModel(uid: project.owner!.id))
-        }
+        
     }
 }

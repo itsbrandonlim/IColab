@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProjectMainView: View {
-    @StateObject var vm: ProjectMainViewModel = ProjectMainViewModel(uid: AccountManager.shared.account?.id ?? "")
+    @StateObject var vm: ProjectMainViewModel = ProjectMainViewModel()
     
     var body: some View {
         VStack {
@@ -52,10 +52,15 @@ struct ProjectMainView: View {
                 .pickerStyle(.segmented)
                 .padding(.vertical)
                 if vm.getProjectsByType(picker: vm.picker).isEmpty{
-                    Image(systemName: "book.closed")
-                        .font(.system(size: 32))
-                    Text("No Projects to be Shown")
-                        .font(.title3.bold())
+                    VStack(spacing: 10){
+                        Spacer()
+                        Image(systemName: "book.closed")
+                            .font(.system(size: 64))
+                        Text("No Projects to be Shown")
+                            .font(.title3.bold())
+                        Spacer()
+                        Spacer()
+                    }
                 }
                 ScrollView {
                     ForEach(vm.getProjectsByType(picker: vm.picker)) { project in

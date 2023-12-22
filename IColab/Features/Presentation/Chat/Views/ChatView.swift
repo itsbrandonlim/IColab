@@ -62,5 +62,5 @@ struct ChatView: View {
 }
 
 #Preview {
-    ChatView(chat: Mock.chats[0])
+    ChatView(chat: Chat(title: "Chat", messages: [Message(text: "Hello", time: Date.now)], projectName: "Project"))
 }

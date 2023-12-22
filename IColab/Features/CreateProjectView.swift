@@ -18,19 +18,21 @@ struct CreateProjectView: View {
         VStack {
             if pageIndex == 0 {
                 AddProjectDetailView(pageIndex: $pageIndex)
-                    .environmentObject(vm)
+                    .transition(.backslide)
             }
             else if pageIndex == 1 {
                 PickMemberView(pageIndex: $pageIndex)
-                    .environmentObject(vm)
                     .padding()
+                    .transition(.backslide)
                 ButtonComponent(title: "Submit", width: 240) {
-                    vm.createProject()
-                    
-                    self.presentationMode.wrappedValue.dismiss()
+                    if vm.createProject() {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
                 }
+                .transition(.backslide)
             }
         }
+        .environmentObject(vm)
         .padding()
     }
 }

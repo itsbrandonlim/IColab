@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OwnerProfileSheet: View {
-    var owner : Account
+    var owner : AccountDetail
     @Binding var showSheet : Bool
     @Binding var showProfile : Bool
     var body: some View {
@@ -16,9 +16,9 @@ struct OwnerProfileSheet: View {
             Circle()
                 .foregroundColor(Color(.purple))
                 .frame(width: 80)
-            Text("\(owner.accountDetail.name)")
+            Text("\(owner.name)")
                 .font(.headline)
-            Text("\(owner.accountDetail.desc)")
+            Text("\(owner.desc)")
                 .padding(.horizontal, 40)
                 .padding(.bottom, 20)
             HStack{
@@ -37,6 +37,6 @@ struct OwnerProfileSheet: View {
 
 struct OwnerProfileSheet_Previews: PreviewProvider {
     static var previews: some View {
-        OwnerProfileSheet(owner: Mock.accounts[0], showSheet: .constant(false), showProfile: .constant(false))
+        OwnerProfileSheet(owner: MockAccountDetails.array[0], showSheet: .constant(false), showProfile: .constant(false))
     }
 }

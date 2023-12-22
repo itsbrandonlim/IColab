@@ -9,12 +9,13 @@ import Foundation
 
 class ProjectOverviewViewModel: ObservableObject {
     @Published var project: Project = Mock.projects[0]
-    
+    var fetchOwner = FetchDocumentFromIDUseCase()
+    var updateProject = UpdateProjectUseCase()
+    var updateAccountDetail = AddAccountDetailUseCase()
     
     init(project : Project) {
         self.project = project
     }
-//    
     func getProject(uid: String) -> Project {
         let project = Mock.projects.first(where: {$0.id == uid})
         return project!
@@ -58,15 +59,37 @@ class ProjectOverviewViewModel: ObservableObject {
         return count
     }
     
-    func rejectRequest(worker: Account){
-        worker.notifications?.append(Notification(desc: "Request Rejected", projectName: project.title, date: Date.now))
-        
+    func rejectRequest(request: Request){
+        fetchOwner.call(collectionName: "accountDetails", id: request.workerID) { document in
+            if let doc = document.data() {
+                let accountDetail = AccountDetail.decode(from: doc)
+                accountDetail.notifications?.append(Notification(desc: "Request Rejected", projectName: self.project.title, date: Date.now))
+            }
+        }
     }
     
     func acceptRequest(request : Request){
-        let member = Member(account: request.worker, role: request.role)
-        project.members?.append(member)
-        request.worker.notifications?.append(Notification(desc: "Request Accepted", projectName: project.title, date: Date.now))
+        fetchOwner.call(collectionName: "accountDetails", id: request.workerID) { document in
+            if let doc = document.data() {
+                let accountDetail = AccountDetail.decode(from: doc)
+                accountDetail.projectsJoined.append(self.project)
+                accountDetail.notifications?.append(Notification(desc: "Request Accepted", projectName: self.project.title, date: Date.now))
+                
+                let member = Member(accountDetail: accountDetail, role: request.role)
+                
+                self.project.members?.append(member)
+                self.updateProject.call(project: self.project) { error in
+                    if let error = error {
+                        print("Error Updating Project : \(error.localizedDescription)")
+                    }
+                }
+                self.updateAccountDetail.call(accountDetail: accountDetail, id: document.documentID) { error in
+                    if let error = error {
+                        print("Error Updating account Detail : \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
     }
     
     func deleteRequest(request : Request){
@@ -74,6 +97,11 @@ class ProjectOverviewViewModel: ObservableObject {
             return
         }
         project.requests.remove(at: index)
+        updateProject.call(project: project) { error in
+            if let error = error {
+                print("Error updating Project : \(error.localizedDescription)")
+            }
+        }
         self.objectWillChange.send()
     }
     

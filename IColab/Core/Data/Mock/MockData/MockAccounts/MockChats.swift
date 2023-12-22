@@ -10,7 +10,7 @@ import Foundation
 struct MockChats: Randomizeable {
     typealias Element = Chat
     
-    static var randomProjectTitle: String = MockProjects.array.randomElement()!.title
+    static var randomProjectTitle: String = "Random Project Title"
     
     static var array: [Element] {
         MockChats.initArray(count: names.count) {

@@ -9,12 +9,11 @@ import SwiftUI
 
 struct InputTaskView: View {
     @EnvironmentObject var vm: EditProjectViewModel
-//    @Binding var tasks: [Task]
     
     var body: some View {
         VStack {
             HStack {
-                Text("Input Members")
+                Text("Input Task")
                     .font(.headline)
                 Spacer()
                 NavigationLink {

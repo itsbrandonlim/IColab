@@ -11,7 +11,7 @@ struct NotificationView: View {
     var nvm = NotificationViewModel()
     var body: some View {
         VStack{
-            if let notifications = nvm.notifications{
+            if let notifications = nvm.notifications, !notifications.isEmpty{
                 ScrollView{
                     ForEach(notifications) { notification in
                         NotificationCard(notification: notification)

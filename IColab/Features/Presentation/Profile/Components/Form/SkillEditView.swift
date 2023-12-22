@@ -37,5 +37,5 @@ struct SkillEditView: View {
 
 #Preview {
     SkillEditView(skill: "String")
-        .environmentObject(ProfileViewModel(uid: Mock.accounts[0].id))
+        .environmentObject(ProfileViewModel())
 }

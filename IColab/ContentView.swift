@@ -11,37 +11,56 @@ struct ContentView: View {
     @State var selectedTabBar : TabBarType = .home
     @ObservedObject var accountManager = AccountManager.shared
     @State var showSignIn : Bool = false
+    @State var isLoading : Bool = false
     var body: some View {
         ZStack{
-            if !showSignIn {
-                NavigationStack {
-                    ScrollView{
+            if !isLoading {
+                if !showSignIn {
+                    NavigationStack {
                         VStack{
-                            switch selectedTabBar {
-                            case .home:
-                                HomeView()
-                            case .projects:
-                                ProjectMainView()
-                            case .chats:
-                                ChatListView()
-                            case .notifications:
-                                NotificationView()
-                            case .profile:
-                                let pvm = ProfileViewModel(uid: accountManager.account?.id ?? "")
-                                ProfileView(pvm: pvm, showSignIn: $showSignIn)
-                                    .environmentObject(pvm)
+                            VStack{
+                                switch selectedTabBar {
+                                case .home:
+                                    HomeView()
+                                case .projects:
+                                    ProjectMainView()
+                                case .chats:
+                                    ChatListView()
+                                case .notifications:
+                                    NotificationView()
+                                case .profile:
+                                    let pvm = ProfileViewModel()
+                                    ProfileView(pvm: pvm, showSignIn: $showSignIn)
+                                        .environmentObject(pvm)
+                                }
                             }
                         }
+                        TabBarView(selectedTabItem: $selectedTabBar)
                     }
-                    TabBarView(selectedTabItem: $selectedTabBar)
+                    .navigationBarBackButtonHidden()
+                    .navigationBarTitleDisplayMode(.large)
                 }
-                .navigationBarBackButtonHidden()
-                .navigationBarTitleDisplayMode(.large)
+                
+            } else{
+                LoadingView()
             }
         }
         .accentColor(.primary)
         .onAppear {
-            self.showSignIn = true
+            self.isLoading = true
+            if AuthenticationManager.shared.getLoggedInUser() != nil {
+                AccountManager.shared.getAccount {
+                    withAnimation {
+                        self.isLoading = false
+                    }
+                }
+                self.showSignIn = false
+            } else {
+                withAnimation {
+                    self.isLoading = false
+                    self.showSignIn = true
+                }
+            }
         }
         .fullScreenCover(isPresented: $showSignIn) {
             NavigationStack{

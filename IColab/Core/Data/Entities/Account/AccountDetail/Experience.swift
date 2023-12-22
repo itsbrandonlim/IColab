@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 class Experience : Background {
     override init(title: String, company: String, startDate: Date, endDate: Date, desc: String) {
@@ -16,23 +17,28 @@ class Experience : Background {
         super.init(copyFrom: other)
     }
     
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        let title = try container.decode(String.self, forKey: .title)
-        let company = try container.decode(String.self, forKey: .company)
-        let startDate = try container.decode(Date.self, forKey: .startDate)
-        let endDate = try container.decode(Date.self, forKey: .endDate)
-        let desc = try container.decode(String.self, forKey: .desc)
-
-        super.init(title: title, company: company, startDate: startDate, endDate: endDate, desc: desc)
+    public func toDict() -> [String : Any] {
+        return [
+            "title" : self.title,
+            "company" : self.company,
+            "startDate" : Timestamp(date: self.startDate),
+            "endDate" : Timestamp(date: self.endDate),
+            "desc" : self.desc
+        ]
     }
     
-    private enum CodingKeys: String, CodingKey {
-        case title
-        case company
-        case startDate
-        case endDate
-        case desc
+    static func decode(from data: [String: Any]) -> Experience{
+        let title = data["title"] as! String
+        let company = data["company"] as! String
+
+        let startDateTimestamp = data["startDate"] as! Timestamp
+        let startDate = startDateTimestamp.dateValue()
+        let endDateTimestamp = data["endDate"] as! Timestamp
+        let endDate = endDateTimestamp.dateValue()
+
+        let desc = data["desc"] as! String
+
+        let experience = Experience(title: title, company: company, startDate: startDate, endDate: endDate, desc: desc)
+        return experience
     }
 }

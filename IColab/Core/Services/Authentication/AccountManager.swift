@@ -6,6 +6,7 @@
 //
 
 import FirebaseAuth
+import FirebaseFirestore
 import Foundation
 
 class AccountManager : ObservableObject {
@@ -16,16 +17,15 @@ class AccountManager : ObservableObject {
     @Published var account : Account?
     var fetch = FetchCollectionUseCase()
     var fetchDocument = FetchDocumentFromIDUseCase()
-    var accountDetailConstants = FireStoreConstant.AccountDetailConstants()
+    var detailConstants = FireStoreConstant.AccountDetailConstants()
     
-    public func getAccount() {
+    public func getAccount(completion: @escaping ()-> Void) {
         if let user = Auth.auth().currentUser {
-            fetchDocument.call(collectionName: accountDetailConstants.collectionName, id: user.uid) { doc in
-                do {
-                    let accountDetail = try doc.data(as: AccountDetail.self)
-                    self.account = Account(email: user.email!, password: "", accountDetail: accountDetail)
-                } catch let error {
-                    print("Error parsing account Detail : \(error.localizedDescription)")
+            fetchDocument.call(collectionName: detailConstants.collectionName, id: user.uid) { doc in
+                if let document = doc.data(){
+                    let accountDetail = AccountDetail.decode(from: document)
+                    self.account = Account(id: user.uid, email: user.email!, password: "", accountDetail: accountDetail)
+                    completion()
                 }
             }
         }

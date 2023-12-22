@@ -10,7 +10,13 @@ import Foundation
 
 protocol FireStoreDataSourceProtocol {
     func getCollection(collectionName : String, completion: @escaping (QuerySnapshot?, Error?)-> Void)
-    func setData<T: Codable>(collectionName : String, element: T, id: String) -> Result<Bool, Error>
     func getDocumentFromID(collectionName: String, id: String, completion: @escaping (DocumentSnapshot?, Error?)-> Void)
+    
+    func addAccountDetail(accountDetail: AccountDetail, id: String, completion: @escaping (Error?) -> Void)
+    func addProject(collectionName: String, project: Project) throws
+    func setDataWithID<T: Codable>(collectionName : String, element: T, id: String) -> Result<Bool, Error>
+    
     func updateDocument<T: Codable>(collectionName: String, id: String, element: T) throws
+    func updateProject(project: Project, completion: @escaping (Error?) -> Void)
+    func addMembertoProject(project: Project, completion: @escaping (QuerySnapshot?, Error?) -> Void)
 }

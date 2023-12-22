@@ -30,7 +30,7 @@ struct EditSkillFormView: View {
 #Preview {
     NavigationStack{
         EditSkillFormView(skill: "Skill", index: 0)
-            .environmentObject(ProfileViewModel(uid: Mock.accounts[0].id))
+            .environmentObject(ProfileViewModel())
     }
     
 }

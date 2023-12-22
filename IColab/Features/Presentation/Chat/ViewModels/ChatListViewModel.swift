@@ -24,25 +24,22 @@ class ChatListViewModel: ObservableObject {
     
     @Published var filterType: ChatFilterType = .all
     
-    init(uid: String){
-        self.account = getAccount(uid: uid)
+    init(){
+        self.account = getAccount()
         self.chats = self.getChats()
         self.projects = self.getProjects()
-        
     }
     
-    private func getAccount(uid: String) -> Account?{
-        return Mock.accounts.first { account in
-            account.id == uid
-        }
+    private func getAccount() -> Account?{
+        return AccountManager.shared.account
     }
     
     func getProjects() -> [Project] {
-        return account!.projectsOwned
+        return account!.accountDetail.projectsOwned
     }
     
     func getChats() -> [Chat] {
-        var chats = account!.chats!
+        var chats = account!.accountDetail.chats!
         
         chats.sort { $0.isPinned && !$1.isPinned }
         
@@ -105,21 +102,21 @@ class ChatListViewModel: ObservableObject {
     }
     
     public func pinChat(chat: Chat) {
-        let chats = account!.chats!
+        let chats = account!.accountDetail.chats!
         if let index = chats.firstIndex(of: chat) {
             //self.chats[index].isPinned.toggle()
-            account!.chats![index].isPinned.toggle()
+            account!.accountDetail.chats![index].isPinned.toggle()
             
             self.objectWillChange.send()
         }
     }
     
     public func sendMessage(chat: Chat, text: String) -> Chat {
-        let index = account!.chats!.firstIndex(of: chat)!
+        let index = account!.accountDetail.chats!.firstIndex(of: chat)!
         
-        account!.chats![index].sendMessage(message: Message(text: text, time: Date.now, isUser: true))
+        account!.accountDetail.chats![index].sendMessage(message: Message(text: text, time: Date.now, isUser: true))
         self.chats = self.getChats()
         
-        return account!.chats![index]
+        return account!.accountDetail.chats![index]
     }
 }

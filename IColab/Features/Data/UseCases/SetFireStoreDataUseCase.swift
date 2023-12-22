@@ -11,6 +11,6 @@ struct SetFireStoreDataUseCase {
     var repository = FireStoreRepository()
     
     func call<T: Codable>(collectionName: String, element: T, id: String)-> Result<Bool, Error> {
-        repository.setData(collectionName: collectionName, element: element, id: id)
+        repository.setDataWithID(collectionName: collectionName, element: element, id: id)
     }
 }
