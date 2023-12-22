@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProjectContactView: View {
-    var project: Project
+    @StateObject var vm : ProjectContactViewModel
     @State var toggle: Bool = true
     
     var body: some View {
@@ -17,7 +17,7 @@ struct ProjectContactView: View {
                 toggle.toggle()
             } label: {
                 HStack {
-                    Text(project.title)
+                    Text(vm.project.title)
                         .font(.headline)
                     Spacer()
                     Image(systemName: toggle ? "chevron.down" : "chevron.up")
@@ -28,7 +28,7 @@ struct ProjectContactView: View {
             Divider()
                 .background(.white)
             if toggle {
-                ForEach(project.members!) { member in
+                ForEach(vm.members) { member in
                     ContactCardView(member: member)
                 }
             }

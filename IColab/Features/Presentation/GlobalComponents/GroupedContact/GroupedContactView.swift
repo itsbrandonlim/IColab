@@ -15,7 +15,7 @@ struct GroupedContactView: View {
     var body: some View {
         VStack {
             ForEach(projects) { project in
-                ProjectContactView(project: project)
+                ProjectContactView(vm: ProjectContactViewModel(project: project))
             }
         }
         

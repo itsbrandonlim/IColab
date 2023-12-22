@@ -35,7 +35,7 @@ struct ProjectMemberContactView: View {
                 .background(.white)
             if toggle {
                 LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(project.members!) { member in
+                    ForEach(project.members) { member in
                         ProjectMemberContactCardView()
                     }
                 }
