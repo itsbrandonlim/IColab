@@ -11,6 +11,7 @@ struct OwnerProfileSheet: View {
     var owner : AccountDetail
     @Binding var showSheet : Bool
     @Binding var showProfile : Bool
+    var addChat = AddChatUseCase()
     var body: some View {
         VStack(spacing: 10) {
             Circle()
@@ -27,7 +28,15 @@ struct OwnerProfileSheet: View {
                     showProfile.toggle()
                 }
                 ButtonComponent(title: "Contact", width: 140) {
-                    print("Contact")
+                    let chat = Chat(title: "Personal Chat", messages: [], type: .personal, members: [owner.name:owner.id!, AccountManager.shared.account!.accountDetail.name: AccountManager.shared.account!.id],projectName: "Project")
+                    addChat.call(chat: chat) { result in
+                        switch result {
+                        case .success(let success):
+                            print("Success adding chat with ID : \(success)")
+                        case .failure(let failure):
+                            print("Error Adding chat : \(failure)")
+                        }
+                    }
                 }
             }
             

@@ -114,7 +114,7 @@ class ChatListViewModel: ObservableObject {
     public func sendMessage(chat: Chat, text: String) -> Chat {
         let index = account!.accountDetail.chats!.firstIndex(of: chat)!
         
-        account!.accountDetail.chats![index].sendMessage(message: Message(text: text, time: Date.now, isUser: true))
+        account!.accountDetail.chats![index].messages.append(Message(text: text, time: Date.now, senderID: UUID().uuidString))
         self.chats = self.getChats()
         
         return account!.accountDetail.chats![index]

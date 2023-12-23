@@ -6,3 +6,9 @@
 //
 
 import Foundation
+import FirebaseDatabase
+import FirebaseDatabaseSwift
+
+protocol DatabaseRepositoryProtocol {
+    func initializeChat(chat: Chat, completion: @escaping (Result<String, Error>) -> Void)
+}

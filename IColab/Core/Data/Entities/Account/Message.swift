@@ -7,9 +7,13 @@
 
 import Foundation
 
-struct Message: Identifiable, Equatable, Codable {
+struct Message: Identifiable, Equatable {
     var id: UUID = UUID()
     var text: String
     var time: Date
-    var isUser: Bool = true
+    var senderID : String
+    
+    static func decode(from data: [String : Any]) -> Message {
+        return Message(id: UUID(), text: "", time: Date.now, senderID: "")
+    }
 }

@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol DatabaseDataSourceProtocol {
+    func initializeChat(chat: Chat, completion: @escaping (Result<String, Error>) -> Void)
+}

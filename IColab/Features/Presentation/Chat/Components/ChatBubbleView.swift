@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct ChatBubbleView: View {
-    var message: Message = Message(text: "Example text", time: Date.now, isUser: true)
+    var message: Message = Message(text: "Example text", time: Date.now, senderID: UUID().uuidString)
     
     var body: some View {
-        if message.isUser {
-            HStack {
-                Spacer()
-                Text(message.text)
-                    .frame(width: 240, alignment: .topTrailing)
-                    .padding(16)
-                    .background(.purple)
-                    .cornerRadius(12, corners: [.topLeft, .topRight, .bottomLeft])
-                    .padding(.top, 12)
-            }
-        }
-        else {
+//        if message.isUser {
+//            HStack {
+//                Spacer()
+//                Text(message.text)
+//                    .frame(width: 240, alignment: .topTrailing)
+//                    .padding(16)
+//                    .background(.purple)
+//                    .cornerRadius(12, corners: [.topLeft, .topRight, .bottomLeft])
+//                    .padding(.top, 12)
+//            }
+//        }
+//        else {
             HStack {
                 VStack {
                     Circle()
@@ -41,7 +41,7 @@ struct ChatBubbleView: View {
                     Spacer()
                 }
             }
-        }
+//        }
     }
 }
 

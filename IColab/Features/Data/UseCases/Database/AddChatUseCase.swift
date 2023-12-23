@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct AddChatUseCase {
+    let repository = DatabaseRepository()
+    
+    func call(chat: Chat, completion: @escaping (Result<String, Error>) -> Void) {
+        repository.initializeChat(chat: chat, completion: completion)
+    }
+}

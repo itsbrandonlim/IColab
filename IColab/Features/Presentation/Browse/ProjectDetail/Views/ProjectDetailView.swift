@@ -51,7 +51,7 @@ struct ProjectDetailView: View {
                 .presentationDetents([.fraction(0.45), .large])
             })
             .navigationDestination(isPresented: $showProfile) {
-                ProfileView(pvm: ProfileViewModel(), showSignIn: .constant(false))
+                ProfileView(pvm: ProfileViewModel(accountDetail: owner), showSignIn: .constant(false))
                     .environmentObject(ProfileViewModel())
             }
         } else {
@@ -61,6 +61,7 @@ struct ProjectDetailView: View {
                         if let document = doc.data() {
                             let accountDetail = AccountDetail.decode(from: document)
                             self.owner = accountDetail
+                            self.owner.id = doc.documentID
                             self.isLoading = false
                         }
                     })

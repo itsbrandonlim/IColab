@@ -62,5 +62,5 @@ struct ChatView: View {
 }
 
 #Preview {
-    ChatView(chat: Chat(title: "Chat", messages: [Message(text: "Hello", time: Date.now)], projectName: "Project"))
+    ChatView(chat: Chat(title: "Chat", messages: [Message(text: "Hello", time: Date.now, senderID: UUID().uuidString)], type: .personal, projectName: "Project"))
 }
