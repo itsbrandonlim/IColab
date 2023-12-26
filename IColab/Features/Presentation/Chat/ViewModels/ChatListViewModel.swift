@@ -18,20 +18,38 @@ enum ChatFilterType: String, CaseIterable {
 }
 
 class ChatListViewModel: ObservableObject {
-    @Published var account: Account?
+    @Published var account: Account!
     @Published var chats: [Chat] = []
     @Published var projects: [Project] = []
+    @Published var isLoading : Bool
+    var fetchChats = FetchChatUseCase()
     
     @Published var filterType: ChatFilterType = .all
     
     init(){
+        self.isLoading = true
         self.account = getAccount()
-        self.chats = self.getChats()
+        fetchChat()
+//        self.chats = self.getChats()
         self.projects = self.getProjects()
     }
     
     private func getAccount() -> Account?{
         return AccountManager.shared.account
+    }
+    
+    func fetchChat() {
+        fetchChats.call(accountID: account.id) { result in
+            switch result {
+            case .success(let fetchedChats):
+                self.chats = fetchedChats.filter({$0.members.contains { (key: String, value: String) in
+                    value == self.account.id
+                }})
+                self.isLoading = false
+            case .failure(let failure):
+                print("Error fetching chat from firebase : \(failure.localizedDescription)")
+            }
+        }
     }
     
     func getProjects() -> [Project] {

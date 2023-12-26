@@ -24,4 +24,14 @@ struct DatabaseDataSource : DatabaseDataSourceProtocol {
             }
         }
     }
+    
+    func fetchChats(accountID: String, completion: @escaping (Result<DataSnapshot, Error>) -> Void) {
+        db.child(chatConstants.parentName).getData { error, snapshot in
+            if let error = error {
+                completion(.failure(error))
+            }else if let snapshot = snapshot{
+                completion(.success(snapshot))
+            }
+        }
+    }
 }

@@ -38,13 +38,13 @@ struct ContactView: View {
                                 .foregroundStyle(.gray)
                         }
                         
-                        Text(chat.messages.first!.text)
+                        Text(chat.messages.first?.text ?? "No Message Found")
                             .font(.footnote)
                     }
                     .frame(width: 240, alignment: .leading)
                     Spacer()
                     VStack(alignment: .trailing) {
-                        Text(chat.messages.first!.time, style: .time)
+                        Text(chat.messages.first?.time ?? Date.now, style: .time)
                             .font(.footnote)
                         if chat.isPinned {
                             Image(systemName: "pin.circle")

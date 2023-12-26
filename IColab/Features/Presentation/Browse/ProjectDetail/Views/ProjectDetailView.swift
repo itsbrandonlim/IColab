@@ -13,6 +13,7 @@ struct ProjectDetailView: View {
     @State var pickerSelection : PickerItem = .overview
     @State var showSheet = false
     @State var showProfile = false
+    @State var showChat = false
     @State var isLoading = true
     @State var owner : AccountDetail!
     var fetchOwner = FetchDocumentFromIDUseCase()
@@ -54,6 +55,7 @@ struct ProjectDetailView: View {
                 ProfileView(pvm: ProfileViewModel(accountDetail: owner), showSignIn: .constant(false))
                     .environmentObject(ProfileViewModel())
             }
+            
         } else {
             LoadingView()
                 .onAppear{
