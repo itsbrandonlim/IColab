@@ -12,4 +12,6 @@ import FirebaseDatabaseSwift
 protocol DatabaseRepositoryProtocol {
     func initializeChat(chat: Chat, completion: @escaping (Result<String, Error>) -> Void)
     func fetchChats(accountID: String, completion: @escaping (Result<[Chat], Error>) -> Void)
+    func addMessageToChat(chat: Chat, message: Message, completion: @escaping (Result<String, Error>) -> Void)
+    
 }

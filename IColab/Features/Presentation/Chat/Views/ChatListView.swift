@@ -37,7 +37,9 @@ struct ChatListView: View {
                 )
             )
             if vm.isLoading {
+                Spacer()
                 LoadingView()
+                Spacer()
             } else{
                 if vm.chats.isEmpty {
                     Spacer()

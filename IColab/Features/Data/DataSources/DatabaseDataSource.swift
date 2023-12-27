@@ -34,4 +34,25 @@ struct DatabaseDataSource : DatabaseDataSourceProtocol {
             }
         }
     }
+    
+    func fetchMessagesFromChatID(chatID: String, completion: @escaping (Result<DataSnapshot, Error>) -> Void) {
+        db.child(messageConstants.parentName).child(chatID).getData { error, snapshot in
+            if let error = error {
+                completion(.failure(error))
+            } else if let snapshot = snapshot {
+                completion(.success(snapshot))
+            }
+        }
+    }
+    
+    func addMessageToChat(chat: Chat, message: Message, completion: @escaping (Result<String, Error>) -> Void) {
+        db.child(messageConstants.parentName).child(chat.id).child(message.id.uuidString).setValue(message.toDict()) { error, databaseReference in
+            if let error = error {
+                completion(.failure(error))
+            } else if let key = databaseReference.key{
+                completion(.success(key))
+                db.child(chatConstants.parentName).child(chat.id).child("lastMessage").setValue(message.text)
+            }
+        }
+    }
 }

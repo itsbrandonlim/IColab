@@ -35,4 +35,28 @@ struct DatabaseRepository : DatabaseRepositoryProtocol {
             }
         }
     }
+    
+    func fetchMessagesFromChatID(chatID: String, completion: @escaping (Result<[Message], Error>) -> Void) {
+        databaseDataSource.fetchMessagesFromChatID(chatID: chatID) { result in
+            switch result {
+            case .success(let snapshot):
+                guard let value = snapshot.value as? [String : Any] else {
+                    return completion(.failure(URLError.badURL as! Error))
+                }
+                var messages : [Message] = []
+                value.forEach { (key: String, value: Any) in
+                    var message = Message.decode(from: value as! [String:Any])
+                    message.id = UUID(uuidString: key) ?? UUID()
+                    messages.append(message)
+                }
+                completion(.success(messages))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func addMessageToChat(chat: Chat, message: Message, completion: @escaping (Result<String, Error>) -> Void) {
+        databaseDataSource.addMessageToChat(chat: chat, message: message, completion: completion)
+    }
 }

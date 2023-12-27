@@ -15,6 +15,7 @@ struct DatabaseConstant {
         let type = "type"
         let members = "members"
         let projectName = "projectName"
+        let lastMessage = "lastMessage"
     }
     
     struct MessageConstants {

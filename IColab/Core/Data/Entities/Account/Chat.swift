@@ -20,12 +20,13 @@ struct Chat: Identifiable, Equatable, Searchable {
     var messages: [Message]
     var type: ChatType
     var members : [String : String]
+    var lastMessage : String?
     
     var projectName: String
     
     var isPinned: Bool
     
-    init(id: String = UUID().uuidString, title: String, messages: [Message] = [], type: ChatType, members: [String:String] = [:], projectName: String, isPinned: Bool = false) {
+    init(id: String = UUID().uuidString, title: String, messages: [Message] = [], type: ChatType, members: [String:String] = [:], projectName: String, isPinned: Bool = false, lastMessage: String? = nil) {
         self.id = id
         self.title = title
         self.messages = messages
@@ -33,6 +34,7 @@ struct Chat: Identifiable, Equatable, Searchable {
         self.members = members
         self.projectName = projectName
         self.isPinned = isPinned
+        self.lastMessage = lastMessage
     }
     
     func toDict() -> [String:Any]{
@@ -52,7 +54,9 @@ struct Chat: Identifiable, Equatable, Searchable {
         let projectName = data[chatConstant.projectName] as! String
         let type = ChatType(rawValue: data[chatConstant.type] as! String)
         let members = data[chatConstant.members] as! [String : String]
+        let lastMessage = data[chatConstant.lastMessage] as? String
         
-        return Chat(title: title, type: type!, members: members, projectName: projectName)
+        
+        return Chat(title: title, type: type!, members: members, projectName: projectName, lastMessage: lastMessage)
     }
 }
