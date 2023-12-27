@@ -31,36 +31,31 @@ struct ContactView: View {
                 HStack {
                     VStack(alignment: .leading) {
                         HStack {
-                            Text(chat.title)
+                            Text(chat.type == .personal ? chat.members.filter({$0.value != AccountManager.shared.account?.id}).first?.key ?? "Personal Chat" : chat.title)
                                 .font(.headline)
                             Text(chat.projectName)
                                 .font(.footnote)
                                 .foregroundStyle(.gray)
                         }
-                        
-                        Text(chat.messages.first!.text)
+                        Text(chat.lastMessage ?? "No Message Found")
                             .font(.footnote)
                     }
                     .frame(width: 240, alignment: .leading)
                     Spacer()
                     VStack(alignment: .trailing) {
-                        Text(chat.messages.first!.time, style: .time)
+                        Text(chat.messages.first?.time ?? Date.now, style: .time)
                             .font(.footnote)
                         if chat.isPinned {
                             Image(systemName: "pin.circle")
                                 .font(.caption2)
                         }
-                        
                         Divider()
-                            
                     }
                 }
                 Divider()
                     .background(.white)
             }
             .padding(8)
-            
-            
         }
         .padding(4)
     }

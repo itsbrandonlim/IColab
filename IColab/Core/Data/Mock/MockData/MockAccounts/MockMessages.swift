@@ -26,7 +26,7 @@ struct MockMessages: Randomizeable {
     
     static var array: [Message] {
         MockMessages.initArray(count: 12) {
-            return Message(text: texts.randomElement()!, time: Date.now.addingTimeInterval(ranNum()), isUser: Bool.random())
+            return Message(text: texts.randomElement()!, time: Date.now.addingTimeInterval(ranNum()), senderID: UUID().uuidString)
         }
     }
     
@@ -38,7 +38,7 @@ struct MockMessages: Randomizeable {
         var array: [Message] = []
         
         for text in texts {
-            array.append(Message(text: text, time: Date.now.addingTimeInterval(ranNum()), isUser: Bool.random()))
+            array.append(Message(text: text, time: Date.now.addingTimeInterval(ranNum()), senderID: UUID().uuidString))
         }
         
         return array

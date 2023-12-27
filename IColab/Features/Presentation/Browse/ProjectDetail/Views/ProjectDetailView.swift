@@ -13,7 +13,9 @@ struct ProjectDetailView: View {
     @State var pickerSelection : PickerItem = .overview
     @State var showSheet = false
     @State var showProfile = false
+    @State var showChat = false
     @State var isLoading = true
+    @State var chat : Chat?
     @State var owner : AccountDetail!
     var fetchOwner = FetchDocumentFromIDUseCase()
     let pickerItems : [PickerItem] = [.overview, .milestone]
@@ -46,13 +48,17 @@ struct ProjectDetailView: View {
             }
             .ignoresSafeArea()
             .sheet(isPresented: $showSheet, content: {
-                OwnerProfileSheet(owner: owner, showSheet: $showSheet, showProfile: $showProfile)
+                OwnerProfileSheet(owner: owner, showSheet: $showSheet, showProfile: $showProfile, showChat: $showChat, chat: $chat)
                     .presentationDragIndicator(.visible)
                 .presentationDetents([.fraction(0.45), .large])
             })
             .navigationDestination(isPresented: $showProfile) {
-                ProfileView(pvm: ProfileViewModel(), showSignIn: .constant(false))
+                ProfileView(pvm: ProfileViewModel(accountDetail: owner), showSignIn: .constant(false))
                     .environmentObject(ProfileViewModel())
+            }
+            .navigationDestination(isPresented: $showChat) {
+                ChatView(chat: chat ?? Chat(title: "", type: .personal, projectName: ""))
+                    .environmentObject(ChatListViewModel())
             }
         } else {
             LoadingView()
@@ -61,6 +67,7 @@ struct ProjectDetailView: View {
                         if let document = doc.data() {
                             let accountDetail = AccountDetail.decode(from: document)
                             self.owner = accountDetail
+                            self.owner.id = doc.documentID
                             self.isLoading = false
                         }
                     })
