@@ -12,10 +12,12 @@ struct ChatBubbleView: View {
     
     var body: some View {
         if message.senderID == AccountManager.shared.account!.id{
-            HStack {
+            HStack(alignment: .bottom) {
                 Spacer()
+                Text(message.time.formatted(date: .numeric, time: .shortened))
+                    .font(.caption2)
                 Text(message.text)
-                    .frame(width: 240, alignment: .topTrailing)
+                    .frame(alignment: .topTrailing)
                     .padding(16)
                     .background(.purple)
                     .cornerRadius(12, corners: [.topLeft, .topRight, .bottomLeft])
@@ -23,7 +25,7 @@ struct ChatBubbleView: View {
             }
         }
         else {
-            HStack {
+            HStack(alignment: .bottom) {
                 VStack {
                     Circle()
                         .frame(width: 48)
@@ -34,10 +36,12 @@ struct ChatBubbleView: View {
                         .foregroundStyle(.clear)
                         .frame(maxHeight: 20)
                     Text(message.text)
-                        .frame(width: 240, alignment: .topLeading)
+                        .frame(alignment: .topLeading)
                         .padding(16)
                         .background(Color("gray"))
                         .cornerRadius(12, corners: [.bottomLeft, .bottomRight, .topRight])
+                    Text(message.time.formatted(date: .numeric, time: .shortened))
+                        .font(.caption2)
                     Spacer()
                 }
             }

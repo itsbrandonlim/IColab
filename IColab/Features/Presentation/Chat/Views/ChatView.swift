@@ -26,6 +26,7 @@ struct ChatView: View {
                             switch result {
                             case .success(let messages):
                                 self.chat.messages.append(contentsOf: messages)
+                                self.chat.messages.sort(by: {$0.time < $1.time})
                                 self.isLoading = false
                             case .failure(let error):
                                 print("Error fetching Messages from firebase : \(error.localizedDescription)")
