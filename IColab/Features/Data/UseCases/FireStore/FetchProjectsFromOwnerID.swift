@@ -7,12 +7,10 @@
 
 import SwiftUI
 
-struct FetchProjectsFromOwnerID: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct FetchProjectsFromOwnerID {
+    let repository = FireStoreRepository()
+    
+    public func call(ownerID: String, completion: @escaping (Result<[Project], Error>) -> Void) {
+        repository.fetchProjectsFromOwnerID(ownerID: ownerID, completion: completion)
     }
-}
-
-#Preview {
-    FetchProjectsFromOwnerID()
 }

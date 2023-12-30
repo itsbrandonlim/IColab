@@ -20,10 +20,19 @@ class AccountManager : ObservableObject {
     var detailConstants = FireStoreConstant.AccountDetailConstants()
     
     public func getAccount(completion: @escaping ()-> Void) {
+        let fetchOwnedProject = FetchProjectsFromOwnerID()
         if let user = Auth.auth().currentUser {
             fetchDocument.call(collectionName: detailConstants.collectionName, id: user.uid) { doc in
                 if let document = doc.data(){
-                    let accountDetail = AccountDetail.decode(from: document)
+                    var accountDetail = AccountDetail.decode(from: document)
+                    fetchOwnedProject.call(ownerID: doc.documentID) { result in
+                        switch result {
+                        case .success(let projects):
+                            accountDetail.projectsOwned.append(contentsOf: projects)
+                        case .failure(let error):
+                            accountDetail.projectsOwned = []
+                        }
+                    }
                     self.account = Account(id: user.uid, email: user.email!, password: "", accountDetail: accountDetail)
                     completion()
                 }

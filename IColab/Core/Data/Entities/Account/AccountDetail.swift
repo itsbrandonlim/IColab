@@ -77,16 +77,15 @@ class AccountDetail: Identifiable, Equatable{
             detailConstants.skills : self.skills,
             detailConstants.educations : self.educations.map({$0.toDict()}),
             detailConstants.experiences : self.experiences.map({$0.toDict()}),
-            detailConstants.projectsOwned : self.projectsOwned.map({$0.toDict()}),
-            detailConstants.projectsJoined : self.projectsJoined.map({$0.toDict()}),
-            detailConstants.notifications : [Notification](),
-            detailConstants.chats : [Chat]()
+            detailConstants.projectsOwned : self.projectsOwned.map({$0.id}),
+            detailConstants.projectsJoined : self.projectsJoined.map({$0.id}),
+            detailConstants.notifications : [Notification]()
         ]
     }
     
     static func decode(from data: [String : Any]) -> AccountDetail {
         let detailConstants = FireStoreConstant.AccountDetailConstants()
-        
+        let fetchProjectFromID = FetchDocumentFromIDUseCase()
         let name = data[detailConstants.name] as! String
         let phoneNumber = data[detailConstants.phoneNumber] as! String
         let bankAccount = data[detailConstants.bankAccount] as! String
@@ -100,18 +99,20 @@ class AccountDetail: Identifiable, Equatable{
         var experiences : [Experience] = []
         let experiencesData = data[detailConstants.experiences] as? [[String:Any]] ?? [[:]]
         experiences = experiencesData.map({Experience.decode(from: $0)})
-        let projectsOwnedData = (data[detailConstants.projectsOwned] as? [[String:Any]] ?? [[:]])
-        var projectsOwned = [Project]()
-        if !projectsOwnedData.isEmpty{
-            projectsOwned = projectsOwnedData.map({Project.decode(from: $0)})
-        }
-        let projectsJoinedData = (data[detailConstants.projectsJoined] as? [[String:Any]] ?? [[:]])
+        
+        let projectsJoinedData = (data[detailConstants.projectsJoined] as? [String] ?? [] )
         var projectsJoined = [Project]()
-        if !projectsJoinedData.isEmpty{
-            projectsJoined = projectsJoinedData.map({Project.decode(from: $0)})
+        projectsJoinedData.forEach { projectID in
+            fetchProjectFromID.call(collectionName: "projects", id: projectID) { doc in
+                if let document = doc.data() {
+                    var project = Project.decode(from: document)
+                    project.id = doc.documentID
+                    projectsJoined.append(project)
+                }
+            }
         }
         
-        let accountDetail = AccountDetail(name: name, desc: desc, location: location, bankAccount: bankAccount, phoneNumber: phoneNumber, skills: skills, educations: educations, experiences: experiences, projectsOwned: projectsOwned, projectsJoined: projectsJoined, notifications: [], chats: [])
+        let accountDetail = AccountDetail(name: name, desc: desc, location: location, bankAccount: bankAccount, phoneNumber: phoneNumber, skills: skills, educations: educations, experiences: experiences, projectsJoined: projectsJoined, notifications: [], chats: [])
         return accountDetail
     }
 }
