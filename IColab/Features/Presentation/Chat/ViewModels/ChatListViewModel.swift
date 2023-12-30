@@ -54,7 +54,8 @@ class ChatListViewModel: ObservableObject {
     }
     
     func getProjects() -> [Project] {
-        return account!.accountDetail.projectsOwned
+        let projects : [Project] = account.accountDetail.projectsOwned + account.accountDetail.projectsJoined
+        return projects
     }
     
     func getChats() -> [Chat] {
