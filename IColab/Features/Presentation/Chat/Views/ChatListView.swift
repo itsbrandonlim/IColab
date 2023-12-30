@@ -25,7 +25,6 @@ struct ChatListView: View {
                     Image(systemName: "plus.circle")
                         .font(.largeTitle)
                 }
-                
                 Spacer()
             }
             SearchView(

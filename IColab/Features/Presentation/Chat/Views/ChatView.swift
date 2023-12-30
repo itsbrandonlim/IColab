@@ -13,6 +13,7 @@ struct ChatView: View {
     var turn: Bool = true
     @State var isLoading : Bool = true
     var fetchMessage = FetchMessagesFromIDUseCase()
+    @Environment(\.presentationMode) var presentationMode
     
     @State var text: String = ""
     
@@ -63,20 +64,20 @@ struct ChatView: View {
                     .padding(24)
                 }
                 .toolbar {
-                    if true {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            NavigationLink {
-                                
-                            } label: {
-                                Image(systemName: "pencil")
-                            }
-                            .buttonStyle(.plain)
-
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button {
+                            self.presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            Image(systemName: "arrow.left")
                         }
+                    }
+                    ToolbarItem(placement: .topBarLeading) {
+                        ProfileChatCard(name: chat.members.first(where: {$0.value != AccountManager.shared.account!.id})!.key, caption: chat.projectName)
                     }
                 }
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 

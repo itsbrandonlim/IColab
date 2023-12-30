@@ -41,7 +41,7 @@ struct DatabaseRepository : DatabaseRepositoryProtocol {
             switch result {
             case .success(let snapshot):
                 guard let value = snapshot.value as? [String : Any] else {
-                    return completion(.failure(URLError.badURL as! Error))
+                    return completion(.success([]))
                 }
                 var messages : [Message] = []
                 value.forEach { (key: String, value: Any) in

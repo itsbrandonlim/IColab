@@ -187,6 +187,7 @@
 		D8A7D54B2B3A8A64008A5B4E /* FetchChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7D54A2B3A8A64008A5B4E /* FetchChatUseCase.swift */; };
 		D8A7D54D2B3AEBB5008A5B4E /* AddMessagetoChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7D54C2B3AEBB5008A5B4E /* AddMessagetoChatUseCase.swift */; };
 		D8A7D54F2B3C1592008A5B4E /* FetchMessagesFromIDUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7D54E2B3C1592008A5B4E /* FetchMessagesFromIDUseCase.swift */; };
+		D8A7D5532B400957008A5B4E /* ProfileChatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7D5522B400957008A5B4E /* ProfileChatCard.swift */; };
 		D8C2BE9E2AB88D5B003969D8 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2BE9D2AB88D5B003969D8 /* NotificationView.swift */; };
 		D8C2BEA02AB89310003969D8 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2BE9F2AB89310003969D8 /* Notification.swift */; };
 		D8C2BEA22AB89538003969D8 /* NotificationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2BEA12AB89538003969D8 /* NotificationCard.swift */; };
@@ -387,6 +388,7 @@
 		D8A7D54A2B3A8A64008A5B4E /* FetchChatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchChatUseCase.swift; sourceTree = "<group>"; };
 		D8A7D54C2B3AEBB5008A5B4E /* AddMessagetoChatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMessagetoChatUseCase.swift; sourceTree = "<group>"; };
 		D8A7D54E2B3C1592008A5B4E /* FetchMessagesFromIDUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMessagesFromIDUseCase.swift; sourceTree = "<group>"; };
+		D8A7D5522B400957008A5B4E /* ProfileChatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChatCard.swift; sourceTree = "<group>"; };
 		D8C2BE9D2AB88D5B003969D8 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		D8C2BE9F2AB89310003969D8 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		D8C2BEA12AB89538003969D8 /* NotificationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCard.swift; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 				6C726A062AC82FCF00E14230 /* ChatFilterView.swift */,
 				6C726A082AC82FCF00E14230 /* FilterButtonView.swift */,
 				6C745EA12AC952BB00646574 /* ChatBubbleView.swift */,
+				D8A7D5522B400957008A5B4E /* ProfileChatCard.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1603,6 +1606,7 @@
 				6C7DAFE72ACD16D000DC7D8B /* Randomizeable.swift in Sources */,
 				D819F7C12B2304A100287D60 /* LoadingView.swift in Sources */,
 				D8A3AF222AA3239D00AC06C9 /* ProjectCard.swift in Sources */,
+				D8A7D5532B400957008A5B4E /* ProfileChatCard.swift in Sources */,
 				D81DCE242AC34EE600D65604 /* SkillEditView.swift in Sources */,
 				B7965D892AD57C3B00D10505 /* PickMemberView.swift in Sources */,
 				D88B632E2B24447A0058C944 /* FireStoreRepositoryProtocol.swift in Sources */,
