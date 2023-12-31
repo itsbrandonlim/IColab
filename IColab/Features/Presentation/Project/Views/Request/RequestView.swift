@@ -12,6 +12,7 @@ struct RequestView: View {
     @State var chosenIndex : Int = 0
     @State var showSheet = false
     @State var showProfile = false
+    @State var owner : AccountDetail!
     var body: some View {
         VStack{
             if vm.project.requests.isEmpty {
@@ -23,6 +24,7 @@ struct RequestView: View {
                 ForEach(vm.project.requests, id: \.id) { request in
                     Button {
                         self.chosenIndex = vm.project.requests.firstIndex(of: request) ?? 0
+                        vm.fetchOwner(ownerID: vm.project.requests[chosenIndex].workerID)
                         showSheet = true
                     } label: {
                         RequestCard(request: request)
@@ -31,7 +33,7 @@ struct RequestView: View {
 
                 }
                 .navigationDestination(isPresented: $showProfile) {
-                    ProfileView(pvm: ProfileViewModel(), showSignIn: .constant(false))
+                    ProfileView(pvm: ProfileViewModel(accountDetail: vm.requestAccount), showSignIn: .constant(false))
                         .environmentObject(ProfileViewModel())
                 }
             }
