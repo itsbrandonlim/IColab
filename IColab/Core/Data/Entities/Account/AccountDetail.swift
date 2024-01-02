@@ -9,7 +9,7 @@ import FirebaseFirestore
 import Foundation
 
 class AccountDetail: Identifiable, Equatable{
-    @DocumentID var id: String?
+    var id: String?
     var name : String
     var desc : String
     var location : String
@@ -21,7 +21,7 @@ class AccountDetail: Identifiable, Equatable{
     
     var projectsOwned : [Project]
     var projectsJoined : [Project]
-    var notifications : [Notification]?
+    var notifications : [Notification] = []
     var chats: [Chat]?
     
     init(name: String, desc: String, location: String, bankAccount: String, phoneNumber: String, skills: [String] = [], educations: [Education] = [], experiences: [Experience] = [], projectsOwned: [Project] = [], projectsJoined: [Project] = [], notifications: [Notification] = [], chats: [Chat] = []) {
@@ -79,7 +79,7 @@ class AccountDetail: Identifiable, Equatable{
             detailConstants.experiences : self.experiences.map({$0.toDict()}),
             detailConstants.projectsOwned : self.projectsOwned.map({$0.id}),
             detailConstants.projectsJoined : self.projectsJoined.map({$0.id}),
-            detailConstants.notifications : [Notification]()
+            detailConstants.notifications : self.notifications.map({$0.toDict()})
         ]
     }
     
@@ -100,19 +100,10 @@ class AccountDetail: Identifiable, Equatable{
         let experiencesData = data[detailConstants.experiences] as? [[String:Any]] ?? [[:]]
         experiences = experiencesData.map({Experience.decode(from: $0)})
         
-        let projectsJoinedData = (data[detailConstants.projectsJoined] as? [String] ?? [] )
-        var projectsJoined = [Project]()
-        projectsJoinedData.forEach { projectID in
-            fetchProjectFromID.call(collectionName: "projects", id: projectID) { doc in
-                if let document = doc.data() {
-                    var project = Project.decode(from: document)
-                    project.id = doc.documentID
-                    projectsJoined.append(project)
-                }
-            }
-        }
         
-        let accountDetail = AccountDetail(name: name, desc: desc, location: location, bankAccount: bankAccount, phoneNumber: phoneNumber, skills: skills, educations: educations, experiences: experiences, projectsJoined: projectsJoined, notifications: [], chats: [])
+        let notifications = (data[detailConstants.notifications] as? [[String:Any]] ?? [[:]]).map({Notification.decode(from: $0)})
+        
+        let accountDetail = AccountDetail(name: name, desc: desc, location: location, bankAccount: bankAccount, phoneNumber: phoneNumber, skills: skills, educations: educations, experiences: experiences, notifications: notifications, chats: [])
         return accountDetail
     }
 }

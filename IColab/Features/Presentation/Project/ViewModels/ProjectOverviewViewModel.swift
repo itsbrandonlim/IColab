@@ -71,12 +71,18 @@ class ProjectOverviewViewModel: ObservableObject {
     }
     
     func rejectRequest(request: Request){
+        self.deleteRequest(request: request)
+        self.saveProjecttoFireStore()
         fetchAccount.call(collectionName: accountDetailConstants.collectionName, id: request.workerID) { document in
             if let doc = document.data() {
-                let accountDetail = AccountDetail.decode(from: doc)
-                accountDetail.notifications?.append(Notification(desc: "Request Rejected", projectName: self.project.title, date: Date.now))
-                self.deleteRequest(request: request)
-                self.saveProjecttoFireStore()
+                var accountDetail = AccountDetail.decode(from: doc)
+                accountDetail.id = document.documentID
+                accountDetail.notifications.append(Notification(desc: "Request Rejected", projectName: self.project.title, date: Date.now))
+                self.updateAccountDetail.call(accountDetail: accountDetail, id: request.workerID) { error in
+                    if let error = error {
+                        print("Error updating account detail to firebase : \(error.localizedDescription)")
+                    }
+                }
             }
         }
     }
@@ -85,7 +91,20 @@ class ProjectOverviewViewModel: ObservableObject {
         let member = Member(workerID: request.workerID, role: request.role)
         self.project.members.append(member)
         self.deleteRequest(request: request)
-        
+        fetchAccount.call(collectionName: accountDetailConstants.collectionName, id: request.workerID) { document in
+            if let doc = document.data() {
+                let accountDetail = AccountDetail.decode(from: doc)
+                accountDetail.id = document.documentID
+                accountDetail.projectsJoined.append(self.project)
+                accountDetail.notifications.append(Notification(desc: "Request Accepted", projectName: self.project.title, date: Date.now))
+                
+                self.updateAccountDetail.call(accountDetail: accountDetail, id: request.workerID) { error in
+                    if let error = error {
+                        print("Error updating account detail to firebase : \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
         self.saveProjecttoFireStore()
     }
     
