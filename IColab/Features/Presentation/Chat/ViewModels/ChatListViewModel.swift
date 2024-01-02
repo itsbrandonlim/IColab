@@ -18,15 +18,20 @@ enum ChatFilterType: String, CaseIterable {
 }
 
 class ChatListViewModel: ObservableObject {
-    @Published var account: Account?
+    @Published var account: Account!
     @Published var chats: [Chat] = []
     @Published var projects: [Project] = []
+    @Published var isLoading : Bool
+    var fetchChatsUseCase = FetchChatUseCase()
+    var addMessageUseCase = AddMessagetoChatUseCase()
+    var fetchMessageUseCase = FetchMessagesFromIDUseCase()
     
     @Published var filterType: ChatFilterType = .all
     
     init(){
+        self.isLoading = true
         self.account = getAccount()
-        self.chats = self.getChats()
+        fetchChat()
         self.projects = self.getProjects()
     }
     
@@ -34,8 +39,23 @@ class ChatListViewModel: ObservableObject {
         return AccountManager.shared.account
     }
     
+    private func fetchChat() {
+        fetchChatsUseCase.call(accountID: account.id) { result in
+            switch result {
+            case .success(let fetchedChats):
+                self.chats = fetchedChats.filter({$0.members.contains { (key: String, value: String) in
+                    value == self.account.id
+                }})
+                self.isLoading = false
+            case .failure(let failure):
+                print("Error fetching chat from firebase : \(failure.localizedDescription)")
+            }
+        }
+    }
+    
     func getProjects() -> [Project] {
-        return account!.accountDetail.projectsOwned
+        let projects : [Project] = account.accountDetail.projectsOwned + account.accountDetail.projectsJoined
+        return projects
     }
     
     func getChats() -> [Chat] {
@@ -98,25 +118,32 @@ class ChatListViewModel: ObservableObject {
             default:
                 self.chats = self.getChats()
         }
-        
     }
     
     public func pinChat(chat: Chat) {
         let chats = account!.accountDetail.chats!
         if let index = chats.firstIndex(of: chat) {
-            //self.chats[index].isPinned.toggle()
             account!.accountDetail.chats![index].isPinned.toggle()
-            
             self.objectWillChange.send()
         }
     }
     
-    public func sendMessage(chat: Chat, text: String) -> Chat {
-        let index = account!.accountDetail.chats!.firstIndex(of: chat)!
+    public func sendMessage(chat: Chat, text: String, senderID : String) -> Chat {
+        var chatInArray = self.chats.first { chatA in
+            chatA.id == chat.id
+        }
         
-        account!.accountDetail.chats![index].sendMessage(message: Message(text: text, time: Date.now, isUser: true))
-        self.chats = self.getChats()
-        
-        return account!.accountDetail.chats![index]
+        let message = Message(text: text, time: Date.now, senderID: senderID)
+        chatInArray?.messages.append(contentsOf: chat.messages)
+        chatInArray?.messages.append(message)
+        self.addMessageUseCase.call(chat: chat, message: message) { result in
+            switch result {
+            case .success(let id):
+                print("Success with message id: \(id)")
+            case .failure(let error):
+                print("Error sending message to firebase : \(error.localizedDescription)")
+            }
+        }
+        return chatInArray!
     }
 }

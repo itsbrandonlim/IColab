@@ -23,6 +23,9 @@ class ProfileViewModel : ObservableObject {
         }
     }
     
+    init(accountDetail: AccountDetail){
+        self.account = Account(email: "", password: "", accountDetail: accountDetail)
+    }
     private func getAccount() -> Account?{
         return AccountManager.shared.account
     }

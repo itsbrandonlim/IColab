@@ -25,7 +25,6 @@ struct ChatListView: View {
                     Image(systemName: "plus.circle")
                         .font(.largeTitle)
                 }
-                
                 Spacer()
             }
             SearchView(
@@ -36,38 +35,45 @@ struct ChatListView: View {
                         .environmentObject(vm)
                 )
             )
-
-            if vm.chats.isEmpty {
+            if vm.isLoading {
                 Spacer()
-                EmptyDataView(icon: "envelope.open.fill", title: "No Message Yet", desc: "Join a project first to start chatting with someone")
-            }
-            else {
-                ScrollView {
-                    ForEach(vm.chats) { chat in
-                        NavigationLink {
-                            ChatView(chat: chat)
-                                .environmentObject(vm)
-                        } label: {
-                            ContactView(chat: chat)
-                        }
-                        .contextMenu(menuItems: {
-                            Button {
-                                vm.pinChat(chat: chat)
+                LoadingView()
+                Spacer()
+            } else{
+                if vm.chats.isEmpty {
+                    Spacer()
+                    EmptyDataView(icon: "envelope.open.fill", title: "No Message Yet", desc: "Join a project first to start chatting with someone")
+                }
+                else {
+                    ScrollView {
+                        ForEach(vm.chats) { chat in
+                            NavigationLink {
+                                ChatView(chat: chat)
+                                    .environmentObject(vm)
                             } label: {
-                                if chat.isPinned {
-                                    Label("Unpin Chat", systemImage: "pin.slash.fill")
-                                }
-                                else {
-                                    Label("Pin Chat", systemImage: "pin.fill")
-                                }
+                                ContactView(chat: chat)
                             }
-                        })
+                            .contextMenu(menuItems: {
+                                Button {
+                                    vm.pinChat(chat: chat)
+                                } label: {
+                                    if chat.isPinned {
+                                        Label("Unpin Chat", systemImage: "pin.slash.fill")
+                                    }
+                                    else {
+                                        Label("Pin Chat", systemImage: "pin.fill")
+                                    }
+                                }
+                            })
+                        }
                     }
                 }
+                
+                Spacer()
             }
             
-            Spacer()
         }
+        
         .padding()
     }
 }

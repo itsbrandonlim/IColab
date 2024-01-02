@@ -102,6 +102,12 @@
 		D80BC30F2ABD38690086558D /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BC30E2ABD38690086558D /* FormTextField.swift */; };
 		D80BC3112ABD3D130086558D /* FormDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BC3102ABD3D130086558D /* FormDatePicker.swift */; };
 		D80BC3132ABD49950086558D /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BC3122ABD49950086558D /* NavigationManager.swift */; };
+		D8155B292B36B7AE000E6267 /* DatabaseDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8155B282B36B7AE000E6267 /* DatabaseDataSourceProtocol.swift */; };
+		D8155B2B2B36B7D4000E6267 /* DatabaseRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8155B2A2B36B7D4000E6267 /* DatabaseRepositoryProtocol.swift */; };
+		D8155B2D2B36B7E7000E6267 /* DatabaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8155B2C2B36B7E7000E6267 /* DatabaseDataSource.swift */; };
+		D8155B2F2B36B804000E6267 /* DatabaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8155B2E2B36B804000E6267 /* DatabaseRepository.swift */; };
+		D8155B312B36B826000E6267 /* DatabaseConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8155B302B36B826000E6267 /* DatabaseConstant.swift */; };
+		D8155B352B36C2CD000E6267 /* AddChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8155B342B36C2CD000E6267 /* AddChatUseCase.swift */; };
 		D81709312B25B04B00DDF2F9 /* FetchDocumentFromIDUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81709302B25B04B00DDF2F9 /* FetchDocumentFromIDUseCase.swift */; };
 		D81709332B25E76300DDF2F9 /* UpdateCollectionWithIDUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81709322B25E76300DDF2F9 /* UpdateCollectionWithIDUseCase.swift */; };
 		D819F7B92B22C0A200287D60 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819F7B82B22C0A200287D60 /* LoginError.swift */; };
@@ -178,6 +184,11 @@
 		D8A3AF362AA4664E00AC06C9 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A3AF352AA4664E00AC06C9 /* Account.swift */; };
 		D8A3AF382AA48A5500AC06C9 /* DetailCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A3AF372AA48A5500AC06C9 /* DetailCard.swift */; };
 		D8A3AF3A2AA4B35B00AC06C9 /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A3AF392AA4B35B00AC06C9 /* PickerView.swift */; };
+		D8A7D54B2B3A8A64008A5B4E /* FetchChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7D54A2B3A8A64008A5B4E /* FetchChatUseCase.swift */; };
+		D8A7D54D2B3AEBB5008A5B4E /* AddMessagetoChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7D54C2B3AEBB5008A5B4E /* AddMessagetoChatUseCase.swift */; };
+		D8A7D54F2B3C1592008A5B4E /* FetchMessagesFromIDUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7D54E2B3C1592008A5B4E /* FetchMessagesFromIDUseCase.swift */; };
+		D8A7D5532B400957008A5B4E /* ProfileChatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7D5522B400957008A5B4E /* ProfileChatCard.swift */; };
+		D8A7D5552B402682008A5B4E /* FetchProjectsFromOwnerID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7D5542B402682008A5B4E /* FetchProjectsFromOwnerID.swift */; };
 		D8C2BE9E2AB88D5B003969D8 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2BE9D2AB88D5B003969D8 /* NotificationView.swift */; };
 		D8C2BEA02AB89310003969D8 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2BE9F2AB89310003969D8 /* Notification.swift */; };
 		D8C2BEA22AB89538003969D8 /* NotificationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2BEA12AB89538003969D8 /* NotificationCard.swift */; };
@@ -301,6 +312,12 @@
 		D80BC30E2ABD38690086558D /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		D80BC3102ABD3D130086558D /* FormDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDatePicker.swift; sourceTree = "<group>"; };
 		D80BC3122ABD49950086558D /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
+		D8155B282B36B7AE000E6267 /* DatabaseDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDataSourceProtocol.swift; sourceTree = "<group>"; };
+		D8155B2A2B36B7D4000E6267 /* DatabaseRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseRepositoryProtocol.swift; sourceTree = "<group>"; };
+		D8155B2C2B36B7E7000E6267 /* DatabaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDataSource.swift; sourceTree = "<group>"; };
+		D8155B2E2B36B804000E6267 /* DatabaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseRepository.swift; sourceTree = "<group>"; };
+		D8155B302B36B826000E6267 /* DatabaseConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseConstant.swift; sourceTree = "<group>"; };
+		D8155B342B36C2CD000E6267 /* AddChatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChatUseCase.swift; sourceTree = "<group>"; };
 		D81709302B25B04B00DDF2F9 /* FetchDocumentFromIDUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDocumentFromIDUseCase.swift; sourceTree = "<group>"; };
 		D81709322B25E76300DDF2F9 /* UpdateCollectionWithIDUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCollectionWithIDUseCase.swift; sourceTree = "<group>"; };
 		D819F7B82B22C0A200287D60 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
@@ -369,6 +386,11 @@
 		D8A3AF352AA4664E00AC06C9 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		D8A3AF372AA48A5500AC06C9 /* DetailCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCard.swift; sourceTree = "<group>"; };
 		D8A3AF392AA4B35B00AC06C9 /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		D8A7D54A2B3A8A64008A5B4E /* FetchChatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchChatUseCase.swift; sourceTree = "<group>"; };
+		D8A7D54C2B3AEBB5008A5B4E /* AddMessagetoChatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMessagetoChatUseCase.swift; sourceTree = "<group>"; };
+		D8A7D54E2B3C1592008A5B4E /* FetchMessagesFromIDUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMessagesFromIDUseCase.swift; sourceTree = "<group>"; };
+		D8A7D5522B400957008A5B4E /* ProfileChatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChatCard.swift; sourceTree = "<group>"; };
+		D8A7D5542B402682008A5B4E /* FetchProjectsFromOwnerID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProjectsFromOwnerID.swift; sourceTree = "<group>"; };
 		D8C2BE9D2AB88D5B003969D8 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		D8C2BE9F2AB89310003969D8 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		D8C2BEA12AB89538003969D8 /* NotificationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCard.swift; sourceTree = "<group>"; };
@@ -545,6 +567,7 @@
 				6C726A062AC82FCF00E14230 /* ChatFilterView.swift */,
 				6C726A082AC82FCF00E14230 /* FilterButtonView.swift */,
 				6C745EA12AC952BB00646574 /* ChatBubbleView.swift */,
+				D8A7D5522B400957008A5B4E /* ProfileChatCard.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -815,6 +838,32 @@
 			path = ProjectContact;
 			sourceTree = "<group>";
 		};
+		D8155B322B36C2B0000E6267 /* FireStore */ = {
+			isa = PBXGroup;
+			children = (
+				D88B63302B2446190058C944 /* FetchCollectionUseCase.swift */,
+				D88B63322B244B010058C944 /* SetFireStoreDataUseCase.swift */,
+				D81709302B25B04B00DDF2F9 /* FetchDocumentFromIDUseCase.swift */,
+				D81709322B25E76300DDF2F9 /* UpdateCollectionWithIDUseCase.swift */,
+				D82F3EFC2B285EC700A5E303 /* AddDatatoFireStoreUseCase.swift */,
+				D88125DA2B298122002A4E0B /* UpdateProjectUseCase.swift */,
+				D88125DC2B29BD9A002A4E0B /* AddAccountDetailUseCase.swift */,
+				D8A7D5542B402682008A5B4E /* FetchProjectsFromOwnerID.swift */,
+			);
+			path = FireStore;
+			sourceTree = "<group>";
+		};
+		D8155B332B36C2BB000E6267 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				D8155B342B36C2CD000E6267 /* AddChatUseCase.swift */,
+				D8A7D54A2B3A8A64008A5B4E /* FetchChatUseCase.swift */,
+				D8A7D54C2B3AEBB5008A5B4E /* AddMessagetoChatUseCase.swift */,
+				D8A7D54E2B3C1592008A5B4E /* FetchMessagesFromIDUseCase.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		D819F7B72B22C08B00287D60 /* Error */ = {
 			isa = PBXGroup;
 			children = (
@@ -905,6 +954,7 @@
 			isa = PBXGroup;
 			children = (
 				D86D75C32B232B8D00830A8B /* FireStoreConstant.swift */,
+				D8155B302B36B826000E6267 /* DatabaseConstant.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -958,6 +1008,7 @@
 			isa = PBXGroup;
 			children = (
 				D88B632D2B24447A0058C944 /* FireStoreRepositoryProtocol.swift */,
+				D8155B2A2B36B7D4000E6267 /* DatabaseRepositoryProtocol.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -966,6 +1017,7 @@
 			isa = PBXGroup;
 			children = (
 				D88B632B2B2444370058C944 /* FireStoreRepository.swift */,
+				D8155B2E2B36B804000E6267 /* DatabaseRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -974,6 +1026,7 @@
 			isa = PBXGroup;
 			children = (
 				D88B63262B243EFE0058C944 /* FireStoreDataSource.swift */,
+				D8155B2C2B36B7E7000E6267 /* DatabaseDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -989,13 +1042,8 @@
 		D88B632F2B2445F30058C944 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				D88B63302B2446190058C944 /* FetchCollectionUseCase.swift */,
-				D88B63322B244B010058C944 /* SetFireStoreDataUseCase.swift */,
-				D81709302B25B04B00DDF2F9 /* FetchDocumentFromIDUseCase.swift */,
-				D81709322B25E76300DDF2F9 /* UpdateCollectionWithIDUseCase.swift */,
-				D82F3EFC2B285EC700A5E303 /* AddDatatoFireStoreUseCase.swift */,
-				D88125DA2B298122002A4E0B /* UpdateProjectUseCase.swift */,
-				D88125DC2B29BD9A002A4E0B /* AddAccountDetailUseCase.swift */,
+				D8155B332B36C2BB000E6267 /* Database */,
+				D8155B322B36C2B0000E6267 /* FireStore */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1211,6 +1259,7 @@
 			isa = PBXGroup;
 			children = (
 				D88B63242B243E080058C944 /* FireStoreDataSourceProtocol.swift */,
+				D8155B282B36B7AE000E6267 /* DatabaseDataSourceProtocol.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -1500,6 +1549,8 @@
 				6C33A21F2AD3EA2400CD4AE5 /* EditGoalView.swift in Sources */,
 				D8A3AF2A2AA3294700AC06C9 /* MockData.swift in Sources */,
 				D88B632C2B2444370058C944 /* FireStoreRepository.swift in Sources */,
+				D8A7D54F2B3C1592008A5B4E /* FetchMessagesFromIDUseCase.swift in Sources */,
+				D8155B2F2B36B804000E6267 /* DatabaseRepository.swift in Sources */,
 				6CFC72DD2ACD6FEA00930E74 /* CreateChatView.swift in Sources */,
 				D89DCFCA2ACA8D8300FF248F /* PortofolioCard.swift in Sources */,
 				D88B63312B2446190058C944 /* FetchCollectionUseCase.swift in Sources */,
@@ -1511,6 +1562,7 @@
 				D8A3AF1F2AA31C9000AC06C9 /* HomeViewModel.swift in Sources */,
 				D895870E2AB2C1720064629B /* Experience.swift in Sources */,
 				B7A2A5F22A7602D7001F392F /* ContentView.swift in Sources */,
+				D8155B2B2B36B7D4000E6267 /* DatabaseRepositoryProtocol.swift in Sources */,
 				D89587052AB02E200064629B /* ProfileDetailCard.swift in Sources */,
 				6C129E932AC2D9C900F7036D /* ProjectOverviewViewModel.swift in Sources */,
 				D8ECD7382AE0F273004F68B6 /* ProjectStatusView.swift in Sources */,
@@ -1520,6 +1572,7 @@
 				6CFC72DF2ACD759F00930E74 /* ProjectContactView.swift in Sources */,
 				D81709332B25E76300DDF2F9 /* UpdateCollectionWithIDUseCase.swift in Sources */,
 				D89587002AAF5E7E0064629B /* ProfileView.swift in Sources */,
+				D8155B312B36B826000E6267 /* DatabaseConstant.swift in Sources */,
 				6C3B2D9D2AD159500049FE41 /* EditProjectViewModel.swift in Sources */,
 				6C745EAE2AC97C5D00646574 /* MockAccounts.swift in Sources */,
 				D8385A522AD51D860013D90F /* AccountManager.swift in Sources */,
@@ -1556,6 +1609,7 @@
 				6C7DAFE72ACD16D000DC7D8B /* Randomizeable.swift in Sources */,
 				D819F7C12B2304A100287D60 /* LoadingView.swift in Sources */,
 				D8A3AF222AA3239D00AC06C9 /* ProjectCard.swift in Sources */,
+				D8A7D5532B400957008A5B4E /* ProfileChatCard.swift in Sources */,
 				D81DCE242AC34EE600D65604 /* SkillEditView.swift in Sources */,
 				B7965D892AD57C3B00D10505 /* PickMemberView.swift in Sources */,
 				D88B632E2B24447A0058C944 /* FireStoreRepositoryProtocol.swift in Sources */,
@@ -1577,6 +1631,7 @@
 				B7EE98CC2ACA97AD00C9B428 /* TextFieldView.swift in Sources */,
 				6C69F9C92AD5460200AAF602 /* Searchable.swift in Sources */,
 				D88125DD2B29BD9A002A4E0B /* AddAccountDetailUseCase.swift in Sources */,
+				D8A7D54D2B3AEBB5008A5B4E /* AddMessagetoChatUseCase.swift in Sources */,
 				D83479AD2AA9D5B800E16739 /* SearchBar.swift in Sources */,
 				D80BC3132ABD49950086558D /* NavigationManager.swift in Sources */,
 				B7EE98CA2ACA979700C9B428 /* OnboardingInfoView.swift in Sources */,
@@ -1587,6 +1642,7 @@
 				D89587142AB8192D0064629B /* Background.swift in Sources */,
 				6C745EBC2AC9818A00646574 /* MockTasks.swift in Sources */,
 				B7EE98C42ACA975400C9B428 /* RegisterView.swift in Sources */,
+				D8155B352B36C2CD000E6267 /* AddChatUseCase.swift in Sources */,
 				D82C0D5B2ABC0741009802D9 /* EditFormView.swift in Sources */,
 				6C726A032AC82FB300E14230 /* ContactView.swift in Sources */,
 				D8ECD73B2AE103FC004F68B6 /* RoleCard.swift in Sources */,
@@ -1596,7 +1652,9 @@
 				6C745EB62AC9802D00646574 /* MockMessages.swift in Sources */,
 				6C69F9CC2AD5468000AAF602 /* SearchView.swift in Sources */,
 				6C74DB9C2AC0324300FD5D3F /* InputTitleView.swift in Sources */,
+				D8155B292B36B7AE000E6267 /* DatabaseDataSourceProtocol.swift in Sources */,
 				6C3189E62AC5614100A6C113 /* MilestoneDetailInfoView.swift in Sources */,
+				D8A7D5552B402682008A5B4E /* FetchProjectsFromOwnerID.swift in Sources */,
 				6C726A172AC8302100E14230 /* RoundedCorner.swift in Sources */,
 				B7A2A5F02A7602D7001F392F /* IColabApp.swift in Sources */,
 				B7965D8B2AD57C4B00D10505 /* CreateProjectView.swift in Sources */,
@@ -1605,10 +1663,12 @@
 				6C74DB952AC02AD000FD5D3F /* ContactCardView.swift in Sources */,
 				6C74DB8B2AC0199D00FD5D3F /* MilestonesView.swift in Sources */,
 				6CCF86002AC167260090D1B3 /* Task.swift in Sources */,
+				D8A7D54B2B3A8A64008A5B4E /* FetchChatUseCase.swift in Sources */,
 				6C74DB8F2AC01A4E00FD5D3F /* MilestoneCardView.swift in Sources */,
 				D82F3EFB2B280C1F00A5E303 /* AnyTransition.swift in Sources */,
 				6C745EB42AC97F6400646574 /* MockAccountDetails.swift in Sources */,
 				B7F3A2A62ACB05370034EACF /* RegisterViewModel.swift in Sources */,
+				D8155B2D2B36B7E7000E6267 /* DatabaseDataSource.swift in Sources */,
 				6C726A152AC82FDB00E14230 /* ChatView.swift in Sources */,
 				6C745EA22AC952BB00646574 /* ChatBubbleView.swift in Sources */,
 				D85D1CB92B219E850074AB98 /* AuthenticationManager.swift in Sources */,

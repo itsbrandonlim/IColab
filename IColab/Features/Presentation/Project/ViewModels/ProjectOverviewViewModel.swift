@@ -9,6 +9,7 @@ import Foundation
 
 class ProjectOverviewViewModel: ObservableObject {
     @Published var project: Project = Mock.projects[0]
+    @Published var requestAccount : AccountDetail!
     var fetchAccount = FetchDocumentFromIDUseCase()
     var updateProject = UpdateProjectUseCase()
     var updateAccountDetail = AddAccountDetailUseCase()
@@ -17,6 +18,7 @@ class ProjectOverviewViewModel: ObservableObject {
     init(project : Project) {
         self.project = project
     }
+    
     func getProject(uid: String) -> Project {
         let project = Mock.projects.first(where: {$0.id == uid})
         return project!
@@ -60,12 +62,27 @@ class ProjectOverviewViewModel: ObservableObject {
         return count
     }
     
+    func fetchOwner(ownerID: String){
+        fetchAccount.call(collectionName: "accountDetails", id: ownerID) { doc in
+            if let document = doc.data() {
+                self.requestAccount = AccountDetail.decode(from: document)
+            }
+        }
+    }
+    
     func rejectRequest(request: Request){
+        self.deleteRequest(request: request)
+        self.saveProjecttoFireStore()
         fetchAccount.call(collectionName: accountDetailConstants.collectionName, id: request.workerID) { document in
             if let doc = document.data() {
-                let accountDetail = AccountDetail.decode(from: doc)
-                accountDetail.notifications?.append(Notification(desc: "Request Rejected", projectName: self.project.title, date: Date.now))
-                self.deleteRequest(request: request)
+                var accountDetail = AccountDetail.decode(from: doc)
+                accountDetail.id = document.documentID
+                accountDetail.notifications.append(Notification(desc: "Request Rejected", projectName: self.project.title, date: Date.now))
+                self.updateAccountDetail.call(accountDetail: accountDetail, id: request.workerID) { error in
+                    if let error = error {
+                        print("Error updating account detail to firebase : \(error.localizedDescription)")
+                    }
+                }
             }
         }
     }
@@ -74,20 +91,21 @@ class ProjectOverviewViewModel: ObservableObject {
         let member = Member(workerID: request.workerID, role: request.role)
         self.project.members.append(member)
         self.deleteRequest(request: request)
-        
-        self.saveProjecttoFireStore()
-        
-        fetchAccount.call(collectionName: accountDetailConstants.collectionName, id: request.workerID) { workerDoc in
-            if let worker = workerDoc.data() {
-                var workerAccountDetail = AccountDetail.decode(from: worker)
-                workerAccountDetail.projectsJoined.append(self.project)
-                self.updateAccountDetail.call(accountDetail: workerAccountDetail, id: workerDoc.documentID) { error in
+        fetchAccount.call(collectionName: accountDetailConstants.collectionName, id: request.workerID) { document in
+            if let doc = document.data() {
+                let accountDetail = AccountDetail.decode(from: doc)
+                accountDetail.id = document.documentID
+                accountDetail.projectsJoined.append(self.project)
+                accountDetail.notifications.append(Notification(desc: "Request Accepted", projectName: self.project.title, date: Date.now))
+                
+                self.updateAccountDetail.call(accountDetail: accountDetail, id: request.workerID) { error in
                     if let error = error {
-                        print("Error Updating Worker Detail : \(error.localizedDescription)")
+                        print("Error updating account detail to firebase : \(error.localizedDescription)")
                     }
                 }
             }
         }
+        self.saveProjecttoFireStore()
     }
     
     func deleteRequest(request : Request){
@@ -112,23 +130,6 @@ class ProjectOverviewViewModel: ObservableObject {
         updateProject.call(project: project) { error in
             if let error = error {
                 print("Error updating Project : \(error.localizedDescription)")
-            }
-        }
-        
-        // save owner account
-        fetchAccount.call(collectionName: accountDetailConstants.collectionName, id: project.owner!) { ownerDoc in
-            if let owner = ownerDoc.data() {
-                var ownerDetail = AccountDetail.decode(from: owner)
-                
-                guard let projectIndex = ownerDetail.projectsOwned.firstIndex(of: self.project) else {
-                    return
-                }
-                ownerDetail.projectsOwned[projectIndex] = self.project
-                self.updateAccountDetail.call(accountDetail: ownerDetail, id: ownerDoc.documentID) { error in
-                    if let error = error {
-                        print("Error Updating Owner's Account Detail : \(error.localizedDescription)")
-                    }
-                }
             }
         }
     }

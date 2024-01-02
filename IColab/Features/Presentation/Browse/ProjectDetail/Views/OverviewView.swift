@@ -71,22 +71,10 @@ struct OverviewView: View {
             
             ButtonComponent(title: "Apply", width: 200) {
                 let request = Request(id: UUID().uuidString, workerID: accountManager.account!.id, name: accountManager.account!.accountDetail.name, role: role, date: Date.now)
-                fetchOwner.call(collectionName: "accountDetails", id: project.owner!) { document in
-                    if let doc = document.data() {
-                        let accountDetail = AccountDetail.decode(from: doc)
-                        let index = accountDetail.projectsOwned.firstIndex(where: {$0.owner == document.documentID})
-                        accountDetail.projectsOwned[index!].requests.append(request)
-                        project.requests.append(request)
-                        updateProject.call(project: project) { error in
-                            if let error = error {
-                                print("error updating project to firestore : \(error.localizedDescription)")
-                            }
-                        }
-                        updateAccountDetail.call(accountDetail: accountDetail, id: document.documentID) { error in
-                            if let error = error {
-                                print("Error updating account detail : \(error.localizedDescription)")
-                            }
-                        }
+                project.requests.append(request)
+                updateProject.call(project: project) { error in
+                    if let error = error {
+                        print("error updating project to firestore : \(error.localizedDescription)")
                     }
                 }
                 showAlert.toggle()

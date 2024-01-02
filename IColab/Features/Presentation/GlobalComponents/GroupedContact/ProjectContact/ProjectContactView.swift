@@ -13,26 +13,34 @@ struct ProjectContactView: View {
     
     var body: some View {
         VStack {
-            Button {
-                toggle.toggle()
-            } label: {
-                HStack {
-                    Text(vm.project.title)
-                        .font(.headline)
-                    Spacer()
-                    Image(systemName: toggle ? "chevron.down" : "chevron.up")
+            if vm.isLoading {
+                Spacer()
+                LoadingView()
+                Spacer()
+            } else {
+                Button {
+                    toggle.toggle()
+                } label: {
+                    HStack {
+                        Text(vm.project.title)
+                            .font(.headline)
+                        Spacer()
+                        Image(systemName: toggle ? "chevron.down" : "chevron.up")
+                    }
+                }
+                .buttonStyle(.plain)
+                
+                Divider()
+                    .background(.white)
+                if toggle {
+                    if vm.project.owner != AccountManager.shared.account!.id {
+                        ContactCardView(member: vm.owner)
+                    }
+                    ForEach(vm.filterMembers()) { member in
+                        ContactCardView(member: member)
+                    }
                 }
             }
-            .buttonStyle(.plain)
-            
-            Divider()
-                .background(.white)
-            if toggle {
-                ForEach(vm.members) { member in
-                    ContactCardView(member: member)
-                }
-            }
-            
         }
         .animation(.easeInOut, value: toggle)
     }

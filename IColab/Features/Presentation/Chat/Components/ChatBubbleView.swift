@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ChatBubbleView: View {
-    var message: Message = Message(text: "Example text", time: Date.now, isUser: true)
+    var message: Message = Message(text: "Example text", time: Date.now, senderID: UUID().uuidString)
     
     var body: some View {
-        if message.isUser {
-            HStack {
+        if message.senderID == AccountManager.shared.account!.id{
+            HStack(alignment: .bottom) {
                 Spacer()
+                Text(message.time.formatted(date: .numeric, time: .shortened))
+                    .font(.caption2)
                 Text(message.text)
-                    .frame(width: 240, alignment: .topTrailing)
+                    .frame(alignment: .topTrailing)
                     .padding(16)
                     .background(.purple)
                     .cornerRadius(12, corners: [.topLeft, .topRight, .bottomLeft])
@@ -23,7 +25,7 @@ struct ChatBubbleView: View {
             }
         }
         else {
-            HStack {
+            HStack(alignment: .bottom) {
                 VStack {
                     Circle()
                         .frame(width: 48)
@@ -32,12 +34,14 @@ struct ChatBubbleView: View {
                 VStack(alignment: .leading) {
                     Rectangle()
                         .foregroundStyle(.clear)
-                        .frame(maxHeight: 20)
                     Text(message.text)
-                        .frame(width: 240, alignment: .topLeading)
+                        .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        .frame(alignment: .topLeading)
                         .padding(16)
                         .background(Color("gray"))
                         .cornerRadius(12, corners: [.bottomLeft, .bottomRight, .topRight])
+                    Text(message.time.formatted(date: .numeric, time: .shortened))
+                        .font(.caption2)
                     Spacer()
                 }
             }

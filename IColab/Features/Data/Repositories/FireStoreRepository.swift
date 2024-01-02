@@ -71,4 +71,19 @@ struct FireStoreRepository : FireStoreRepositoryProtocol {
             }
         }
     }
+    
+    func fetchProjectsFromOwnerID(ownerID: String, completion: @escaping (Result<[Project], Error>) -> Void) {
+        firestoreDataSource.fetchProjectsFromOwnerID(ownerID: ownerID) { result in
+            switch result {
+            case .success(let querySnapShot):
+                var projects : [Project] = []
+                querySnapShot.documents.forEach { doc in
+                    projects.append(Project.decode(from: doc.data()))
+                }
+                completion(.success(projects))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
