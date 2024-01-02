@@ -14,7 +14,7 @@ struct ContactCardView: View {
         HStack {
             Circle()
                 .frame(width: 48)
-                .foregroundColor(.purple)
+                .foregroundColor(Color(.purple))
             VStack(alignment: .leading) {
                 Text(member.name)
                 Divider()

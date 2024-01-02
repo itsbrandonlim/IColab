@@ -49,9 +49,9 @@ struct ProjectStatusView: View {
                     DetailCard(detailCardType: .cardwithlogo, symbol: "clock.fill", title: "End Date", caption: vm.project.endDate.formatted(date: .numeric, time: .omitted))
                 }
                 HStack(spacing: 13){
-                    RoleCard(symbol: "computermouse.fill", roleTitle: "Front-End", quantity: 3, max: 4)
-                    RoleCard(symbol: "desktopcomputer", roleTitle: "Back-End", quantity: 3, max: 4)
-                    RoleCard(symbol: "paintbrush.pointed.fill", roleTitle: "Design", quantity: 3, max: 4)
+                    ForEach(vm.project.getExistingRoles(), id: \.self) { role in
+                        RoleCard(symbol: Role.getRoleIcon(role: role), roleTitle: role.rawValue, quantity: 1, max: 1)
+                    }
                 }
                 NavigationLink {
                     RequestView()

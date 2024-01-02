@@ -64,7 +64,7 @@ struct MilestoneDetailCard: View {
                     .padding()
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color("purple"), lineWidth: 3)
+                            .stroke(Color(.purple), lineWidth: 3)
                     )
                 }
                 .padding(.horizontal, 20)

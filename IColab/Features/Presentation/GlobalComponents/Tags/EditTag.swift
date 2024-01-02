@@ -21,7 +21,7 @@ struct EditTag: View {
             .buttonStyle(.plain)
         }
         .padding(8)
-        .background(.purple)
+        .background(Color(.purple))
         .cornerRadius(12)
     }
 }

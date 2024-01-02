@@ -41,7 +41,7 @@ struct ProjectDetailView: View {
                 case .overview:
                     OverviewView(project: project)
                 case .milestone:
-                    MilestoneView(milestones: project.milestones)
+                    MilestoneView(milestones: project.milestones, role: project.milestones.first?.role ?? .backend)
                 default:
                     EmptyView()
                 }
