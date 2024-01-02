@@ -80,6 +80,9 @@
 		6CFC72DB2ACD607700930E74 /* MockMembers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFC72DA2ACD607700930E74 /* MockMembers.swift */; };
 		6CFC72DD2ACD6FEA00930E74 /* CreateChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFC72DC2ACD6FEA00930E74 /* CreateChatView.swift */; };
 		6CFC72DF2ACD759F00930E74 /* ProjectContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFC72DE2ACD759F00930E74 /* ProjectContactView.swift */; };
+		B76012192B44262E00A36DCB /* EditProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76012182B44262E00A36DCB /* EditProfilePicture.swift */; };
+		B760121C2B44369600A36DCB /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B760121B2B44369600A36DCB /* ImagePicker.swift */; };
+		B760121E2B4439A300A36DCB /* ImagePickerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B760121D2B4439A300A36DCB /* ImagePickerState.swift */; };
 		B7965D892AD57C3B00D10505 /* PickMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7965D882AD57C3B00D10505 /* PickMemberView.swift */; };
 		B7965D8B2AD57C4B00D10505 /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7965D8A2AD57C4B00D10505 /* CreateProjectView.swift */; };
 		B7965D8D2AD57C6200D10505 /* AddProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7965D8C2AD57C6200D10505 /* AddProjectDetailView.swift */; };
@@ -289,6 +292,9 @@
 		6CFC72DA2ACD607700930E74 /* MockMembers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMembers.swift; sourceTree = "<group>"; };
 		6CFC72DC2ACD6FEA00930E74 /* CreateChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChatView.swift; sourceTree = "<group>"; };
 		6CFC72DE2ACD759F00930E74 /* ProjectContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectContactView.swift; sourceTree = "<group>"; };
+		B76012182B44262E00A36DCB /* EditProfilePicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePicture.swift; sourceTree = "<group>"; };
+		B760121B2B44369600A36DCB /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		B760121D2B4439A300A36DCB /* ImagePickerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerState.swift; sourceTree = "<group>"; };
 		B7965D882AD57C3B00D10505 /* PickMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickMemberView.swift; sourceTree = "<group>"; };
 		B7965D8A2AD57C4B00D10505 /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
 		B7965D8C2AD57C6200D10505 /* AddProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectDetailView.swift; sourceTree = "<group>"; };
@@ -690,6 +696,15 @@
 			path = GroupedContact;
 			sourceTree = "<group>";
 		};
+		B760121A2B44368A00A36DCB /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				B760121B2B44369600A36DCB /* ImagePicker.swift */,
+				B760121D2B4439A300A36DCB /* ImagePickerState.swift */,
+			);
+			name = ImagePicker;
+			sourceTree = "<group>";
+		};
 		B7965D822AD57B9E00D10505 /* CreateProject */ = {
 			isa = PBXGroup;
 			children = (
@@ -1073,6 +1088,7 @@
 			isa = PBXGroup;
 			children = (
 				D89586FD2AAF5E340064629B /* ProfileViewModel.swift */,
+				B76012182B44262E00A36DCB /* EditProfilePicture.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1080,6 +1096,7 @@
 		D89587012AAF5ED10064629B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B760121A2B44368A00A36DCB /* ImagePicker */,
 				D8C27B282ACC452F00C58BAD /* Form */,
 				D8C27B272ACC451E00C58BAD /* ProfileDetail */,
 				D89DCFC92ACA8D8300FF248F /* PortofolioCard.swift */,
@@ -1520,6 +1537,7 @@
 				D83605472AE173B9003CDF80 /* MockRequest.swift in Sources */,
 				6C3189D62AC4490100A6C113 /* ContactListViewModel.swift in Sources */,
 				D8FCE0802AAC363300B19B95 /* TagManager.swift in Sources */,
+				B760121C2B44369600A36DCB /* ImagePicker.swift in Sources */,
 				6C3B2DA02AD164320049FE41 /* InputTaskCardView.swift in Sources */,
 				6C74DB812AC00ABC00FD5D3F /* MemberListView.swift in Sources */,
 				B7F3A2A42ACB052E0034EACF /* LoginViewModel.swift in Sources */,
@@ -1674,10 +1692,12 @@
 				D85D1CB92B219E850074AB98 /* AuthenticationManager.swift in Sources */,
 				6C726A112AC82FD600E14230 /* ChatListViewModel.swift in Sources */,
 				6C3B2D972AD1109F0049FE41 /* ProjectMemberContactCardView.swift in Sources */,
+				B76012192B44262E00A36DCB /* EditProfilePicture.swift in Sources */,
 				D819F7BF2B22F1A700287D60 /* FireStoreManager.swift in Sources */,
 				D87A67BA2AA766CD000586A1 /* Milestone.swift in Sources */,
 				D8A3AF272AA326B200AC06C9 /* Project.swift in Sources */,
 				6C745EAC2AC97AF300646574 /* MockProjects.swift in Sources */,
+				B760121E2B4439A300A36DCB /* ImagePickerState.swift in Sources */,
 				D819F7B92B22C0A200287D60 /* LoginError.swift in Sources */,
 				6C726A0E2AC82FCF00E14230 /* FilterButtonView.swift in Sources */,
 				D8A3AF302AA3332800AC06C9 /* ProjectDetailView.swift in Sources */,
