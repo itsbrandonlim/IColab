@@ -12,7 +12,7 @@ struct InputTagPopupView: View {
     
     @Binding var tag: [String]
     @Binding var popupToggle: Bool
-    var tags: [String] = ["HealthKit", "CoreData", "Vision", "CloudKit", "LocationKit"]
+    var tags: [String] = ["HealthKit", "CoreData", "Vision", "CloudKit", "LocationKit", "SwiftUI", "UIKit", "SpriteKit", "WatchKit"]
     @State var pickerSelector: String = "Vision"
     
     var body: some View {
@@ -41,7 +41,6 @@ struct InputTagPopupView: View {
                 withAnimation {
                     popupToggle.toggle()
                 }
-//                vm.getTestProject().tags.append(pickerSelector)
                 tag.append(pickerSelector)
             } label: {
                 Text("Confirm")

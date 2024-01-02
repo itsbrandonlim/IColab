@@ -17,7 +17,7 @@ struct MilestoneDetailView: View {
             ZStack(alignment: .bottomLeading) {
                 Rectangle()
                     .frame(height: 200)
-                    .foregroundColor(Color("purple"))
+                    .foregroundColor(Color(.purple))
                 VStack(alignment: .leading) {
                     Text(goal.name)
                         .font(.largeTitle)

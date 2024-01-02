@@ -30,7 +30,7 @@ struct InputRoleToggleView: View {
                             .frame(width: 20)
                     if role == rolePick {
                         Circle()
-                            .foregroundColor(.purple)
+                            .foregroundColor(Color(.purple))
                             .frame(width: 12)
                     }
                 }

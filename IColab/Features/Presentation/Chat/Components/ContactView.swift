@@ -33,11 +33,13 @@ struct ContactView: View {
                         HStack {
                             Text(chat.type == .personal ? chat.members.filter({$0.value != AccountManager.shared.account?.id}).first?.key ?? "Personal Chat" : chat.title)
                                 .font(.headline)
+                                .multilineTextAlignment(.leading)
                             Text(chat.projectName)
                                 .font(.footnote)
                                 .foregroundStyle(.gray)
                         }
-                        Text(chat.lastMessage ?? "No Message Found")
+                        Text(chat.lastMessage ?? "No Message found in this chat")
+                            .multilineTextAlignment(.leading)
                             .font(.footnote)
                     }
                     .frame(width: 240, alignment: .leading)
@@ -57,7 +59,6 @@ struct ContactView: View {
             }
             .padding(8)
         }
-        .padding(4)
     }
 }
 
