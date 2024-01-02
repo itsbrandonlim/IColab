@@ -29,7 +29,9 @@ class ProjectContactViewModel : ObservableObject {
             qss.documents.forEach { doc in
                 self.project.members.forEach { member in
                     if doc.documentID == member.workerID {
-                        self.members.append(AccountDetail.decode(from: doc.data()))
+                        let accountDetail = AccountDetail.decode(from: doc.data())
+                        accountDetail.id = doc.documentID
+                        self.members.append(accountDetail)
                     }
                 }
                 self.isLoading = false
@@ -44,4 +46,11 @@ class ProjectContactViewModel : ObservableObject {
             }
         }
     }
+    
+    func filterMembers() -> [AccountDetail] {
+        let members = self.members.filter({$0.id != AccountManager.shared.account?.id})
+        return members
+    }
+    
+    
 }

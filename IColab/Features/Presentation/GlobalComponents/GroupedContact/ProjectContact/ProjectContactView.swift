@@ -36,7 +36,7 @@ struct ProjectContactView: View {
                     if vm.project.owner != AccountManager.shared.account!.id {
                         ContactCardView(member: vm.owner)
                     }
-                    ForEach(vm.members) { member in
+                    ForEach(vm.filterMembers()) { member in
                         ContactCardView(member: member)
                     }
                 }
