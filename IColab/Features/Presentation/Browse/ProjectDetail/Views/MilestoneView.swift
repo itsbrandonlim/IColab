@@ -9,7 +9,17 @@ import SwiftUI
 
 struct MilestoneView: View {
     @State var milestones : [Milestone]
-    @State var role : Role = .frontend
+    @State var role : Role
+    
+    init(milestones: [Milestone], role: Role) {
+        self.milestones = milestones
+        self.role = role
+    }
+    
+    var allExistingRoles : [Role] {
+        let allRoles = milestones.map { $0.role }
+        return Array(Set(allRoles))
+    }
     
     var body: some View {
         ScrollView{
@@ -18,7 +28,7 @@ struct MilestoneView: View {
                     .font(.title2).bold()
                 Spacer()
                 Picker("Role", selection: $role) {
-                    ForEach(Role.allCases, id : \.self){ role in
+                    ForEach(allExistingRoles, id : \.self){ role in
                         Text(role.rawValue)
                     }
                 }
@@ -40,6 +50,6 @@ struct MilestoneView: View {
 
 struct MilestoneView_Previews: PreviewProvider {
     static var previews: some View {
-        MilestoneView(milestones: Mock.projects[0].milestones)
+        MilestoneView(milestones: Mock.projects[0].milestones, role: .backend)
     }
 }

@@ -40,6 +40,12 @@ class Project : Identifiable, Searchable{
         self.projectState = projectState
     }
     
+    func getExistingRoles() -> [Role] {
+        let roles = milestones.map { $0.role }
+        let uniqueRoles = Array(Set(roles))
+        return uniqueRoles
+    }
+    
     func setOverview(title: String, tags: [String], desc: String) {
         self.title = title
         self.tags = tags
@@ -110,7 +116,6 @@ class Project : Identifiable, Searchable{
         let milestones = (data[projectConstants.milestones] as? [[String:Any]] ?? []).map({Milestone.decode(from: $0)})
         let projectState = ProjectState(rawValue: (data[projectConstants.projectState] as! String))
         return Project(id: id, title: title, owner: ownerID, members: members, role: role, requirements: requirements, tags: tags, startDate: startDate, endDate: endDate, desc: desc, milestones: milestones, requests: requests, projectState: projectState!)
-        
     }
 }
 

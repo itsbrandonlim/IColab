@@ -12,7 +12,7 @@ struct OverviewView: View {
     @ObservedObject var accountManager = AccountManager.shared
     @State var showAlert: Bool = false
     @Environment(\.presentationMode) var presentationMode
-    @State var role : Role = .frontend
+    @State var role : Role = .backend
     var updateProject = UpdateProjectUseCase()
     var fetchOwner = FetchDocumentFromIDUseCase()
     var updateAccountDetail = AddAccountDetailUseCase()
@@ -59,7 +59,7 @@ struct OverviewView: View {
                     .padding(.leading)
                 Spacer()
                 Picker("Role", selection: $role) {
-                    ForEach(Role.allCases, id: \.self){ role in
+                    ForEach(project.getExistingRoles(), id: \.self){ role in
                         Text(role.rawValue)
                     }
                 }
