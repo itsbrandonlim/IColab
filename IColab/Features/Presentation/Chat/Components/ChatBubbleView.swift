@@ -34,8 +34,8 @@ struct ChatBubbleView: View {
                 VStack(alignment: .leading) {
                     Rectangle()
                         .foregroundStyle(.clear)
-                        .frame(maxHeight: 20)
                     Text(message.text)
+                        .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                         .frame(alignment: .topLeading)
                         .padding(16)
                         .background(Color("gray"))

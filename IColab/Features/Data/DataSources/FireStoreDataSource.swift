@@ -82,4 +82,15 @@ struct FireStoreDataSource : FireStoreDataSourceProtocol {
             }
         }
     }
+    
+    func fetchProjectsFromOwnerID(ownerID: String, completion: @escaping (Result<QuerySnapshot, Error>) -> Void){
+        let query = db.collection(projectConstants.collectionName).whereField(projectConstants.ownerID, isEqualTo: ownerID)
+        query.getDocuments { qss, error in
+            if let error = error {
+                completion(.failure(error))
+            }else if let qss = qss {
+                completion(.success(qss))
+            }
+        }
+    }
 }

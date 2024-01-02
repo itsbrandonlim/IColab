@@ -188,6 +188,7 @@
 		D8A7D54D2B3AEBB5008A5B4E /* AddMessagetoChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7D54C2B3AEBB5008A5B4E /* AddMessagetoChatUseCase.swift */; };
 		D8A7D54F2B3C1592008A5B4E /* FetchMessagesFromIDUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7D54E2B3C1592008A5B4E /* FetchMessagesFromIDUseCase.swift */; };
 		D8A7D5532B400957008A5B4E /* ProfileChatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7D5522B400957008A5B4E /* ProfileChatCard.swift */; };
+		D8A7D5552B402682008A5B4E /* FetchProjectsFromOwnerID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A7D5542B402682008A5B4E /* FetchProjectsFromOwnerID.swift */; };
 		D8C2BE9E2AB88D5B003969D8 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2BE9D2AB88D5B003969D8 /* NotificationView.swift */; };
 		D8C2BEA02AB89310003969D8 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2BE9F2AB89310003969D8 /* Notification.swift */; };
 		D8C2BEA22AB89538003969D8 /* NotificationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2BEA12AB89538003969D8 /* NotificationCard.swift */; };
@@ -389,6 +390,7 @@
 		D8A7D54C2B3AEBB5008A5B4E /* AddMessagetoChatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMessagetoChatUseCase.swift; sourceTree = "<group>"; };
 		D8A7D54E2B3C1592008A5B4E /* FetchMessagesFromIDUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMessagesFromIDUseCase.swift; sourceTree = "<group>"; };
 		D8A7D5522B400957008A5B4E /* ProfileChatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChatCard.swift; sourceTree = "<group>"; };
+		D8A7D5542B402682008A5B4E /* FetchProjectsFromOwnerID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProjectsFromOwnerID.swift; sourceTree = "<group>"; };
 		D8C2BE9D2AB88D5B003969D8 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		D8C2BE9F2AB89310003969D8 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		D8C2BEA12AB89538003969D8 /* NotificationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCard.swift; sourceTree = "<group>"; };
@@ -846,6 +848,7 @@
 				D82F3EFC2B285EC700A5E303 /* AddDatatoFireStoreUseCase.swift */,
 				D88125DA2B298122002A4E0B /* UpdateProjectUseCase.swift */,
 				D88125DC2B29BD9A002A4E0B /* AddAccountDetailUseCase.swift */,
+				D8A7D5542B402682008A5B4E /* FetchProjectsFromOwnerID.swift */,
 			);
 			path = FireStore;
 			sourceTree = "<group>";
@@ -1651,6 +1654,7 @@
 				6C74DB9C2AC0324300FD5D3F /* InputTitleView.swift in Sources */,
 				D8155B292B36B7AE000E6267 /* DatabaseDataSourceProtocol.swift in Sources */,
 				6C3189E62AC5614100A6C113 /* MilestoneDetailInfoView.swift in Sources */,
+				D8A7D5552B402682008A5B4E /* FetchProjectsFromOwnerID.swift in Sources */,
 				6C726A172AC8302100E14230 /* RoundedCorner.swift in Sources */,
 				B7A2A5F02A7602D7001F392F /* IColabApp.swift in Sources */,
 				B7965D8B2AD57C4B00D10505 /* CreateProjectView.swift in Sources */,
