@@ -24,16 +24,13 @@ struct ProjectOverviewView: View {
                                 .font(.title)
                         })
                         Spacer()
-                        if true {
-                            NavigationLink {
-                                EditProjectView()
-                                    .environmentObject(vm)
-                            } label: {
-                                Image(systemName: "pencil.circle")
-                                    .font(.title)
-                            }
-                            .buttonStyle(.plain)
+                        NavigationLink {
+                            EditProjectView(vm: vm)
+                        } label: {
+                            Image(systemName: "pencil.circle")
+                                .font(.title)
                         }
+                        .buttonStyle(.plain)
                     }
                     .padding(.vertical)
                     Text(vm.project.title)

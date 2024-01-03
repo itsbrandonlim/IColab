@@ -24,8 +24,9 @@ class ProjectOverviewViewModel: ObservableObject {
         return project!
     }
     
-    func editProjectDetail(title: String, summary: String, tags: [String]) {
-        self.project.setOverview(title: title, tags: tags, desc: summary)
+    func editProjectDetail(title: String, summary: String, tags: [String], startDate: Date, endDate: Date) {
+        self.project.setOverview(title: title, tags: tags, desc: summary, startDate: startDate, endDate: endDate)
+        saveProjecttoFireStore()
     }
     
     func getCurrentGoal() -> Goal {
@@ -117,12 +118,12 @@ class ProjectOverviewViewModel: ObservableObject {
         self.objectWillChange.send()
     }
     
-    func extend(date : Date){
-        let dateRange = Calendar.current.dateComponents([.day], from: project.startDate, to: project.endDate)
-        project.startDate = date
-        project.endDate = Calendar.current.date(byAdding: dateRange, to: date)!
+    func extend(startDate : Date, endDate : Date){
+        project.startDate = startDate
+        project.endDate = endDate
         
         project.projectState = .extended
+        saveProjecttoFireStore()
         self.objectWillChange.send()
     }
     

@@ -10,7 +10,7 @@ import SwiftUI
 struct MilestonesView: View {
     @StateObject var vm: EditProjectViewModel
     
-    @State var picker: Role = .backend
+    @State var picker: Role
     
     var body: some View {
         NavigationStack {
