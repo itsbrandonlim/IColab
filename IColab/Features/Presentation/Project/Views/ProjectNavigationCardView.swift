@@ -33,7 +33,7 @@ struct ProjectNavigationCardView: View {
                 )
             }
             NavigationLink {
-                MilestonesView(vm: EditProjectViewModel(project: vm.project))
+                MilestonesView(vm: EditProjectViewModel(project: vm.project), picker: vm.project.milestones.first?.role ?? .frontend)
             } label: {
                 ProjectButtonView(
                     icon: "star.circle",

@@ -46,10 +46,12 @@ class Project : Identifiable, Searchable{
         return uniqueRoles
     }
     
-    func setOverview(title: String, tags: [String], desc: String) {
+    func setOverview(title: String, tags: [String], desc: String, startDate: Date, endDate: Date) {
         self.title = title
         self.tags = tags
         self.desc = desc
+        self.startDate = startDate
+        self.endDate = endDate
     }
     
     public func setOwner(owner : String){
