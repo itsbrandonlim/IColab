@@ -58,7 +58,7 @@ class Project : Identifiable, Searchable{
         self.owner = owner
     }
     
-    public func totalMilestone() -> Int{
+    public func getTotalMilestone() -> Int{
         var total = 0
         for milestone in milestones {
             total += milestone.goals[0].nominal
@@ -67,7 +67,7 @@ class Project : Identifiable, Searchable{
     }
     
     public func calculateAverageMilestone() -> Float {
-        return Float(totalMilestone()/milestones.count)
+        return Float(getTotalMilestone()/milestones.count)
     }
     
     public func addMilestone(milestone : Milestone){

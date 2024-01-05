@@ -22,15 +22,6 @@ struct FireStoreRepository : FireStoreRepositoryProtocol {
         }
     }
     
-    func setDataWithID<T>(collectionName: String, element: T, id: String) -> Result<Bool, Error> where T : Decodable, T : Encodable {
-        switch firestoreDataSource.setDataWithID(collectionName: collectionName, element: element, id: id) {
-            case .success(let boolean) :
-                return .success(boolean)
-            case .failure(let error) :
-                return .failure(error)
-        }
-    }
-    
     func getDocumentFromID(collectionName: String, id: String, completion: @escaping (DocumentSnapshot) -> Void) {
         firestoreDataSource.getDocumentFromID(collectionName: collectionName, id: id) { documentSnapShot, error in
             if let error = error {
@@ -39,14 +30,6 @@ struct FireStoreRepository : FireStoreRepositoryProtocol {
             if let doc = documentSnapShot {
                 completion(doc)
             }
-        }
-    }
-    
-    func updateDocument<T>(collectionName: String, id: String, element: T) throws where T : Decodable, T : Encodable {
-        do {
-            try firestoreDataSource.updateDocument(collectionName: collectionName, id: id, element: element)
-        } catch let error {
-            throw error
         }
     }
     

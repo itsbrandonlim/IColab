@@ -38,7 +38,7 @@ struct OverviewView: View {
                         detailCardType: .cardwithlogo,
                         symbol: "clock.fill",
                         title: "Total Earning",
-                        caption: "Rp \(project.totalMilestone().formatted(.number))"
+                        caption: "Rp \(project.getTotalMilestone().formatted(.number))"
                     )
                 }
             }

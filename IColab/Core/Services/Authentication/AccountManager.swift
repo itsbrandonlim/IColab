@@ -15,13 +15,11 @@ class AccountManager : ObservableObject {
     private init(){}
 
     @Published var account : Account?
-    var fetch = FetchCollectionUseCase()
-    var fetchDocument = FetchDocumentFromIDUseCase()
     var detailConstants = FireStoreConstant.AccountDetailConstants()
     
     public func getAccount(completion: @escaping ()-> Void) {
-        
         if let user = Auth.auth().currentUser {
+            let fetchDocument = FetchDocumentFromIDUseCase()
             fetchDocument.call(collectionName: detailConstants.collectionName, id: user.uid) { doc in
                 if let document = doc.data(){
                     let accountDetail = AccountDetail.decode(from: document)
@@ -79,11 +77,6 @@ class AccountManager : ObservableObject {
                 }
             }
         }
-    }
-    
-    public func setAccount(account: Account) {
-        self.account = account
-        self.objectWillChange.send()
     }
     
     public func logout(){

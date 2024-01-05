@@ -13,8 +13,6 @@ struct Member: Identifiable, Equatable{
     var workerID : String
     var role: Role
     
-    
-    
     static func decode(from data: [String:Any]) -> Member {
         let workerID = data["workerID"] as! String
         let role = Role(rawValue: (data["role"] as! String))

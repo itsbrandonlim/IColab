@@ -20,7 +20,7 @@ struct ExtendSheet: View {
             DatePicker("Extend Start Date", selection: $startDate, displayedComponents: .date)
             DatePicker("Extend End Date", selection: $endDate, displayedComponents: .date)
             ButtonComponent(title: "Confirm", width: 320) {
-                vm.extend(startDate: startDate, endDate: endDate)
+                vm.extendProject(startDate: startDate, endDate: endDate)
                 showSheet = false
             }
         }

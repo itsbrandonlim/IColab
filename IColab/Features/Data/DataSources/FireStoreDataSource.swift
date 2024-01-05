@@ -12,18 +12,9 @@ struct FireStoreDataSource : FireStoreDataSourceProtocol {
     private let db = Firestore.firestore()
     let projectConstants = FireStoreConstant.ProjectConstants()
     let detailConstants = FireStoreConstant.AccountDetailConstants()
+    
     func getCollection(collectionName: String, completion: @escaping (QuerySnapshot?, Error?) -> Void){
         db.collection(collectionName).getDocuments(completion: completion)
-    }
-    
-    func setDataWithID<T>(collectionName: String, element: T, id: String) -> Result<Bool, Error> where T : Codable {
-        let dataReference = db.collection(collectionName).document(id)
-        do{
-            try dataReference.setData(from: element)
-            return .success(true)
-        } catch let error {
-            return .failure(error)
-        }
     }
     
     func getDocumentFromID(collectionName: String, id: String, completion: @escaping (DocumentSnapshot?, Error?) -> Void) {
@@ -35,15 +26,6 @@ struct FireStoreDataSource : FireStoreDataSourceProtocol {
             if let document = documentSnapShot, documentSnapShot!.exists {
                 completion(document, nil)
             }
-        }
-    }
-    
-    func updateDocument<T:Codable>(collectionName: String, id: String, element: T) throws {
-        let docReference = db.collection(collectionName).document(id)
-        do{
-            try docReference.setData(from: element)
-        } catch let error{
-            throw error
         }
     }
     

@@ -19,11 +19,6 @@ class ProjectOverviewViewModel: ObservableObject {
         self.project = project
     }
     
-    func getProject(uid: String) -> Project {
-        let project = Mock.projects.first(where: {$0.id == uid})
-        return project!
-    }
-    
     func editProjectDetail(title: String, summary: String, tags: [String], startDate: Date, endDate: Date) {
         self.project.setOverview(title: title, tags: tags, desc: summary, startDate: startDate, endDate: endDate)
         saveProjecttoFireStore()
@@ -41,17 +36,17 @@ class ProjectOverviewViewModel: ObservableObject {
         return goals[0]
     }
     
-    func existingRoles() -> [Role] {
+    func getExistingRoles() -> [Role] {
         var roles: [Role] = []
         for role in Role.allCases {
-            if memberCount(role: role) != 0 {
+            if getMemberCount(role: role) != 0 {
                 roles.append(role)
             }
         }
         return roles
     }
     
-    func memberCount(role: Role) -> Int {
+    func getMemberCount(role: Role) -> Int {
         var count: Int = 0
         
         for member in self.project.members {
@@ -118,7 +113,7 @@ class ProjectOverviewViewModel: ObservableObject {
         self.objectWillChange.send()
     }
     
-    func extend(startDate : Date, endDate : Date){
+    func extendProject(startDate : Date, endDate : Date){
         project.startDate = startDate
         project.endDate = endDate
         
