@@ -83,6 +83,7 @@
 		B76012192B44262E00A36DCB /* EditProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76012182B44262E00A36DCB /* EditProfilePicture.swift */; };
 		B760121C2B44369600A36DCB /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B760121B2B44369600A36DCB /* ImagePicker.swift */; };
 		B760121E2B4439A300A36DCB /* ImagePickerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B760121D2B4439A300A36DCB /* ImagePickerState.swift */; };
+		B760123D2B4A5B7900A36DCB /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B760123C2B4A5B7900A36DCB /* DocumentPicker.swift */; };
 		B7965D892AD57C3B00D10505 /* PickMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7965D882AD57C3B00D10505 /* PickMemberView.swift */; };
 		B7965D8B2AD57C4B00D10505 /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7965D8A2AD57C4B00D10505 /* CreateProjectView.swift */; };
 		B7965D8D2AD57C6200D10505 /* AddProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7965D8C2AD57C6200D10505 /* AddProjectDetailView.swift */; };
@@ -295,6 +296,7 @@
 		B76012182B44262E00A36DCB /* EditProfilePicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePicture.swift; sourceTree = "<group>"; };
 		B760121B2B44369600A36DCB /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		B760121D2B4439A300A36DCB /* ImagePickerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerState.swift; sourceTree = "<group>"; };
+		B760123C2B4A5B7900A36DCB /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		B7965D882AD57C3B00D10505 /* PickMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickMemberView.swift; sourceTree = "<group>"; };
 		B7965D8A2AD57C4B00D10505 /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
 		B7965D8C2AD57C6200D10505 /* AddProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectDetailView.swift; sourceTree = "<group>"; };
@@ -705,6 +707,14 @@
 			name = ImagePicker;
 			sourceTree = "<group>";
 		};
+		B760123B2B4A5B6800A36DCB /* FilePicker */ = {
+			isa = PBXGroup;
+			children = (
+				B760123C2B4A5B7900A36DCB /* DocumentPicker.swift */,
+			);
+			path = FilePicker;
+			sourceTree = "<group>";
+		};
 		B7965D822AD57B9E00D10505 /* CreateProject */ = {
 			isa = PBXGroup;
 			children = (
@@ -1096,6 +1106,7 @@
 		D89587012AAF5ED10064629B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B760123B2B4A5B6800A36DCB /* FilePicker */,
 				B760121A2B44368A00A36DCB /* ImagePicker */,
 				D8C27B282ACC452F00C58BAD /* Form */,
 				D8C27B272ACC451E00C58BAD /* ProfileDetail */,
@@ -1618,6 +1629,7 @@
 				6C3B2D952AD110640049FE41 /* ProjectMemberContactView.swift in Sources */,
 				D88B63332B244B010058C944 /* SetFireStoreDataUseCase.swift in Sources */,
 				6C74DB972AC02C1300FD5D3F /* GroupedContactView.swift in Sources */,
+				B760123D2B4A5B7900A36DCB /* DocumentPicker.swift in Sources */,
 				6C3189D82AC449D700A6C113 /* ProjectNavigationCardView.swift in Sources */,
 				D83605452AE17045003CDF80 /* RequestView.swift in Sources */,
 				6C726A0C2AC82FCF00E14230 /* ChatFilterView.swift in Sources */,
