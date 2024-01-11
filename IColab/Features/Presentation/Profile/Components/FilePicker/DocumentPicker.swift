@@ -5,7 +5,6 @@
 //  Created by Brandon Nicolas Marlim on 1/7/24.
 //
 
-import Foundation
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -20,18 +19,18 @@ struct YourApp: App {
 
 struct DocumentPickerView: View {
     @State private var selectedURL: URL?
-
+    @State var boole: Bool = false
     var body: some View {
+        
         VStack {
+
             Button("Select Document") {
-                openDocumentPicker()
+                boole.toggle()
             }
         }
         .fileImporter(
-            isPresented: Binding<Bool>(
-                get: { selectedURL == nil },
-                set: { _ in }
-            ),
+            isPresented:$boole
+            ,
             allowedContentTypes: [UTType.data],
             onCompletion: { result in
                 do {
@@ -40,7 +39,6 @@ struct DocumentPickerView: View {
                         print("Selected document URL: \(url)")
                     }
                 } catch {
-                    // Handle error
                     print("Error selecting document: \(error.localizedDescription)")
                 }
             }
@@ -48,7 +46,7 @@ struct DocumentPickerView: View {
     }
 
     private func openDocumentPicker() {
-       
+
     }
 }
 
