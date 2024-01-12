@@ -8,26 +8,28 @@
 import SwiftUI
 
 struct ProjectMemberContactCardView: View {
-    var name: String = "Name"
-    var role: String = "Role"
+    var member : AccountDetail
+    var role : String
     
     var body: some View {
         VStack {
             Circle()
                 .frame(width: 48)
                 .foregroundColor(.purple)
-            Text(name)
+            Text(member.name)
+                .bold()
+                .multilineTextAlignment(.center)
             Text(role)
+                .font(.caption)
         }
         .padding()
         .padding()
-        .padding(.horizontal)
         .background(Color("gray"))
         .cornerRadius(12)
     }
 }
 
 #Preview {
-    ProjectMemberContactCardView()
+    ProjectMemberContactCardView(member: AccountDetail(name: "Kevin", desc: "", location: "", bankAccount: "", phoneNumber: ""), role: "Back-End")
         .preferredColorScheme(.dark)
 }

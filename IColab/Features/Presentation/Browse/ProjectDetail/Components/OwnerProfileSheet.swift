@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OwnerProfileSheet: View {
     var owner : AccountDetail
+    var projectTitle : String
     @Binding var showSheet : Bool
     @Binding var showProfile : Bool
     @Binding var showChat : Bool
@@ -30,18 +31,40 @@ struct OwnerProfileSheet: View {
                     showProfile.toggle()
                 }
                 ButtonComponent(title: "Contact", width: 140) {
-                    let chat = Chat(title: "Personal Chat", messages: [], type: .personal, members: [owner.name:owner.id!, AccountManager.shared.account!.accountDetail.name: AccountManager.shared.account!.id],projectName: "Project")
-                    addChat.call(chat: chat) { result in
+                    let fetchChatsUseCase = FetchChatUseCase()
+                    var fetchedChat = [Chat]()
+                    fetchChatsUseCase.call(accountID: owner.id ?? "") { result in
                         switch result {
-                        case .success(let success):
-                            print("Success adding chat with ID : \(success)")
-                            self.chat = chat
-                            showSheet = false
-                            showChat = true
-                        case .failure(let failure):
-                            print("Error Adding chat : \(failure)")
+                        case .success(let chats):
+                            fetchedChat = chats.filter({$0.members.contains { (key: String, value: String) in
+                                value == owner.id
+                            }})
+                            if let existingChat = fetchedChat.first(where: {$0.members.contains { (key: String, value: String) in
+                                value == AccountManager.shared.account?.id
+                            }}) {
+                                self.chat = existingChat
+                                showSheet = false
+                                showChat = true
+                            } else {
+                                let newChat = Chat(title: "Personal Chat", messages: [], type: .personal, members: [owner.name:owner.id!, AccountManager.shared.account!.accountDetail.name: AccountManager.shared.account!.id],projectName: projectTitle)
+                                addChat.call(chat: newChat ) { result in
+                                    switch result {
+                                    case .success(let success):
+                                        print("Success adding chat with ID : \(success)")
+                                        self.chat = newChat
+                                        showSheet = false
+                                        showChat = true
+                                    case .failure(let failure):
+                                        print("Error Adding chat : \(failure)")
+                                    }
+                                }
+                            }
+                            
+                        case .failure(_):
+                            fetchedChat = []
                         }
                     }
+                    
                 }
             }
             
@@ -51,6 +74,6 @@ struct OwnerProfileSheet: View {
 
 struct OwnerProfileSheet_Previews: PreviewProvider {
     static var previews: some View {
-        OwnerProfileSheet(owner: MockAccountDetails.array[0], showSheet: .constant(false), showProfile: .constant(false), showChat: .constant(false), chat: .constant(nil))
+        OwnerProfileSheet(owner: MockAccountDetails.array[0], projectTitle: "", showSheet: .constant(false), showProfile: .constant(false), showChat: .constant(false), chat: .constant(nil))
     }
 }

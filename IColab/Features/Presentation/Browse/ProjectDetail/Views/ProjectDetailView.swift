@@ -48,7 +48,7 @@ struct ProjectDetailView: View {
             }
             .ignoresSafeArea()
             .sheet(isPresented: $showSheet, content: {
-                OwnerProfileSheet(owner: owner, showSheet: $showSheet, showProfile: $showProfile, showChat: $showChat, chat: $chat)
+                OwnerProfileSheet(owner: owner, projectTitle: project.title, showSheet: $showSheet, showProfile: $showProfile, showChat: $showChat, chat: $chat)
                     .presentationDragIndicator(.visible)
                 .presentationDetents([.fraction(0.45), .large])
             })

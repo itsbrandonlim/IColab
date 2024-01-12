@@ -20,9 +20,7 @@ struct DatabaseRepository : DatabaseRepositoryProtocol {
         databaseDataSource.fetchChats(accountID: accountID) { result in
             switch result {
             case .success(let success):
-                guard let value = success.value as? [String : Any] else {
-                    return completion(.failure(URLError.badURL as! Error))
-                }
+                let value = success.value as? [String : Any] ?? [:]
                 var chats : [Chat] = []
                 value.forEach { (key: String, value: Any) in
                     var chat = Chat.decode(from: value as! [String : Any])
