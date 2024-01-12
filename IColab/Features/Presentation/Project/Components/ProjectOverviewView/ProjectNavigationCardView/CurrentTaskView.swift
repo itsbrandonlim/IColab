@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CurrentTaskView: View {
     @StateObject var vm: CurrentTaskViewModel
-    @State var isOwner: Bool = false
     @State var picker: TaskStatus = .notCompleted
     
     var body: some View {
@@ -22,36 +21,37 @@ struct CurrentTaskView: View {
             .pickerStyle(.segmented)
             .padding(.bottom)
             
-            ScrollView {
-                Group {
-                    ForEach(0..<vm.tasks.count, id: \.self) { i in
-                        if vm.tasks[i].status == picker {
-                            TaskCardView(task: vm.tasks[i], toggle: $vm.toggles[i])
+            if vm.tasks.filter({$0.status == picker}).isEmpty {
+                Spacer()
+                EmptyDataView(icon: "book.pages", title: "No Tasks listed with status \(picker.rawValue)", desc: "")
+                Spacer()
+            } else{
+                ScrollView {
+                    Group {
+                        ForEach(0..<vm.tasks.count, id: \.self) { i in
+                            if vm.tasks[i].status == picker {
+                                TaskCardView(task: vm.tasks[i], toggle: $vm.toggles[i])
+                            }
                         }
                     }
+                    .padding(4)
                 }
-                .padding(4)
             }
             
-            if isOwner {
+            if vm.isOwner {
                 if picker == .onReview {
                     ButtonComponent(title: "Validate", width: 360) {
                         vm.validateTask()
                     }
-                    .padding(.top)
                 }
-
             }
             else {
                 if picker == .notCompleted {
                     ButtonComponent(title: "Submit", width: 360) {
                         vm.submitTasks()
                     }
-                    .padding(.top)
                 }
             }
-            
-            Spacer()
         }
         .padding()
     }

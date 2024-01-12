@@ -34,6 +34,8 @@ struct ContactView: View {
                             Text(chat.type == .personal ? chat.members.filter({$0.value != AccountManager.shared.account?.id}).first?.key ?? "Personal Chat" : chat.title)
                                 .font(.headline)
                                 .multilineTextAlignment(.leading)
+                                .truncationMode(.tail)
+                                .lineLimit(1)
                             Text(chat.projectName)
                                 .font(.footnote)
                                 .foregroundStyle(.gray)
@@ -42,8 +44,7 @@ struct ContactView: View {
                             .multilineTextAlignment(.leading)
                             .font(.footnote)
                     }
-                    .frame(width: 240, alignment: .leading)
-                    Spacer()
+                    .frame(width: 250, alignment: .leading)
                     VStack(alignment: .trailing) {
                         Text(chat.messages.first?.time ?? Date.now, style: .time)
                             .font(.footnote)

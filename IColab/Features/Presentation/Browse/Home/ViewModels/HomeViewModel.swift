@@ -24,7 +24,7 @@ class HomeViewModel : ObservableObject{
                 allProjects.append(project)
             }
             let filteredProjects = allProjects.filter { project in
-                project.owner != AccountManager.shared.account?.id || project.members.contains(where: {$0.workerID != AccountManager.shared.account?.id})
+                project.owner != AccountManager.shared.account?.id && project.members.contains(where: {$0.workerID != AccountManager.shared.account?.id})
             }
             self.projects = filteredProjects
             self.objectWillChange.send()
