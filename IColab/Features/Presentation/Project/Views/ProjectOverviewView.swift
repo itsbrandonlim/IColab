@@ -53,6 +53,11 @@ struct ProjectOverviewView: View {
                         ProjectStatusView(showSheet: $showSheet)
                             .environmentObject(vm)
                     case .started:
+                        Picker("Role", selection: $vm.selectedRole) {
+                            ForEach(vm.getExistingRoles(), id: \.self) { role in
+                                Text(role.rawValue)
+                            }
+                        }
                         CurrentMilestoneView(goal: vm.getCurrentGoal())
                         Divider()
                             .background(.gray)

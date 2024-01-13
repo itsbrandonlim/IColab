@@ -10,6 +10,7 @@ import Foundation
 class ProjectOverviewViewModel: ObservableObject {
     @Published var project: Project = Mock.projects[0]
     @Published var requestAccount : AccountDetail!
+    @Published var selectedRole : Role!
     var fetchAccount = FetchDocumentFromIDUseCase()
     var updateProject = UpdateProjectUseCase()
     var updateAccountDetail = AddAccountDetailUseCase()
@@ -17,6 +18,7 @@ class ProjectOverviewViewModel: ObservableObject {
     
     init(project : Project) {
         self.project = project
+        selectedRole = project.milestones.first!.role
     }
     
     func editProjectDetail(title: String, summary: String, tags: [String], startDate: Date, endDate: Date) {
@@ -25,15 +27,11 @@ class ProjectOverviewViewModel: ObservableObject {
     }
     
     func getCurrentGoal() -> Goal {
-        let goals = self.project.milestones[0].goals
-        
-        for goal in goals {
-            if !goal.isAchieved {
-                return goal
-            }
+        guard let selectedRoleGoals = self.project.milestones.first(where: {$0.role == selectedRole})?.goals else {
+            return self.project.milestones[0].goals[0]
         }
         
-        return goals[0]
+        return selectedRoleGoals.first(where: {!$0.isAchieved}) ?? selectedRoleGoals[0]
     }
     
     func getExistingRoles() -> [Role] {

@@ -21,21 +21,24 @@ struct CurrentTaskView: View {
             .pickerStyle(.segmented)
             .padding(.bottom)
             
-            if vm.tasks.filter({$0.status == picker}).isEmpty {
-                Spacer()
-                EmptyDataView(icon: "book.pages", title: "No Tasks listed with status \(picker.rawValue)", desc: "")
-                Spacer()
-            } else{
+            if !vm.tasks.filter({$0.key.status == picker}).isEmpty {
                 ScrollView {
                     Group {
-                        ForEach(0..<vm.tasks.count, id: \.self) { i in
-                            if vm.tasks[i].status == picker {
-                                TaskCardView(task: vm.tasks[i], toggle: $vm.toggles[i])
+                        ForEach(Array(vm.tasks), id: \.key) { (key, value) in
+                            if key.status == picker { // Filter within the ForEach
+                                TaskCardView(task: key, toggle: Binding<Bool>(
+                                    get: { value },
+                                    set: { newValue in vm.tasks[key] = newValue }
+                                ))
                             }
                         }
                     }
                     .padding(4)
                 }
+            } else{
+                Spacer()
+                EmptyDataView(icon: "book.pages", title: "No Tasks listed with status \(picker.rawValue)", desc: "")
+                Spacer()
             }
             
             if vm.isOwner {

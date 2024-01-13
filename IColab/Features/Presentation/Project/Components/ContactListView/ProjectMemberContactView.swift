@@ -85,8 +85,7 @@ struct ProjectMemberContactView: View {
                         }
                     }
                 }
-            }
-            
+            } 
         }
         .onAppear{
             self.fetchMembers()

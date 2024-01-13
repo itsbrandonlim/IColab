@@ -9,67 +9,68 @@ import Foundation
 
 class CurrentTaskViewModel: ObservableObject {
     @Published var project: Project
+    @Published var selectedRole : Role!
     @Published var goal: Goal!
-    @Published var tasks: [Task] = []
-    @Published var toggles: [Bool] = []
+    @Published var tasks: [Task : Bool] = [:]
     @Published var isOwner : Bool = false
     
     let updateProjectUseCase = UpdateProjectUseCase()
     
-    init(project : Project, uid: String){
+    init(project : Project, goal : Goal){
         self.project = project
-        self.goal = getGoal(uid: uid)
-        self.tasks = goal.tasks
-        self.initToggle()
+        self.goal = goal
+        self.tasks = initToggle(tasks: goal.tasks)
         self.isOwner = self.validateOwner()
     }
     
-    func getGoal(uid: String) -> Goal {
-        let goals = project.milestones[0].goals
-        
-        return goals.first { goal in
-            goal.id == uid
-        }!
-    }
-    
-    private func initToggle() {
+    private func initToggle(tasks : [Task]) -> [Task : Bool] {
+        var tasksWithToggle : [Task : Bool] = [:]
         for task in tasks {
             if task.status == .notCompleted {
-                toggles.append(false)
+                tasksWithToggle[task] = false
             }
             else {
-                toggles.append(true)
+                tasksWithToggle[task] = true
             }
         }
+        return tasksWithToggle
     }
     
     func submitTasks() {
-        for (index, _) in self.tasks.enumerated() {
-            if toggles[index] == true && self.tasks[index].status == .notCompleted {
-                let indexGoal = project.milestones[0].goals.firstIndex(where: {$0.id == self.goal.id})
-                project.milestones[0].goals[indexGoal!].tasks[index].setStatus(status: .onReview)
-                saveProjectToFirestore()
-                
-                self.goal = project.milestones[0].goals[indexGoal!]
-                self.tasks = self.goal.tasks
-                self.objectWillChange.send()
-                
+        let milestoneIndex = project.milestones.firstIndex(where: {$0.goals.contains(goal)}) ?? 0
+        let goalIndex = project.milestones[milestoneIndex].goals.firstIndex(of: goal) ?? 0
+        
+        tasks.forEach { (task: Task, isTrue: Bool) in
+            if isTrue {
+                let taskIndex = project.milestones[milestoneIndex].goals[goalIndex].tasks.firstIndex(of: task) ?? 0
+                project.milestones[milestoneIndex].goals[goalIndex].tasks[taskIndex].setStatus(status: .onReview)
             }
         }
+        saveProjectToFirestore()
+        self.goal = project.milestones[milestoneIndex].goals[goalIndex]
+        self.tasks = initToggle(tasks: self.goal.tasks)
+        self.objectWillChange.send()
     }
     
     func validateTask() {
-        for (index, _) in self.tasks.enumerated() {
-            if toggles[index] == true && self.tasks[index].status == .onReview {
-                let indexGoal = project.milestones[0].goals.firstIndex(where: {$0.id == self.goal.id})
-                project.milestones[0].goals[indexGoal!].tasks[index].setStatus(status: .completed)
-                saveProjectToFirestore()
-                
-                self.goal = project.milestones[0].goals[indexGoal!]
-                self.tasks = self.goal.tasks
-                self.objectWillChange.send()
+        let milestoneIndex = project.milestones.firstIndex(where: {$0.goals.contains(goal)}) ?? 0
+        let goalIndex = project.milestones[milestoneIndex].goals.firstIndex(of: goal) ?? 0
+        
+        tasks.forEach { (task: Task, isTrue: Bool) in
+            if isTrue && task.status == .onReview {
+                let taskIndex = project.milestones[milestoneIndex].goals[goalIndex].tasks.firstIndex(of: task) ?? 0
+                project.milestones[milestoneIndex].goals[goalIndex].tasks[taskIndex].setStatus(status: .completed)
             }
         }
+        
+        if project.milestones[milestoneIndex].goals[goalIndex].tasks.allSatisfy({$0.status == .completed}) {
+            project.milestones[milestoneIndex].goals[goalIndex].isAchieved = true
+        }
+        
+        saveProjectToFirestore()
+        self.goal = project.milestones[milestoneIndex].goals[goalIndex]
+        self.tasks = initToggle(tasks: self.goal.tasks)
+        self.objectWillChange.send()
     }
     
     func validateOwner() -> Bool {

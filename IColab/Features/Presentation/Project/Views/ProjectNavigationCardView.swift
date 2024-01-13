@@ -51,7 +51,7 @@ struct ProjectNavigationCardView: View {
                 )
             }
             NavigationLink {
-                CurrentTaskView(vm: CurrentTaskViewModel(project: vm.project, uid: vm.getCurrentGoal().id))
+                CurrentTaskView(vm: CurrentTaskViewModel(project: vm.project, goal: vm.getCurrentGoal()))
 
             } label: {
                 ProjectButtonView(
