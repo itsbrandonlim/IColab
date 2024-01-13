@@ -33,7 +33,7 @@ struct ProjectNavigationCardView: View {
                 )
             }
             NavigationLink {
-                MilestonesView(vm: EditProjectViewModel(project: vm.project), picker: vm.project.milestones.first?.role ?? .frontend)
+                MilestonesView(vm: EditProjectViewModel(project: vm.project), picker: vm.selectedRole)
             } label: {
                 ProjectButtonView(
                     icon: "star.circle",
@@ -52,7 +52,6 @@ struct ProjectNavigationCardView: View {
             }
             NavigationLink {
                 CurrentTaskView(vm: CurrentTaskViewModel(project: vm.project, goal: vm.getCurrentGoal()))
-
             } label: {
                 ProjectButtonView(
                     icon: "bag.circle",

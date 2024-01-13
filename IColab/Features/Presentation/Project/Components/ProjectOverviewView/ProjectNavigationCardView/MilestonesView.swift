@@ -23,19 +23,18 @@ struct MilestonesView: View {
             ScrollView {
                 VStack {
                     HStack {
-                        MilestoneInfoView(title: "Total Milestone", value: "6", measurement: "Milestone")
+                        MilestoneInfoView(title: "Total Milestone", value: "\(vm.getMilestone(role: picker).goals.count)", measurement: "Milestone")
                         Divider()
                             .frame(height: 32)
-                        MilestoneInfoView(title: "Average Length", value: "2.2 ", measurement: "Days")
+                        MilestoneInfoView(title: "Average Length", value: "2.2", measurement: "Days")
                         Divider()
                             .frame(height: 32)
-                        MilestoneInfoView(title: "Average Payment", value: "5.525.000", measurement: "Rp")
+                        MilestoneInfoView(title: "Average Payment", value: "\(vm.getAveragePayment(role: picker).formatted(.currency(code: "IDR")))", measurement: "")
                     }
                     .padding()
                     .background(Color("gray"))
                     .cornerRadius(12)
-                    MilestoneLineView(vm: EditProjectViewModel(project: vm.project), role: picker)
-                        .environmentObject(vm)
+                    MilestoneLineView(vm: vm, role: picker)
                 }
             }
             .navigationTitle("Milestone")
