@@ -12,7 +12,7 @@ struct OverviewView: View {
     @ObservedObject var accountManager = AccountManager.shared
     @State var showAlert: Bool = false
     @Environment(\.presentationMode) var presentationMode
-    @State var role : Role = .backend
+    @State var role : Role
     var updateProject = UpdateProjectUseCase()
     var fetchOwner = FetchDocumentFromIDUseCase()
     var updateAccountDetail = AddAccountDetailUseCase()
@@ -72,6 +72,18 @@ struct OverviewView: View {
             ButtonComponent(title: "Apply", width: 200) {
                 let request = Request(id: UUID().uuidString, workerID: accountManager.account!.id, name: accountManager.account!.accountDetail.name, role: role, date: Date.now)
                 project.requests.append(request)
+                fetchOwner.call(collectionName: "accountDetails", id: project.owner!) { doc in
+                    if let document = doc.data() {
+                        var accountDetail = AccountDetail.decode(from: document)
+                        accountDetail.id = doc.documentID
+                        accountDetail.notifications.append(Notification(desc: "\(accountManager.account?.accountDetail.name ?? "Someone") wants to join your project!", projectName: project.title, date: Date.now))
+                        updateAccountDetail.call(accountDetail: accountDetail, id: accountDetail.id!) { error in
+                            if let error = error {
+                                print("Error updating account detail to firestore : \(error)")
+                            }
+                        }
+                    }
+                }
                 updateProject.call(project: project) { error in
                     if let error = error {
                         print("error updating project to firestore : \(error.localizedDescription)")
@@ -91,6 +103,6 @@ struct OverviewView: View {
 
 struct OverviewView_Previews: PreviewProvider {
     static var previews: some View {
-        OverviewView(project: Mock.projects[0])
+        OverviewView(project: Mock.projects[0], role: .backend)
     }
 }

@@ -39,7 +39,7 @@ struct ProjectDetailView: View {
                     .padding(.horizontal, 10)
                 switch pickerSelection {
                 case .overview:
-                    OverviewView(project: project)
+                    OverviewView(project: project, role: project.getExistingRoles().first!)
                 case .milestone:
                     MilestoneView(milestones: project.milestones, role: project.milestones.first?.role ?? .backend)
                 default:

@@ -21,6 +21,7 @@ class CreateProjectViewModel: ObservableObject {
     init(needRefresh: Binding<Bool>){
         self._needRefresh = needRefresh
         self.account = getAccount()
+        project.owner = account.id
     }
     
     private func getAccount() -> Account{
@@ -29,7 +30,6 @@ class CreateProjectViewModel: ObservableObject {
     
     func createProject() -> Bool {
         if validateProjectMilestones() {
-            project.owner = account.id
             project.members = []
             self.account.accountDetail.projectsOwned.append(self.project)
             do{
