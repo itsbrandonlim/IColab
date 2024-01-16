@@ -31,11 +31,6 @@ struct ProjectDescriptionView: View {
                 HStack{
                     DetailCard(
                         detailCardType: .cardwithlogo,
-                        symbol: "person",
-                        title: "Role",
-                        caption: "\(project.role)")
-                    DetailCard(
-                        detailCardType: .cardwithlogo,
                         symbol: "dollarsign",
                         title: "Total Earning",
                         caption: "Rp \(project.getTotalMilestone().formatted(.number))"

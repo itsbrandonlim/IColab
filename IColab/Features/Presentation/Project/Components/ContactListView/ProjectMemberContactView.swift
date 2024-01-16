@@ -13,8 +13,11 @@ struct ProjectMemberContactView: View {
     @State var toggle: Bool
     @State var isLoading : Bool
     @State var members : [AccountDetail]
-    @State var selectedMember : AccountDetail?
+    @State var searchedMembers : [AccountDetail]
+    @State var selectedMember : AccountDetail!
     @State var chat : Chat?
+    @State var searchText : String = ""
+    @FocusState var isInputActive: Bool
     
     @State var showSheet : Bool
     @State var showProfile : Bool
@@ -24,6 +27,7 @@ struct ProjectMemberContactView: View {
         GridItem(.flexible()),
         GridItem(.flexible()),
     ]
+    
     init(title: String = "Title", project: Project = MockProjects.array[0], toggle: Bool = true, isLoading: Bool = false, members: [AccountDetail] = [], selectedMember: AccountDetail? = nil, chat: Chat? = nil, showSheet: Bool = false, showProfile: Bool = false, showChat: Bool = false) {
         self.title = title
         self.project = project
@@ -31,6 +35,7 @@ struct ProjectMemberContactView: View {
         self.isLoading = isLoading
         self.members = members
         self.selectedMember = selectedMember
+        self.searchedMembers = members
         self.chat = chat
         self.showSheet = showSheet
         self.showProfile = showProfile
@@ -41,6 +46,7 @@ struct ProjectMemberContactView: View {
         self.isLoading = true
         let fetchAccountDetail = FetchDocumentFromIDUseCase()
         let accountDetailConstants = FireStoreConstant.AccountDetailConstants()
+        var callRemaining = project.members.count
         for member in project.members {
             fetchAccountDetail.call(collectionName: accountDetailConstants.collectionName, id: member.workerID) { doc in
                 if let data = doc.data() {
@@ -50,8 +56,24 @@ struct ProjectMemberContactView: View {
                         members.append(member)
                     }
                 }
-                self.isLoading = false
+                callRemaining -= 1
+                if callRemaining == 0 {
+                    self.isLoading = false
+                }
             }
+        }
+    }
+    
+    func searchMember(searchTitle: String) {
+        if searchTitle == "" {
+            self.searchedMembers = self.members
+        } else {
+            let allMembers = self.members
+            let filteredMembers = allMembers.filter { accountDetail in
+                let lowercasedName = accountDetail.name.lowercased()
+                return lowercasedName.contains(searchTitle.lowercased())
+            }
+            self.searchedMembers = filteredMembers
         }
     }
     
@@ -65,12 +87,14 @@ struct ProjectMemberContactView: View {
                         .font(.headline)
                     Spacer()
                     Image(systemName: toggle ? "chevron.down" : "chevron.up")
+                    
                 }
             }
+            .padding(.horizontal)
             .buttonStyle(.plain)
-            
             Divider()
                 .background(.white)
+            
             if toggle {
                 if isLoading {
                     LoadingView()
@@ -78,7 +102,7 @@ struct ProjectMemberContactView: View {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(0..<members.count) { i in
                             Button {
-                                selectedMember = members[i]
+                                self.selectedMember = members[i]
                             } label: {
                                 ProjectMemberContactCardView(member: members[i], role: project.members[i].role.rawValue)
                             }
@@ -96,7 +120,7 @@ struct ProjectMemberContactView: View {
             .presentationDetents([.fraction(0.45), .large])
         })
         .navigationDestination(isPresented: $showProfile) {
-            ProfileView(pvm: ProfileViewModel(accountDetail: selectedMember!), showSignIn: .constant(false))
+            ProfileView(pvm: ProfileViewModel(accountDetail: selectedMember ?? AccountDetail(name: "", desc: "", location: "", bankAccount: "", phoneNumber: "")), showSignIn: .constant(false))
                 .environmentObject(ProfileViewModel())
         }
         .navigationDestination(isPresented: $showChat) {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CircleProgressView: View {
-    var progress: Double = 0.75
+    var progress: Double
     var lineWidth: CGFloat = 10
     
     var body: some View {
@@ -22,7 +22,7 @@ struct CircleProgressView: View {
                         lineWidth: lineWidth
                     )
                 Circle()
-                    .trim(from: 0, to: clampedProgress)
+                    .trim(from: 0, to: progress)
                     .stroke(
                         Color.purple,
                         style: StrokeStyle(
@@ -33,7 +33,7 @@ struct CircleProgressView: View {
                     .rotationEffect(.degrees(0))
                     .animation(.easeOut, value: clampedProgress)
                 
-                Text("\(clampedProgress * 100, specifier: "%.0f")")
+                Text("\(progress * 100, specifier: "%.0f")")
                     .font(.title3)
                     .bold()
             }
@@ -45,6 +45,6 @@ struct CircleProgressView: View {
 
 struct CircleProgressView_Previews: PreviewProvider {
     static var previews: some View {
-        CircleProgressView()
+        CircleProgressView(progress: 20)
     }
 }

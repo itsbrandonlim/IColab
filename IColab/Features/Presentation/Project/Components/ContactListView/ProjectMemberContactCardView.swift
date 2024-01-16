@@ -23,7 +23,7 @@ struct ProjectMemberContactCardView: View {
                 .font(.caption)
         }
         .padding()
-        .padding()
+        .frame(maxWidth: 180, maxHeight: 180)
         .background(Color("gray"))
         .cornerRadius(12)
     }

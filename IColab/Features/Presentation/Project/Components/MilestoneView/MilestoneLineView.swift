@@ -73,8 +73,10 @@ struct MilestoneLineView: View {
             else {
                 VerticalStepIndicator(vm: vm, role: role, currentStepIndex: currentStepIndex)
             }
-            ButtonComponent(title: "Add Goals", width: 330) {
-                vm.nextView = true
+            if vm.project.owner == AccountManager.shared.account?.id {
+                ButtonComponent(title: "Add Goals", width: 330) {
+                    vm.nextView = true
+                }
             }
         }
         .navigationDestination(isPresented: $vm.nextView) {

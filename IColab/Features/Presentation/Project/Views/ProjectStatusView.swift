@@ -50,24 +50,26 @@ struct ProjectStatusView: View {
                 }
                 HStack(spacing: 13){
                     ForEach(vm.project.getExistingRoles(), id: \.self) { role in
-                        RoleCard(symbol: Role.getRoleIcon(role: role), roleTitle: role.rawValue, quantity: 1, max: 1)
+                        RoleCard(symbol: Role.getRoleIcon(role: role), roleTitle: role.rawValue, quantity: vm.getMemberCount(role: role), max: 1)
                     }
                 }
-                NavigationLink {
-                    RequestView()
-                        .environmentObject(vm)
-                } label: {
-                    HStack{
-                        Text("Worker Requests")
-                            .bold()
-                        Spacer()
-                        Image(systemName: "chevron.right")
+                if vm.project.owner == AccountManager.shared.account?.id {
+                    NavigationLink {
+                        RequestView()
+                            .environmentObject(vm)
+                    } label: {
+                        HStack{
+                            Text("Worker Requests")
+                                .bold()
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                        }
+                        .padding(.vertical, 5)
                     }
-                    .padding(.vertical, 5)
+                    .tint(Color(.purple))
+                    .buttonStyle(.borderedProminent)
+                    .padding(.horizontal)
                 }
-                .tint(Color(.purple))
-                .buttonStyle(.borderedProminent)
-                .padding(.horizontal)
             }
         }
     }

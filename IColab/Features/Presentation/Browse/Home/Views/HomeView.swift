@@ -39,7 +39,7 @@ struct HomeView: View {
                     }
                 }else{
                     ScrollView{
-                        ForEach(homeViewModel.projects){ project in
+                        ForEach(homeViewModel.selectedProjects){ project in
                             NavigationLink {
                                 ProjectDetailView(project: project)
                             } label: {

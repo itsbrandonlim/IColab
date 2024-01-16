@@ -10,7 +10,7 @@ import Foundation
 class ProjectOverviewViewModel: ObservableObject {
     @Published var project: Project = Mock.projects[0]
     @Published var requestAccount : AccountDetail!
-    @Published var selectedRole : Role!
+    @Published var selectedRole : Role
     var fetchAccount = FetchDocumentFromIDUseCase()
     var updateProject = UpdateProjectUseCase()
     var updateAccountDetail = AddAccountDetailUseCase()
@@ -36,10 +36,8 @@ class ProjectOverviewViewModel: ObservableObject {
     
     func getExistingRoles() -> [Role] {
         var roles: [Role] = []
-        for role in Role.allCases {
-            if getMemberCount(role: role) != 0 {
-                roles.append(role)
-            }
+        for milestone in project.milestones {
+            roles.append(milestone.role)
         }
         return roles
     }
@@ -49,7 +47,7 @@ class ProjectOverviewViewModel: ObservableObject {
         
         for member in self.project.members {
             if member.role == role {
-                count += 1;
+                count += 1
             }
         }
         
@@ -57,7 +55,7 @@ class ProjectOverviewViewModel: ObservableObject {
     }
     
     func fetchOwner(ownerID: String){
-        fetchAccount.call(collectionName: "accountDetails", id: ownerID) { doc in
+        fetchAccount.call(collectionName: accountDetailConstants.collectionName, id: ownerID) { doc in
             if let document = doc.data() {
                 self.requestAccount = AccountDetail.decode(from: document)
             }

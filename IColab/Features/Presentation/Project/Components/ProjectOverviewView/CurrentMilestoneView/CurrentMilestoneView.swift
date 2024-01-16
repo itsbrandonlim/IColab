@@ -12,7 +12,7 @@ struct CurrentMilestoneView: View {
     
     var body: some View {
         HStack {
-            CircleProgressView()
+            CircleProgressView(progress: goal.getProgress())
                 .frame(width: 80, height: 80)
             VStack(alignment: .leading) {
                 Text(goal.name)

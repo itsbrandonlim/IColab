@@ -43,14 +43,15 @@ struct MilestoneDetailView: View {
         }
         .navigationTitle("Milestone Detail")
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink {
-                    EditGoalView(vm: vm, role: milestone.role, goal: goal)
-                        .environmentObject(vm)
-                } label: {
-                    Image(systemName: "pencil")
+            if AccountManager.shared.account?.id == vm.project.owner {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        EditGoalView(vm: vm, role: milestone.role, goal: goal)
+                            .environmentObject(vm)
+                    } label: {
+                        Image(systemName: "pencil")
+                    }
                 }
-
             }
         }
         .onAppear{

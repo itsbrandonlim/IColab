@@ -39,14 +39,16 @@ struct MilestonesView: View {
             }
             .navigationTitle("Milestone")
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink {
-                        AddGoalView(vm: vm, role: picker)
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.title)
-                    }
+                if vm.project.owner == AccountManager.shared.account?.id{
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink {
+                            AddGoalView(vm: vm, role: picker)
+                        } label: {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.title)
+                        }
 
+                    }
                 }
             }
         }

@@ -24,13 +24,15 @@ struct ProjectOverviewView: View {
                                 .font(.title)
                         })
                         Spacer()
-                        NavigationLink {
-                            EditProjectView(vm: vm)
-                        } label: {
-                            Image(systemName: "pencil.circle")
-                                .font(.title)
+                        if vm.project.owner == AccountManager.shared.account?.id {
+                            NavigationLink {
+                                EditProjectView(vm: vm)
+                            } label: {
+                                Image(systemName: "pencil.circle")
+                                    .font(.title)
+                            }
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
                     }
                     .padding(.vertical)
                     Text(vm.project.title)
