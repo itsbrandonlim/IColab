@@ -60,7 +60,15 @@ struct ProjectNavigationCardView: View {
                     description: "Current project or task that must be done according to the deadline"
                 )
             }
-                
+            NavigationLink {
+                CurrentTaskView(vm: CurrentTaskViewModel(project: vm.project, uid: vm.getCurrentGoal().id))
+            } label: {
+                ProjectButtonView(
+                    icon: "dollarsign.circle",
+                    title: "Payment Management",
+                    description: "Manage due payment and check on history of payment for the previous milestones"
+                )
+            }
         }
     }
 }

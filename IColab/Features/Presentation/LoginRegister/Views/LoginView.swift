@@ -29,7 +29,7 @@ struct LoginView: View {
                                 .frame(width: 330, height: 20)
                                 .padding(.vertical, 10)
                                 .border(.primary)
-                        } else{
+                        } else {
                             Text("Sign In")
                                 .frame(width: 330, height: 20)
                                 .padding(.vertical, 10)

@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Foundation
-import FirebaseAuth
+import FirebaseAuth 
 
 class RegisterViewModel : ObservableObject {
     @Published var username : String
@@ -23,7 +23,7 @@ class RegisterViewModel : ObservableObject {
     var addAccountDetailtoFireStore = AddAccountDetailUseCase()
     @Published var error : RegisterError?
     @Published var showError : Bool
-    
+        
     init(username: String = "", email: String = "", password: String = "", phoneNumber: String = "", region: String = "", signIn: Bool = false, showSignIn: Binding<Bool>, error: RegisterError? = nil, showError: Bool = false) {
         self.username = username
         self.email = email
@@ -36,9 +36,18 @@ class RegisterViewModel : ObservableObject {
         self.showError = showError
     }
     
+    public func saveToDatabase() {
+        if registrationValidation() {
+            UserDataManager.shared.addUser(username: self.username, email: self.email, phone: self.phoneNumber, region: self.region)
+            print("called")
+        }
+    }
+    
     public func register(){
         self.isLoading = true
         if registrationValidation() {
+            self.saveToDatabase()
+            
             AuthenticationManager.shared.createUser(email: self.email, password: self.password) { authDataResult, error in
                 if let error = error {
                     self.showError(error: .firebaseError(error))

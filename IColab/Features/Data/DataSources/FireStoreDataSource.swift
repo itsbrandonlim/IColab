@@ -12,6 +12,7 @@ struct FireStoreDataSource : FireStoreDataSourceProtocol {
     private let db = Firestore.firestore()
     let projectConstants = FireStoreConstant.ProjectConstants()
     let detailConstants = FireStoreConstant.AccountDetailConstants()
+    let paymentConstants = FireStoreConstant.PaymentConstants()
     func getCollection(collectionName: String, completion: @escaping (QuerySnapshot?, Error?) -> Void){
         db.collection(collectionName).getDocuments(completion: completion)
     }
@@ -92,5 +93,10 @@ struct FireStoreDataSource : FireStoreDataSourceProtocol {
                 completion(.success(qss))
             }
         }
+    }
+    
+    func setPayment(collectionName: String, payment: Payment) throws {
+        let docReference = db.collection(collectionName).document(payment.id)
+        docReference.setData(payment.toDict())
     }
 }

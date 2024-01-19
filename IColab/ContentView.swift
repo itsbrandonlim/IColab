@@ -32,6 +32,10 @@ struct ContentView: View {
                                     let pvm = ProfileViewModel()
                                     ProfileView(pvm: pvm, showSignIn: $showSignIn)
                                         .environmentObject(pvm)
+                                case .payment:
+                                    PaymentAdminView()
+                                case .user:
+                                    UserAdminView()
                                 }
                             }
                         }

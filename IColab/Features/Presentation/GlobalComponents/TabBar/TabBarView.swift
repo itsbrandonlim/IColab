@@ -9,10 +9,11 @@ import SwiftUI
 
 struct TabBarView: View {
     @Binding var selectedTabItem : TabBarType
-    private let tabBarItems: [TabBarType] = [.home, .projects, .chats, .notifications, .profile]
+    private let tabBarItems: [TabBarType] = TabBarType.getUserTabs()
     var body: some View {
-        GeometryReader{ geometry in
-            HStack(spacing: 0){
+        GeometryReader { geometry in
+            HStack(spacing: 0) {
+                Spacer()
                 ForEach(tabBarItems, id: \.self){ tabBarType in
                     TabBarItemComponent(tabBarType: tabBarType) {
                         selectedTabItem = tabBarType
@@ -20,6 +21,7 @@ struct TabBarView: View {
                     .frame(width: geometry.size.width * 0.2)
                     .foregroundColor(tabBarType == selectedTabItem ? .blue : .primary)
                 }.offset(y: 5)
+                Spacer()
             }
         }
         .frame(height: 50)

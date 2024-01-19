@@ -41,6 +41,16 @@ struct FireStoreConstant {
         let startDate = "startDate"
         let tags = "tags"
     }
+    
+    struct PaymentConstants {
+        let collectionName = "payments"
+        let id = "id"
+        let amount = "amount"
+        let isValidated = "isValidated"
+        let ownerId = "ownerid"
+        let workerId = "workerid"
+        let projectId = "projectid"
+    }
 }
 
 var accountDetail = FireStoreConstant.AccountDetailConstants()

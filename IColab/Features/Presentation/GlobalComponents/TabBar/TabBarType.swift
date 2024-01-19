@@ -13,6 +13,17 @@ enum TabBarType {
     case chats
     case notifications
     case profile
+    
+    case payment
+    case user
+    
+    static func getUserTabs() -> [TabBarType] {
+        return [.home, .projects, .chats, .notifications, .profile]
+    }
+    
+    static func getAdminTabs() -> [TabBarType] {
+        return [.home, .payment, .user]
+    }
 }
 
 extension TabBarType{
@@ -28,6 +39,10 @@ extension TabBarType{
             return "bell"
         case .profile:
             return "person"
+        case .payment:
+            return "dollarsign"
+        case .user:
+            return "person"
         }
     }
     func getCaption() -> String {
@@ -42,6 +57,10 @@ extension TabBarType{
             return "Notifications"
         case .profile:
             return "Profile"
+        case .payment:
+            return "Payment"
+        case .user:
+            return "User"
         }
     }
 }
