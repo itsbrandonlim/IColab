@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct EditGoalView: View {
-    @EnvironmentObject var vm: EditProjectViewModel
+    @ObservedObject var vm: EditProjectViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    var role: Role
     var goal: Goal
+    var role: Role
+    
+    init(vm: EditProjectViewModel, role: Role, goal: Goal) {
+        self.vm = vm
+        self.role = role
+        self.goal = goal
+    }
     
     var body: some View {
         VStack {

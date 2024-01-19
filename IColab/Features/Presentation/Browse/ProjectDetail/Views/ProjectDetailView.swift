@@ -39,7 +39,7 @@ struct ProjectDetailView: View {
                     .padding(.horizontal, 10)
                 switch pickerSelection {
                 case .overview:
-                    OverviewView(project: project)
+                    OverviewView(project: project, role: project.getExistingRoles().first!)
                 case .milestone:
                     MilestoneView(milestones: project.milestones, role: project.milestones.first?.role ?? .backend)
                 default:
@@ -48,7 +48,7 @@ struct ProjectDetailView: View {
             }
             .ignoresSafeArea()
             .sheet(isPresented: $showSheet, content: {
-                OwnerProfileSheet(owner: owner, showSheet: $showSheet, showProfile: $showProfile, showChat: $showChat, chat: $chat)
+                OwnerProfileSheet(owner: owner, projectTitle: project.title, showSheet: $showSheet, showProfile: $showProfile, showChat: $showChat, chat: $chat)
                     .presentationDragIndicator(.visible)
                 .presentationDetents([.fraction(0.45), .large])
             })

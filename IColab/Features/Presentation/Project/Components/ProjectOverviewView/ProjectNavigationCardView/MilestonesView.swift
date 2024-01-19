@@ -10,7 +10,7 @@ import SwiftUI
 struct MilestonesView: View {
     @StateObject var vm: EditProjectViewModel
     
-    @State var picker: Role = .backend
+    @State var picker: Role
     
     var body: some View {
         NavigationStack {
@@ -23,31 +23,32 @@ struct MilestonesView: View {
             ScrollView {
                 VStack {
                     HStack {
-                        MilestoneInfoView(title: "Total Milestone", value: "6", measurement: "Milestone")
+                        MilestoneInfoView(title: "Total Milestone", value: "\(vm.getMilestone(role: picker).goals.count)", measurement: "Milestone")
                         Divider()
                             .frame(height: 32)
-                        MilestoneInfoView(title: "Average Length", value: "2.2 ", measurement: "Days")
+                        MilestoneInfoView(title: "Average Length", value: "2.2", measurement: "Days")
                         Divider()
                             .frame(height: 32)
-                        MilestoneInfoView(title: "Average Payment", value: "5.525.000", measurement: "Rp")
+                        MilestoneInfoView(title: "Average Payment", value: "\(vm.getAveragePayment(role: picker).formatted(.currency(code: "IDR")))", measurement: "")
                     }
                     .padding()
                     .background(Color("gray"))
                     .cornerRadius(12)
-                    MilestoneLineView(vm: EditProjectViewModel(project: vm.project), role: picker)
-                        .environmentObject(vm)
+                    MilestoneLineView(vm: vm, role: picker)
                 }
             }
             .navigationTitle("Milestone")
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink {
-                        AddGoalView(vm: vm, role: picker)
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.title)
-                    }
+                if vm.project.owner == AccountManager.shared.account?.id{
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink {
+                            AddGoalView(vm: vm, role: picker)
+                        } label: {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.title)
+                        }
 
+                    }
                 }
             }
         }

@@ -31,14 +31,9 @@ struct ProjectDescriptionView: View {
                 HStack{
                     DetailCard(
                         detailCardType: .cardwithlogo,
-                        symbol: "person",
-                        title: "Role",
-                        caption: "\(project.role)")
-                    DetailCard(
-                        detailCardType: .cardwithlogo,
                         symbol: "dollarsign",
                         title: "Total Earning",
-                        caption: "Rp \(project.totalMilestone().formatted(.number))"
+                        caption: "Rp \(project.getTotalMilestone().formatted(.number))"
                     )
                 }
             }
@@ -49,8 +44,8 @@ struct ProjectDescriptionView: View {
             VStack(alignment: .leading) {
                 Text("Members")
                     .font(.headline)
-                ForEach(vm.existingRoles(), id: \.self) { role in
-                    MemberListView(role: role, count: vm.memberCount(role: role))
+                ForEach(vm.getExistingRoles(), id: \.self) { role in
+                    MemberListView(role: role, count: vm.getMemberCount(role: role))
                 }
             }
             .padding()

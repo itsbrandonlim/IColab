@@ -23,6 +23,7 @@ struct AddProjectDetailView: View {
                 InputDescriptionView(title: "Project Short Summary", text: $vm.project.desc)
                 InputTagsView(tags: $vm.project.tags)
                 InputDateView(date: $vm.project.startDate, title: "Input Start Date")
+                InputDateView(date: $vm.project.endDate, title: "Input End Date")
                 Spacer()
                 ButtonComponent(title: "Next", width: 240) {
                     withAnimation() {

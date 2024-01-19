@@ -33,11 +33,12 @@ struct ProjectContactView: View {
                 Divider()
                     .background(.white)
                 if toggle {
-                    if vm.project.owner != AccountManager.shared.account!.id {
-                        ContactCardView(member: vm.owner)
-                    }
                     ForEach(vm.filterMembers()) { member in
-                        ContactCardView(member: member)
+                        Button {
+                            
+                        } label: {
+                            ContactCardView(member: member)
+                        }
                     }
                 }
             }

@@ -15,13 +15,11 @@ class AccountManager : ObservableObject {
     private init(){}
 
     @Published var account : Account?
-    var fetch = FetchCollectionUseCase()
-    var fetchDocument = FetchDocumentFromIDUseCase()
     var detailConstants = FireStoreConstant.AccountDetailConstants()
     
     public func getAccount(completion: @escaping ()-> Void) {
-        
         if let user = Auth.auth().currentUser {
+            let fetchDocument = FetchDocumentFromIDUseCase()
             fetchDocument.call(collectionName: detailConstants.collectionName, id: user.uid) { doc in
                 if let document = doc.data(){
                     let accountDetail = AccountDetail.decode(from: document)
@@ -40,6 +38,17 @@ class AccountManager : ObservableObject {
         fetchOwnedProject.call(ownerID: ownerID) { result in
             switch result {
             case .success(let projects):
+                projects.forEach { project in
+                    if project.endDate <= Date.now {
+                        project.projectState = .overdue
+                    }
+                    else if project.startDate <= Date.now {
+                        project.projectState = .started
+                    }
+                    else {
+                        project.projectState = .notStarted
+                    }
+                }
                 self.account?.accountDetail.projectsOwned.append(contentsOf: projects)
             case .failure(_):
                 self.account?.accountDetail.projectsOwned = []
@@ -55,15 +64,19 @@ class AccountManager : ObservableObject {
                 if let document = doc.data() {
                     let project = Project.decode(from: document)
                     project.id = doc.documentID
+                    if project.endDate <= Date.now {
+                        project.projectState = .overdue
+                    }
+                    else if project.startDate <= Date.now {
+                        project.projectState = .started
+                    }
+                    else {
+                        project.projectState = .notStarted
+                    }
                     self.account?.accountDetail.projectsJoined.append(project)
                 }
             }
         }
-    }
-    
-    public func setAccount(account: Account) {
-        self.account = account
-        self.objectWillChange.send()
     }
     
     public func logout(){

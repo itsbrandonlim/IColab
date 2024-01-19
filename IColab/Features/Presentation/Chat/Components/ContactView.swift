@@ -32,18 +32,21 @@ struct ContactView: View {
                     VStack(alignment: .leading) {
                         HStack {
                             Text(chat.type == .personal ? chat.members.filter({$0.value != AccountManager.shared.account?.id}).first?.key ?? "Personal Chat" : chat.title)
+                                .lineLimit(1)
                                 .font(.headline)
                                 .multilineTextAlignment(.leading)
                             Text(chat.projectName)
-                                .font(.footnote)
+                                .truncationMode(.tail)
+                                .lineLimit(2)
+                                .font(.caption2)
                                 .foregroundStyle(.gray)
+                                .multilineTextAlignment(.trailing)
                         }
                         Text(chat.lastMessage ?? "No Message found in this chat")
                             .multilineTextAlignment(.leading)
                             .font(.footnote)
                     }
-                    .frame(width: 240, alignment: .leading)
-                    Spacer()
+                    .frame(width: 250, alignment: .leading)
                     VStack(alignment: .trailing) {
                         Text(chat.messages.first?.time ?? Date.now, style: .time)
                             .font(.footnote)

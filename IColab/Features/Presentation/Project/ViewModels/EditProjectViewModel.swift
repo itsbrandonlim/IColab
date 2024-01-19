@@ -11,7 +11,7 @@ class EditProjectViewModel: ObservableObject {
     @Published var project: Project
     @Published var milestones: [Milestone]
     
-    init(project: Project) {
+    init(project: Project, initializeGoal: Bool = false, goal : Goal? = nil) {
         self.project = project
         self.milestones = project.milestones
     }
@@ -22,6 +22,16 @@ class EditProjectViewModel: ObservableObject {
     @Published var dueDate: Date = Date.now
     @Published var tasks: [Task] = []
     @Published var nextView : Bool = false
+    let updateProjectUseCase = UpdateProjectUseCase()
+    
+    
+    func initializeGoal(goal : Goal) {
+        self.title = goal.name
+        self.nominal = goal.nominal
+        self.desc = goal.desc
+        self.dueDate = goal.endDate
+        self.tasks = goal.tasks
+    }
     
     func addTask(title: String) {
         let task = Task(title: title)
@@ -41,10 +51,18 @@ class EditProjectViewModel: ObservableObject {
         return self.project.milestones[index!]
     }
     
+    func getAveragePayment(role : Role) -> Double {
+        let goals = getMilestone(role: role).goals
+        
+        return Double(goals.map({$0.nominal}).reduce(0, +) / goals.count)
+    }
+    
     func addGoal(role: Role) {
         let index = self.milestones.firstIndex(where: {$0.role == role})
         
         project.milestones[index!].goals.append(Goal(name: title, nominal: nominal, desc: desc, endDate: dueDate, isAchieved: false, tasks: tasks))
+        
+        updateProjectToFirestore()
         self.objectWillChange.send()
     }
     
@@ -56,7 +74,9 @@ class EditProjectViewModel: ObservableObject {
         
         project.milestones[index!].goals[goalIndex!] = Goal(name: title, nominal: nominal, desc: desc, endDate: dueDate, isAchieved: goal.isAchieved, tasks: tasks)
         
+        updateProjectToFirestore()
         self.milestones = self.project.milestones
+        
         self.objectWillChange.send()
     }
     
@@ -66,7 +86,16 @@ class EditProjectViewModel: ObservableObject {
         
         project.milestones[index!].goals.remove(at: goalIndex)
         
+        updateProjectToFirestore()
         self.milestones = self.project.milestones
         self.objectWillChange.send()
+    }
+    
+    func updateProjectToFirestore() {
+        updateProjectUseCase.call(project: project) { error in
+            if let error = error {
+                print("Error updating project to firestore :\(error.localizedDescription)")
+            }
+        }
     }
 }

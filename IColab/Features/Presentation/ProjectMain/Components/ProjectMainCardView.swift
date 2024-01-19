@@ -17,8 +17,18 @@ struct ProjectMainCardView: View {
         if isLoading {
             LoadingView()
                 .onAppear{
-                    self.owner = AccountManager.shared.account?.accountDetail
-                    self.isLoading = false
+                    if AccountManager.shared.account?.id == project.owner {
+                        self.owner = AccountManager.shared.account?.accountDetail
+                        self.isLoading = false
+                    }else {
+                        fetchOwner.call(collectionName: "accountDetails", id: project.owner!) { doc in
+                            if let document = doc.data() {
+                                self.owner = AccountDetail.decode(from: document)
+                                self.owner.id = doc.documentID
+                                self.isLoading = false
+                            }
+                        }
+                    }
                 }
         }else {
             HStack {

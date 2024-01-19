@@ -11,17 +11,17 @@ import SwiftUI
 class CreateProjectViewModel: ObservableObject {
     @Published var account: Account!
     @Published var project: Project = Project(title: "", role: "", requirements: [], tags: [], startDate: Date.now, endDate: Date.now, desc: "Short Summary", milestones: [])
-    @Published var roles: [Role] = []
     @Published var error: CreateProjectError?
     @Binding var needRefresh : Bool
     @Published var showAlert : Bool = false
-    var addDatatoFireStore = AddDatatoFireStoreUseCase()
+    var addProject = AddProjectUseCase()
     var projectConstants = FireStoreConstant.ProjectConstants()
     var updateAccountDetail = AddAccountDetailUseCase()
     
     init(needRefresh: Binding<Bool>){
         self._needRefresh = needRefresh
         self.account = getAccount()
+        project.owner = account.id
     }
     
     private func getAccount() -> Account{
@@ -30,11 +30,10 @@ class CreateProjectViewModel: ObservableObject {
     
     func createProject() -> Bool {
         if validateProjectMilestones() {
-            project.owner = account.id
             project.members = []
             self.account.accountDetail.projectsOwned.append(self.project)
             do{
-                try addDatatoFireStore.call(collectionName: projectConstants.collectionName, element: project)
+                try addProject.call(collectionName: projectConstants.collectionName, element: project)
             } catch let error {
                 print("Error adding data to firestore : \(error.localizedDescription)")
             }

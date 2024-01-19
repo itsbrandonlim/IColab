@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AddDatatoFireStoreUseCase {
+struct AddProjectUseCase {
     var repository = FireStoreRepository()
     
     func call(collectionName: String, element: Project) throws {

@@ -10,7 +10,7 @@ import Foundation
 class NotificationViewModel {
     var notifications : [Notification]?
     
-    init(notifications: [Notification]? = nil) {
+    init() {
         self.notifications = getNotifications()
     }
     

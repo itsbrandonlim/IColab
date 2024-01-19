@@ -28,9 +28,9 @@ struct MilestoneDetailView: View {
                 .padding()
             }
             HStack {
-                MilestoneDetailInfoView(icon: "hourglass.circle", title: "Due Date", value: "08-08-2023")
-                MilestoneDetailInfoView(icon: "dollarsign.circle", title: "Nominal", value: "Rp. 500.000")
-                MilestoneDetailInfoView(icon: "folder.circle", title: "Total Task", value: "5")
+                MilestoneDetailInfoView(icon: "hourglass.circle", title: "Due Date", value: "\(goal.endDate.formatted(date: .abbreviated, time: .omitted))")
+                MilestoneDetailInfoView(icon: "dollarsign.circle", title: "Nominal", value: "\(goal.nominal.formatted(.currency(code: "IDR")))")
+                MilestoneDetailInfoView(icon: "folder.circle", title: "Total Task", value: "\(goal.tasks.count)")
             }
             .padding(.vertical)
             Divider()
@@ -43,15 +43,19 @@ struct MilestoneDetailView: View {
         }
         .navigationTitle("Milestone Detail")
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink {
-                    EditGoalView(role: milestone.role, goal: goal)
-                        .environmentObject(vm)
-                } label: {
-                    Image(systemName: "pencil")
+            if AccountManager.shared.account?.id == vm.project.owner {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        EditGoalView(vm: vm, role: milestone.role, goal: goal)
+                            .environmentObject(vm)
+                    } label: {
+                        Image(systemName: "pencil")
+                    }
                 }
-
             }
+        }
+        .onAppear{
+            vm.initializeGoal(goal: self.goal)
         }
     }
 }

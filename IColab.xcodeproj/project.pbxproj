@@ -121,7 +121,6 @@
 		D8155B312B36B826000E6267 /* DatabaseConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8155B302B36B826000E6267 /* DatabaseConstant.swift */; };
 		D8155B352B36C2CD000E6267 /* AddChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8155B342B36C2CD000E6267 /* AddChatUseCase.swift */; };
 		D81709312B25B04B00DDF2F9 /* FetchDocumentFromIDUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81709302B25B04B00DDF2F9 /* FetchDocumentFromIDUseCase.swift */; };
-		D81709332B25E76300DDF2F9 /* UpdateCollectionWithIDUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81709322B25E76300DDF2F9 /* UpdateCollectionWithIDUseCase.swift */; };
 		D819F7B92B22C0A200287D60 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819F7B82B22C0A200287D60 /* LoginError.swift */; };
 		D819F7BB2B22C25500287D60 /* RegisterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819F7BA2B22C25500287D60 /* RegisterError.swift */; };
 		D819F7BF2B22F1A700287D60 /* FireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819F7BE2B22F1A700287D60 /* FireStoreManager.swift */; };
@@ -133,7 +132,7 @@
 		D82C0D5B2ABC0741009802D9 /* EditFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82C0D5A2ABC0741009802D9 /* EditFormView.swift */; };
 		D82F3EF82B280A2500A5E303 /* CreateProjectError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F3EF72B280A2500A5E303 /* CreateProjectError.swift */; };
 		D82F3EFB2B280C1F00A5E303 /* AnyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F3EFA2B280C1F00A5E303 /* AnyTransition.swift */; };
-		D82F3EFD2B285EC700A5E303 /* AddDatatoFireStoreUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F3EFC2B285EC700A5E303 /* AddDatatoFireStoreUseCase.swift */; };
+		D82F3EFD2B285EC700A5E303 /* AddProjectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82F3EFC2B285EC700A5E303 /* AddProjectUseCase.swift */; };
 		D83479AD2AA9D5B800E16739 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83479AC2AA9D5B800E16739 /* SearchBar.swift */; };
 		D83605452AE17045003CDF80 /* RequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83605442AE17045003CDF80 /* RequestView.swift */; };
 		D83605472AE173B9003CDF80 /* MockRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83605462AE173B9003CDF80 /* MockRequest.swift */; };
@@ -173,7 +172,6 @@
 		D88B632C2B2444370058C944 /* FireStoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88B632B2B2444370058C944 /* FireStoreRepository.swift */; };
 		D88B632E2B24447A0058C944 /* FireStoreRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88B632D2B24447A0058C944 /* FireStoreRepositoryProtocol.swift */; };
 		D88B63312B2446190058C944 /* FetchCollectionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88B63302B2446190058C944 /* FetchCollectionUseCase.swift */; };
-		D88B63332B244B010058C944 /* SetFireStoreDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88B63322B244B010058C944 /* SetFireStoreDataUseCase.swift */; };
 		D89586FE2AAF5E340064629B /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89586FD2AAF5E340064629B /* ProfileViewModel.swift */; };
 		D89587002AAF5E7E0064629B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89586FF2AAF5E7E0064629B /* ProfileView.swift */; };
 		D89587032AAF5EDA0064629B /* ProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89587022AAF5EDA0064629B /* ProfileCardView.swift */; };
@@ -343,7 +341,6 @@
 		D8155B302B36B826000E6267 /* DatabaseConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseConstant.swift; sourceTree = "<group>"; };
 		D8155B342B36C2CD000E6267 /* AddChatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChatUseCase.swift; sourceTree = "<group>"; };
 		D81709302B25B04B00DDF2F9 /* FetchDocumentFromIDUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDocumentFromIDUseCase.swift; sourceTree = "<group>"; };
-		D81709322B25E76300DDF2F9 /* UpdateCollectionWithIDUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCollectionWithIDUseCase.swift; sourceTree = "<group>"; };
 		D819F7B82B22C0A200287D60 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		D819F7BA2B22C25500287D60 /* RegisterError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterError.swift; sourceTree = "<group>"; };
 		D819F7BE2B22F1A700287D60 /* FireStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreManager.swift; sourceTree = "<group>"; };
@@ -355,7 +352,7 @@
 		D82C0D5A2ABC0741009802D9 /* EditFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFormView.swift; sourceTree = "<group>"; };
 		D82F3EF72B280A2500A5E303 /* CreateProjectError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectError.swift; sourceTree = "<group>"; };
 		D82F3EFA2B280C1F00A5E303 /* AnyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyTransition.swift; sourceTree = "<group>"; };
-		D82F3EFC2B285EC700A5E303 /* AddDatatoFireStoreUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDatatoFireStoreUseCase.swift; sourceTree = "<group>"; };
+		D82F3EFC2B285EC700A5E303 /* AddProjectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectUseCase.swift; sourceTree = "<group>"; };
 		D83479AC2AA9D5B800E16739 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		D83605442AE17045003CDF80 /* RequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestView.swift; sourceTree = "<group>"; };
 		D83605462AE173B9003CDF80 /* MockRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRequest.swift; sourceTree = "<group>"; };
@@ -364,6 +361,7 @@
 		D8385A512AD51D860013D90F /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		D84142D22AC0162000E38C5B /* AddProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileView.swift; sourceTree = "<group>"; };
 		D84142D82AC0215800E38C5B /* ProfileSectionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSectionCard.swift; sourceTree = "<group>"; };
+		D842C9982B57EB3E00F18E3D /* IColab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IColab.entitlements; sourceTree = "<group>"; };
 		D85679622ADE346E00C50ABE /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		D85CEFBA2AC1E553004D4C75 /* NewFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFormView.swift; sourceTree = "<group>"; };
 		D85D1CA22B2192990074AB98 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -387,7 +385,6 @@
 		D88B632B2B2444370058C944 /* FireStoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreRepository.swift; sourceTree = "<group>"; };
 		D88B632D2B24447A0058C944 /* FireStoreRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreRepositoryProtocol.swift; sourceTree = "<group>"; };
 		D88B63302B2446190058C944 /* FetchCollectionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCollectionUseCase.swift; sourceTree = "<group>"; };
-		D88B63322B244B010058C944 /* SetFireStoreDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFireStoreDataUseCase.swift; sourceTree = "<group>"; };
 		D89586FD2AAF5E340064629B /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		D89586FF2AAF5E7E0064629B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		D89587022AAF5EDA0064629B /* ProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardView.swift; sourceTree = "<group>"; };
@@ -883,6 +880,7 @@
 		B7A2A5EE2A7602D7001F392F /* IColab */ = {
 			isa = PBXGroup;
 			children = (
+				D842C9982B57EB3E00F18E3D /* IColab.entitlements */,
 				D85D1CB72B219C880074AB98 /* Info.plist */,
 				D8A3AF232AA3269600AC06C9 /* Core */,
 				D87E1F8A2AA2EE6A009E3C23 /* Features */,
@@ -978,10 +976,8 @@
 			isa = PBXGroup;
 			children = (
 				D88B63302B2446190058C944 /* FetchCollectionUseCase.swift */,
-				D88B63322B244B010058C944 /* SetFireStoreDataUseCase.swift */,
 				D81709302B25B04B00DDF2F9 /* FetchDocumentFromIDUseCase.swift */,
-				D81709322B25E76300DDF2F9 /* UpdateCollectionWithIDUseCase.swift */,
-				D82F3EFC2B285EC700A5E303 /* AddDatatoFireStoreUseCase.swift */,
+				D82F3EFC2B285EC700A5E303 /* AddProjectUseCase.swift */,
 				D88125DA2B298122002A4E0B /* UpdateProjectUseCase.swift */,
 				D88125DC2B29BD9A002A4E0B /* AddAccountDetailUseCase.swift */,
 				D8A7D5542B402682008A5B4E /* FetchProjectsFromOwnerID.swift */,
@@ -1689,7 +1685,7 @@
 				D862DB592AE24FD90014F2FC /* RequestSheet.swift in Sources */,
 				6C96656E2B52784800E3B3E3 /* OwnerPaymentManagementView.swift in Sources */,
 				6C745EB22AC97F0400646574 /* MockChats.swift in Sources */,
-				D82F3EFD2B285EC700A5E303 /* AddDatatoFireStoreUseCase.swift in Sources */,
+				D82F3EFD2B285EC700A5E303 /* AddProjectUseCase.swift in Sources */,
 				D837EFD92AE52FDE002AD1C4 /* ProfileFormView.swift in Sources */,
 				6C33A21F2AD3EA2400CD4AE5 /* EditGoalView.swift in Sources */,
 				D8A3AF2A2AA3294700AC06C9 /* MockData.swift in Sources */,
@@ -1717,7 +1713,6 @@
 				D895870C2AB180060064629B /* AccountDetail.swift in Sources */,
 				D8C2BEA02AB89310003969D8 /* Notification.swift in Sources */,
 				6CFC72DF2ACD759F00930E74 /* ProjectContactView.swift in Sources */,
-				D81709332B25E76300DDF2F9 /* UpdateCollectionWithIDUseCase.swift in Sources */,
 				D89587002AAF5E7E0064629B /* ProfileView.swift in Sources */,
 				D8155B312B36B826000E6267 /* DatabaseConstant.swift in Sources */,
 				6C3B2D9D2AD159500049FE41 /* EditProjectViewModel.swift in Sources */,
@@ -1746,7 +1741,6 @@
 				B7965D8F2AD57CCC00D10505 /* CreateProjectViewModel.swift in Sources */,
 				D81709312B25B04B00DDF2F9 /* FetchDocumentFromIDUseCase.swift in Sources */,
 				6C3B2D952AD110640049FE41 /* ProjectMemberContactView.swift in Sources */,
-				D88B63332B244B010058C944 /* SetFireStoreDataUseCase.swift in Sources */,
 				6C74DB972AC02C1300FD5D3F /* GroupedContactView.swift in Sources */,
 				6C3189D82AC449D700A6C113 /* ProjectNavigationCardView.swift in Sources */,
 				D83605452AE17045003CDF80 /* RequestView.swift in Sources */,
@@ -1985,6 +1979,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = IColab/IColab.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IColab/Preview Content\"";
@@ -2015,6 +2010,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = IColab/IColab.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IColab/Preview Content\"";

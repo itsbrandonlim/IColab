@@ -10,26 +10,41 @@ import SwiftUI
 struct ContactListView: View {
     @EnvironmentObject var vm: ProjectOverviewViewModel
     var project: Project
+    @State var owner : AccountDetail?
+    @State var toggle : Bool = true
+    @State var isLoading : Bool = false
     
     @StateObject var homeViewModel = HomeViewModel()
-    @FocusState var isInputActive: Bool
-    
+        
     var body: some View {
         VStack {
-            HStack{
-                SearchBar(searchText: $homeViewModel.searchText){ search in
-                    homeViewModel.searchProject(searchTitle: search)
-                }
-                .focused($isInputActive)
+            if AccountManager.shared.account?.id != project.owner {
                 Button {
-                    homeViewModel.searchPressed.toggle()
+                    toggle.toggle()
                 } label: {
-                    Image(systemName: "line.3.horizontal.decrease.circle")
-                        .font(.title2)
-                        .foregroundColor(.primary)
+                    HStack {
+                        Text("Owner")
+                            .font(.headline)
+                        Spacer()
+                        Image(systemName: toggle ? "chevron.down" : "chevron.up")
+                    }
+                }
+                .onAppear{
+                    self.fetchOwner()
+                }
+                .buttonStyle(.plain)
+                .padding(.horizontal)
+                Divider()
+                    .background(.white)
+                if toggle {
+                    if isLoading {
+                        LoadingView()
+                    } else{
+                        ProjectMemberContactCardView(member: owner ?? AccountDetail(name: "", desc: "", location: "", bankAccount: "", phoneNumber: ""), role: "Owner")
+                            
+                    }
                 }
             }
-            .padding(.horizontal, 10)
             ScrollView {
                 ProjectMemberContactView(title: "Members", project: project)
             }
@@ -39,6 +54,19 @@ struct ContactListView: View {
         }
         .padding()
         
+    }
+    
+    func fetchOwner(){
+        self.isLoading = true
+        let fetchOwner = FetchDocumentFromIDUseCase()
+        fetchOwner.call(collectionName: "accountDetails", id: project.owner ?? "") { doc in
+            if let document = doc.data() {
+                let accountDetail = AccountDetail.decode(from: document)
+                accountDetail.id = doc.documentID
+                self.owner = accountDetail
+                self.isLoading = false
+            }
+        }
     }
 }
 

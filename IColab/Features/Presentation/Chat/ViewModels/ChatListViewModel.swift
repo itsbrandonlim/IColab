@@ -53,7 +53,7 @@ class ChatListViewModel: ObservableObject {
         }
     }
     
-    func getProjects() -> [Project] {
+    private func getProjects() -> [Project] {
         let projects : [Project] = account.accountDetail.projectsOwned + account.accountDetail.projectsJoined
         return projects
     }

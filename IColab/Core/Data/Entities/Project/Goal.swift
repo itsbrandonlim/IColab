@@ -51,5 +51,9 @@ struct Goal: Identifiable, Equatable{
         
         return Goal(name: name, nominal: nominal, desc: desc, endDate: endDate, isAchieved: isAchieved, tasks: tasks)
     }
+    
+    func getProgress() -> Double{
+        return Double(tasks.filter({$0.status == .completed}).count) / Double(tasks.count)
+    }
 
 }

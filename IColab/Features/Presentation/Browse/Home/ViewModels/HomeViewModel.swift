@@ -10,6 +10,7 @@ import FirebaseFirestore
 
 class HomeViewModel : ObservableObject{
     @Published var projects : [Project] = []
+    @Published var selectedProjects : [Project] = []
     @Published var searchText : String = ""
     @Published var searchPressed : Bool = false
     @Published var filters : [String] = []
@@ -24,9 +25,10 @@ class HomeViewModel : ObservableObject{
                 allProjects.append(project)
             }
             let filteredProjects = allProjects.filter { project in
-                project.owner != AccountManager.shared.account?.id || project.members.contains(where: {$0.workerID != AccountManager.shared.account?.id})
+                project.owner != AccountManager.shared.account?.id
             }
             self.projects = filteredProjects
+            self.selectedProjects = self.projects
             self.objectWillChange.send()
             completion()
         }
@@ -45,6 +47,6 @@ class HomeViewModel : ObservableObject{
     }
     
     public func searchProject(searchTitle: String) {
-        self.projects = getSearchProjects(searchTitle: searchTitle)
+        self.selectedProjects = getSearchProjects(searchTitle: searchTitle)
     }
 }

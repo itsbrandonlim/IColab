@@ -10,6 +10,7 @@ import Foundation
 class ProjectOverviewViewModel: ObservableObject {
     @Published var project: Project = Mock.projects[0]
     @Published var requestAccount : AccountDetail!
+    @Published var selectedRole : Role
     var fetchAccount = FetchDocumentFromIDUseCase()
     var updateProject = UpdateProjectUseCase()
     var updateAccountDetail = AddAccountDetailUseCase()
@@ -17,45 +18,36 @@ class ProjectOverviewViewModel: ObservableObject {
     
     init(project : Project) {
         self.project = project
+        selectedRole = project.milestones.first!.role
     }
     
-    func getProject(uid: String) -> Project {
-        let project = Mock.projects.first(where: {$0.id == uid})
-        return project!
-    }
-    
-    func editProjectDetail(title: String, summary: String, tags: [String]) {
-        self.project.setOverview(title: title, tags: tags, desc: summary)
+    func editProjectDetail(title: String, summary: String, tags: [String], startDate: Date, endDate: Date) {
+        self.project.setOverview(title: title, tags: tags, desc: summary, startDate: startDate, endDate: endDate)
+        saveProjecttoFireStore()
     }
     
     func getCurrentGoal() -> Goal {
-        let goals = self.project.milestones[0].goals
-        
-        for goal in goals {
-            if !goal.isAchieved {
-                return goal
-            }
+        guard let selectedRoleGoals = self.project.milestones.first(where: {$0.role == selectedRole})?.goals else {
+            return self.project.milestones[0].goals[0]
         }
         
-        return goals[0]
+        return selectedRoleGoals.first(where: {!$0.isAchieved}) ?? selectedRoleGoals[0]
     }
     
-    func existingRoles() -> [Role] {
+    func getExistingRoles() -> [Role] {
         var roles: [Role] = []
-        for role in Role.allCases {
-            if memberCount(role: role) != 0 {
-                roles.append(role)
-            }
+        for milestone in project.milestones {
+            roles.append(milestone.role)
         }
         return roles
     }
     
-    func memberCount(role: Role) -> Int {
+    func getMemberCount(role: Role) -> Int {
         var count: Int = 0
         
         for member in self.project.members {
             if member.role == role {
-                count += 1;
+                count += 1
             }
         }
         
@@ -63,7 +55,7 @@ class ProjectOverviewViewModel: ObservableObject {
     }
     
     func fetchOwner(ownerID: String){
-        fetchAccount.call(collectionName: "accountDetails", id: ownerID) { doc in
+        fetchAccount.call(collectionName: accountDetailConstants.collectionName, id: ownerID) { doc in
             if let document = doc.data() {
                 self.requestAccount = AccountDetail.decode(from: document)
             }
@@ -117,12 +109,12 @@ class ProjectOverviewViewModel: ObservableObject {
         self.objectWillChange.send()
     }
     
-    func extend(date : Date){
-        let dateRange = Calendar.current.dateComponents([.day], from: project.startDate, to: project.endDate)
-        project.startDate = date
-        project.endDate = Calendar.current.date(byAdding: dateRange, to: date)!
+    func extendProject(startDate : Date, endDate : Date){
+        project.startDate = startDate
+        project.endDate = endDate
         
         project.projectState = .extended
+        saveProjecttoFireStore()
         self.objectWillChange.send()
     }
     
