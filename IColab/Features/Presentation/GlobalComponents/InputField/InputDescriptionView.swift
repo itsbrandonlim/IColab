@@ -10,6 +10,7 @@ import SwiftUI
 struct InputDescriptionView: View {
     var title: String = "Input Description"
     @Binding var text: String
+    @FocusState private var isFocused : Bool
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -20,21 +21,29 @@ struct InputDescriptionView: View {
                     .autocorrectionDisabled()
                     .frame(height: 120)
                     .foregroundColor(.gray.opacity(0.75))
+                    .focused($isFocused)
                 Spacer()
                 Button {
                     text = ""
                 } label: {
                     Image(systemName: "x.circle")
                 }
-
-                
             }
             Divider()
                 .foregroundColor(.white)
             HStack {
                 Spacer()
-                Text("5/150")
+                Text("\(text.count)/150")
                     .font(.caption2)
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .keyboard) {
+                if isFocused {
+                    Button("Done") {
+                        isFocused = false
+                    }
+                }
             }
         }
     }

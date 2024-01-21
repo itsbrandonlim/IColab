@@ -32,6 +32,19 @@ class AccountManager : ObservableObject {
         }
     }
     
+    public func getAccount(id: String, completion: @escaping ()-> Void) {
+        let fetchDocument = FetchDocumentFromIDUseCase()
+        fetchDocument.call(collectionName: detailConstants.collectionName, id: id) { doc in
+            if let document = doc.data(){
+                let accountDetail = AccountDetail.decode(from: document)
+                self.account = Account(id: id, email: "", password: "", accountDetail: accountDetail)
+                self.fetchOwnedProjects(ownerID: doc.documentID)
+                self.fetchJoinedProjects(projectIDs: document[self.detailConstants.projectsJoined] as? [String] ?? [])
+                completion()
+            }
+        }
+    }
+    
     private func fetchOwnedProjects(ownerID: String){
         let fetchOwnedProject = FetchProjectsFromOwnerID()
         

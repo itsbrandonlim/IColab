@@ -48,6 +48,7 @@ struct RegisterView: View {
             Spacer()
             Spacer()
         }
+        .ignoresSafeArea(.keyboard)
         .padding()
         .navigationTitle("Register")
         .alert(isPresented: $rvm.showError, error: rvm.error) { error in

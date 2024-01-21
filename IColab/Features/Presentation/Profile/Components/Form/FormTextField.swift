@@ -11,6 +11,7 @@ struct FormTextField: View {
     var title : String
     @Binding var textField : String
     @State var letterCount = 0
+    @FocusState var isFocused : Bool
     var body: some View {
         VStack(alignment: .leading){
             Text(title)
@@ -20,6 +21,7 @@ struct FormTextField: View {
             HStack{
                 TextField(title, text: $textField, axis: .vertical)
                     .autocorrectionDisabled()
+                    .focused($isFocused)
                     .submitLabel(.continue)
                 Button(action: { textField = "" }, label: {
                     Image(systemName: "xmark.circle.fill")
@@ -39,6 +41,15 @@ struct FormTextField: View {
             .onChange(of: textField.count, perform: { value in
                 letterCount = value
             })
+        }
+        .toolbar {
+            ToolbarItem(placement: .keyboard) {
+                if isFocused {
+                    Button("Done") {
+                        isFocused = false
+                    }
+                }
+            }
         }
     }
 }

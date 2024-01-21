@@ -25,6 +25,7 @@ struct AddGoalView: View {
                 self.presentationMode.wrappedValue.dismiss()
             }
         }
+        .ignoresSafeArea(.keyboard)
         .padding(.horizontal)
         .environmentObject(vm)
         .navigationTitle("Add Goal")
