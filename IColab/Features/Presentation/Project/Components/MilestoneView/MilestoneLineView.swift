@@ -80,7 +80,7 @@ struct MilestoneLineView: View {
             }
         }
         .navigationDestination(isPresented: $vm.nextView) {
-            AddGoalView(vm: vm, role: role)
+            AddGoalView(vm: vm, isEdit: false, role: role)
         }
     }
 }

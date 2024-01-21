@@ -57,16 +57,18 @@ class EditProjectViewModel: ObservableObject {
         return Double(goals.map({$0.nominal}).reduce(0, +) / goals.count)
     }
     
-    func addGoal(role: Role) {
+    func addGoal(role: Role, isEdit: Bool) {
         let index = self.milestones.firstIndex(where: {$0.role == role})
         
         project.milestones[index!].goals.append(Goal(name: title, nominal: nominal, desc: desc, endDate: dueDate, isAchieved: false, tasks: tasks))
         
-        updateProjectToFirestore()
+        if isEdit {
+            updateProjectToFirestore()
+        }
         self.objectWillChange.send()
     }
     
-    func editGoal(role: Role, goal: Goal) {
+    func editGoal(role: Role, goal: Goal, isEdit : Bool) {
         let index = self.milestones.firstIndex(where: {$0.role == role})
         let goalIndex = self.milestones[index!].goals.firstIndex(where: {$0.id == goal.id})
         
@@ -74,19 +76,22 @@ class EditProjectViewModel: ObservableObject {
         
         project.milestones[index!].goals[goalIndex!] = Goal(name: title, nominal: nominal, desc: desc, endDate: dueDate, isAchieved: goal.isAchieved, tasks: tasks)
         
-        updateProjectToFirestore()
+        if isEdit {
+            updateProjectToFirestore()
+        }
         self.milestones = self.project.milestones
         
         self.objectWillChange.send()
     }
     
-    func deleteGoal(role: Role, goal: Goal) {
+    func deleteGoal(role: Role, goal: Goal, isEdit : Bool) {
         let index = self.milestones.firstIndex(where: {$0.role == role})
         let goalIndex = self.milestones[index!].goals.firstIndex(where: {$0.id == goal.id})!
         
         project.milestones[index!].goals.remove(at: goalIndex)
-        
-        updateProjectToFirestore()
+        if isEdit {
+            updateProjectToFirestore()
+        }
         self.milestones = self.project.milestones
         self.objectWillChange.send()
     }

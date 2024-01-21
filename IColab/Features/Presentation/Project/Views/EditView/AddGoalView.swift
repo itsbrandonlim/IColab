@@ -10,6 +10,7 @@ import SwiftUI
 struct AddGoalView: View {
     @ObservedObject var vm: EditProjectViewModel
     @Environment(\.presentationMode) var presentationMode
+    @State var isEdit : Bool
     
     var role: Role
     
@@ -21,7 +22,7 @@ struct AddGoalView: View {
             InputDateView(date: $vm.dueDate)
             InputTaskView()
             ButtonComponent(title: "Add Goal", width: 320) {
-                vm.addGoal(role: role)
+                vm.addGoal(role: role, isEdit: isEdit)
                 self.presentationMode.wrappedValue.dismiss()
             }
         }
