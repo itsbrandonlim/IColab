@@ -60,7 +60,7 @@ struct ProjectNavigationCardView: View {
                 )
             }
             NavigationLink {
-                CurrentTaskView(vm: CurrentTaskViewModel(project: vm.project, uid: vm.getCurrentGoal().id))
+                OwnerPaymentManagementView()
             } label: {
                 ProjectButtonView(
                     icon: "dollarsign.circle",

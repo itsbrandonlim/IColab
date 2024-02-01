@@ -80,4 +80,27 @@ struct FireStoreDataSource : FireStoreDataSourceProtocol {
         let docReference = db.collection(collectionName).document(payment.id)
         docReference.setData(payment.toDict())
     }
+    
+    func deletePayment(collectionName: String, paymentId: String, completion: @escaping (QuerySnapshot?, Error?) -> Void) {
+        let query = db.collection(collectionName).whereField(paymentConstants.id, isEqualTo: paymentId)
+        query.getDocuments { querySnapShot, error in
+            if let error = error {
+                completion(nil, error)
+            }
+            else if let qss = querySnapShot {
+                completion(qss, nil)
+            }
+        }
+    }
+    
+    func fetchPaymentsFromGoalId(goalId: String, completion: @escaping (Result<QuerySnapshot, Error>) -> Void){
+        let query = db.collection(paymentConstants.collectionName).whereField(paymentConstants.goalid, isEqualTo: goalId)
+        query.getDocuments { qss, error in
+            if let error = error {
+                completion(.failure(error))
+            }else if let qss = qss {
+                completion(.success(qss))
+            }
+        }
+    }
 }

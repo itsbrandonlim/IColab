@@ -51,5 +51,5 @@ struct PaymentDetailAdminView: View {
 }
 
 #Preview {
-    PaymentDetailAdminView(payment: Payment(amount: 1000, owner: "Owner", worker: "Worker", project: "Project"))
+    PaymentDetailAdminView(payment: Payment(amount: 1000, owner: "Owner", worker: "Worker", project: "Project", goal: "Some goal idk"))
 }

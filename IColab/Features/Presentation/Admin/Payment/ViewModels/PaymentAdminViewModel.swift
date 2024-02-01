@@ -29,7 +29,7 @@ class PaymentAdminViewModel: ObservableObject {
     
     public func createPaymentButton() {
         do {
-           try self.setPayment.call(payment: Payment(amount: 1234, owner: "Test Owner", worker: "Test Worker", project: "Test Project"))
+           try self.setPayment.call(payment: Payment(amount: 1234, owner: "Test Owner", worker: "Test Worker", project: "Test Project", goal: "Test goal"))
             self.objectWillChange.send()
         }
         catch {

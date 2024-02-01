@@ -32,7 +32,7 @@ class CreateProjectViewModel: ObservableObject {
         if validateProjectMilestones() {
             project.members = []
             self.account.accountDetail.projectsOwned.append(self.project)
-            do{
+            do {
                 try addProject.call(collectionName: projectConstants.collectionName, element: project)
             } catch let error {
                 print("Error adding data to firestore : \(error.localizedDescription)")

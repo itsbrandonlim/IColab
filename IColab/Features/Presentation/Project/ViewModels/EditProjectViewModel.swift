@@ -23,7 +23,7 @@ class EditProjectViewModel: ObservableObject {
     @Published var tasks: [Task] = []
     @Published var nextView : Bool = false
     let updateProjectUseCase = UpdateProjectUseCase()
-    
+    var setPayment = SetPaymentUseCase()
     
     func initializeGoal(goal : Goal) {
         self.title = goal.name
@@ -57,10 +57,23 @@ class EditProjectViewModel: ObservableObject {
         return Double(goals.map({$0.nominal}).reduce(0, +) / goals.count)
     }
     
+    public func setPayment(amount: Double, owner: String, worker: String, project: String, goal: String) {
+        do {
+            try self.setPayment.call(payment: Payment(amount: amount, owner: "Test Owner", worker: "Test Worker", project: project, goal: goal))
+            self.objectWillChange.send()
+        }
+        catch {
+            print("Failed creating Payment")
+        }
+    }
+    
     func addGoal(role: Role) {
         let index = self.milestones.firstIndex(where: {$0.role == role})
         
         project.milestones[index!].goals.append(Goal(name: title, nominal: nominal, desc: desc, endDate: dueDate, isAchieved: false, tasks: tasks))
+        
+        var goalIndex = project.milestones[index!].goals.endIndex-1
+        self.setPayment(amount: Double(nominal), owner: project.owner ?? "Placeholder Owner", worker: "Placeholder Worker", project: project.id, goal: project.milestones[index!].goals[goalIndex].id)
         
         updateProjectToFirestore()
         self.objectWillChange.send()
@@ -73,6 +86,8 @@ class EditProjectViewModel: ObservableObject {
         let goal = project.milestones[index!].goals[goalIndex!]
         
         project.milestones[index!].goals[goalIndex!] = Goal(name: title, nominal: nominal, desc: desc, endDate: dueDate, isAchieved: goal.isAchieved, tasks: tasks)
+        
+        self.setPayment(amount: Double(nominal), owner: project.owner ?? "Placeholder Owner", worker: "Placeholder Worker", project: project.id, goal: project.milestones[index!].goals[goalIndex ?? 0].id)
         
         updateProjectToFirestore()
         self.milestones = self.project.milestones

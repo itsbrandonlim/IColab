@@ -13,14 +13,16 @@ class Payment: Identifiable {
     var owner: String
     var worker: String
     var project: String
+    var goal: String
     var isValidated: Bool
     
-    init(id: String = UUID().uuidString, amount: Double, owner: String, worker: String, project: String, isValidated: Bool = false) {
+    init(id: String = UUID().uuidString, amount: Double, owner: String, worker: String, project: String, goal: String, isValidated: Bool = false) {
         self.id = id
         self.amount = amount
         self.owner = owner
         self.worker = worker
         self.project = project
+        self.goal = goal
         self.isValidated = isValidated
     }
     
@@ -33,6 +35,7 @@ class Payment: Identifiable {
             paymentConstants.ownerId : self.owner,
             paymentConstants.projectId : self.project,
             paymentConstants.workerId : self.worker,
+            paymentConstants.goalid : self.goal,
             paymentConstants.isValidated : self.isValidated
             
         ]
@@ -47,9 +50,10 @@ class Payment: Identifiable {
         let ownerId = data[paymentConstants.ownerId] as! String
         let projectId = data[paymentConstants.projectId] as! String
         let workerId = data[paymentConstants.workerId] as! String
+        let goalId = data[paymentConstants.goalid] as! String
         let isValidated = data[paymentConstants.isValidated] as! Bool
         
-        return Payment(id: id, amount: amount, owner: ownerId, worker: workerId, project: projectId, isValidated: isValidated)
+        return Payment(id: id, amount: amount, owner: ownerId, worker: workerId, project: projectId, goal: goalId, isValidated: isValidated)
     }
     
     func validate() {

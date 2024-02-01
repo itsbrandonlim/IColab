@@ -10,6 +10,7 @@ import FirebaseFirestore
 
 struct UserData {
     var username, email, phone, region : String
+    var isAdmin: Bool = false
 }
 
 class UserDataManager {
@@ -20,8 +21,14 @@ class UserDataManager {
     
     let db = Firestore.firestore()
     
-    func addUser(username: String = "", email: String = "", phone: String = "", region: String = "") {
-        db.collection("users").addDocument(data: [username: username, email: email, phone: phone, region: region])
+    func addUser(username: String = "", email: String = "", phone: String = "", region: String = "", isAdmin: Bool = false) {
+        db.collection("users").addDocument(data: [
+            "username" : username,
+            "email" : email,
+            "phone" : phone,
+            "region" : region,
+            "isAdmin" : isAdmin
+        ])
     }
     
     func getCollection() -> [UserData] {

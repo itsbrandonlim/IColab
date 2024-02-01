@@ -50,6 +50,7 @@ struct FireStoreConstant {
         let ownerId = "ownerid"
         let workerId = "workerid"
         let projectId = "projectid"
+        let goalid = "goalid"
     }
 }
 

@@ -24,14 +24,19 @@ struct OwnerPaymentManagementView: View {
             .pickerStyle(.segmented)
             .padding(.vertical)
             
-            ScrollView {
-                ForEach(0..<7) { _ in
-                    PaymentStatusCardView(status: PaymentStatusEnum.allCases.randomElement()!)
+            VStack {
+                ScrollView {
+                    ForEach(0..<7) { _ in
+                        PaymentStatusCardView(status: PaymentStatusEnum.allCases.randomElement()!)
+                    }
                 }
             }
+            .padding()
             
             Spacer()
-        }.navigationTitle("Payment Management").navigationBarTitleDisplayMode(.inline)
+        }
+        
+        .navigationTitle("Payment Management").navigationBarTitleDisplayMode(.inline)
     }
 }
 

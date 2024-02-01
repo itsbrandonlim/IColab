@@ -7,6 +7,6 @@
 
 import Foundation
 
-class OwnerPaymentViewModels: ObservableObject {
+class OwnerPaymentManagementViewModels: ObservableObject {
     
 }

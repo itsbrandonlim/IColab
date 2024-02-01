@@ -73,6 +73,15 @@ class CurrentTaskViewModel: ObservableObject {
         self.objectWillChange.send()
     }
     
+    func checkIfGoalFinished() {
+        let milestoneIndex = project.milestones.firstIndex(where: {$0.goals.contains(goal)}) ?? 0
+        let goalIndex = project.milestones[milestoneIndex].goals.firstIndex(of: goal) ?? 0
+        
+        if tasks.count == tasks.map({$0.key.status == .completed}).count {
+            print("All tasks completed")
+        }
+    }
+    
     func validateOwner() -> Bool {
         AccountManager.shared.account?.id == project.owner
     }

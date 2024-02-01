@@ -10,6 +10,7 @@
 		6C129E912AC2D26800F7036D /* EditProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C129E902AC2D26800F7036D /* EditProjectView.swift */; };
 		6C129E932AC2D9C900F7036D /* ProjectOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C129E922AC2D9C900F7036D /* ProjectOverviewViewModel.swift */; };
 		6C129E952AC2E25100F7036D /* EditTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C129E942AC2E25100F7036D /* EditTag.swift */; };
+		6C2384B42B5F9D7600FE7C92 /* OwnerPaymentManagementViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C2384B32B5F9D7600FE7C92 /* OwnerPaymentManagementViewModels.swift */; };
 		6C3189D62AC4490100A6C113 /* ContactListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3189D52AC4490100A6C113 /* ContactListViewModel.swift */; };
 		6C3189D82AC449D700A6C113 /* ProjectNavigationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3189D72AC449D700A6C113 /* ProjectNavigationCardView.swift */; };
 		6C3189E12AC55F9100A6C113 /* MilestoneLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3189E02AC55F9100A6C113 /* MilestoneLineView.swift */; };
@@ -229,6 +230,7 @@
 		6C129E902AC2D26800F7036D /* EditProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectView.swift; sourceTree = "<group>"; };
 		6C129E922AC2D9C900F7036D /* ProjectOverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectOverviewViewModel.swift; sourceTree = "<group>"; };
 		6C129E942AC2E25100F7036D /* EditTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTag.swift; sourceTree = "<group>"; };
+		6C2384B32B5F9D7600FE7C92 /* OwnerPaymentManagementViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerPaymentManagementViewModels.swift; sourceTree = "<group>"; };
 		6C3189D52AC4490100A6C113 /* ContactListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewModel.swift; sourceTree = "<group>"; };
 		6C3189D72AC449D700A6C113 /* ProjectNavigationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectNavigationCardView.swift; sourceTree = "<group>"; };
 		6C3189E02AC55F9100A6C113 /* MilestoneLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneLineView.swift; sourceTree = "<group>"; };
@@ -456,6 +458,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C2384B22B5F9D6A00FE7C92 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				6C2384B32B5F9D7600FE7C92 /* OwnerPaymentManagementViewModels.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		6C3189D92AC44B1D00A6C113 /* ProjectOverviewView */ = {
 			isa = PBXGroup;
 			children = (
@@ -783,6 +793,7 @@
 		6C96656B2B52781D00E3B3E3 /* Owner */ = {
 			isa = PBXGroup;
 			children = (
+				6C2384B22B5F9D6A00FE7C92 /* ViewModels */,
 				6C96656F2B527CBD00E3B3E3 /* Components */,
 				6C96656C2B52782700E3B3E3 /* Views */,
 			);
@@ -1783,6 +1794,7 @@
 				6C9665692B52530300E3B3E3 /* PaymentAdminView.swift in Sources */,
 				D87E1F902AA2F0F9009E3C23 /* TabBarView.swift in Sources */,
 				D89587142AB8192D0064629B /* Background.swift in Sources */,
+				6C2384B42B5F9D7600FE7C92 /* OwnerPaymentManagementViewModels.swift in Sources */,
 				6C745EBC2AC9818A00646574 /* MockTasks.swift in Sources */,
 				B7EE98C42ACA975400C9B428 /* RegisterView.swift in Sources */,
 				D8155B352B36C2CD000E6267 /* AddChatUseCase.swift in Sources */,

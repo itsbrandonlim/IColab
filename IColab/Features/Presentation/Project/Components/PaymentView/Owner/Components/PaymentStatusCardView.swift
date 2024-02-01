@@ -37,6 +37,7 @@ struct PaymentStatusCardView: View {
         }
         .padding()
         .background(.ultraThinMaterial)
+        .cornerRadius(12)
     }
 }
 

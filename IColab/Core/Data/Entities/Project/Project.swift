@@ -23,6 +23,7 @@ class Project : Identifiable, Searchable{
     var milestones : [Milestone]
     var requests : [Request] = []
     var projectState : ProjectState
+    var payments : [String] = []
 
     init(id: String = UUID().uuidString, title: String, owner: String? = nil, members: [Member] = [], role: String, requirements: [String] = [], tags: [String] = [], startDate: Date, endDate: Date, desc: String, milestones: [Milestone], requests : [Request] = [], projectState: ProjectState = .notStarted) {
         self.id = id
