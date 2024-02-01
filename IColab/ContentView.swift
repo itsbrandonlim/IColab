@@ -52,6 +52,7 @@ struct ContentView: View {
         .accentColor(.primary)
         .onAppear {
             self.isLoading = true
+            
             if AuthenticationManager.shared.getLoggedInUser() != nil {
                 AccountManager.shared.getAccount {
                     withAnimation {
@@ -65,6 +66,13 @@ struct ContentView: View {
                     self.showSignIn = true
                 }
             }
+//            AccountManager.shared.getAccount(id: "ubDASCnrj2SyV419SwpJ39h7xby1") {
+//                withAnimation {
+//                    self.isLoading = false
+//                }
+//            }
+//            self.showSignIn = false
+            
         }
         .fullScreenCover(isPresented: $showSignIn) {
             NavigationStack{

@@ -73,6 +73,14 @@ class CreateProjectViewModel: ObservableObject {
             showError(error: .milestoneMissing)
             return false
         }
+        let milestonesThatHasNoGoal = project.milestones.filter({$0.goals.isEmpty})
+        if !milestonesThatHasNoGoal.isEmpty {
+            showError(error: .goalsMissing(milestonesThatHasNoGoal.first!))
+        }
+        let goalsThatHasNoTask = project.milestones.flatMap({$0.goals}).filter({$0.tasks.isEmpty})
+        if !goalsThatHasNoTask.isEmpty {
+            showError(error: .taskMissing(goalsThatHasNoTask.first!))
+        }
         return true
     }
 }

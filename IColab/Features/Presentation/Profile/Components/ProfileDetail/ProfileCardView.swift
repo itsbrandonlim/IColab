@@ -17,7 +17,7 @@ struct ProfileCardView: View {
             HStack(spacing: 20){
                 if pvm.loggedInAccountIsViewed {
                     NavigationLink {
-                        ProfileFormView()
+                        ProfileFormView(name: account.accountDetail.name, bankAccount: account.accountDetail.bankAccount, region: account.accountDetail.location, desc: account.accountDetail.desc)
                             .environmentObject(pvm)
                     } label: {
                         ZStack{

@@ -53,13 +53,14 @@ struct HomeView: View {
                 LoadingView()
                 Spacer()
                 Spacer()
-                    .onAppear(perform: {
-                        self.homeViewModel.getProjects {
-                            self.isLoading = false
-                        }
-                    })
             }
         }
+        .onAppear(perform: {
+            self.isLoading = true
+            self.homeViewModel.getProjects {
+                self.isLoading = false
+            }
+        })
         .padding(.horizontal, 20)
         .navigationTitle("Browse")
         .toolbar {

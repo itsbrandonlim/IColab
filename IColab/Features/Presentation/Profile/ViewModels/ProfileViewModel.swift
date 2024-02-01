@@ -111,9 +111,10 @@ class ProfileViewModel : ObservableObject {
         self.saveToFireStore()
     }
     
-    public func editProfile(name: String, role: String, region: String, desc: String){
+    public func editProfile(name: String, bankAccount: String, region: String, desc: String){
         account?.accountDetail.name = name
         account?.accountDetail.location = region
+        account?.accountDetail.bankAccount = bankAccount
         account?.accountDetail.desc = desc
         self.saveToFireStore()
         objectWillChange.send()

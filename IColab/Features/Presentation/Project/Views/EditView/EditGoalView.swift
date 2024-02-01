@@ -28,7 +28,7 @@ struct EditGoalView: View {
             InputDateView(date: $vm.dueDate)
             InputTaskView()
             ButtonComponent(title: "Edit Goal", width: 320) {
-                vm.editGoal(role: role, goal: goal)
+                vm.editGoal(role: role, goal: goal, isEdit: true)
                 
                 vm.objectWillChange.send()
                 self.presentationMode.wrappedValue.dismiss()
@@ -39,7 +39,7 @@ struct EditGoalView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    vm.deleteGoal(role: role, goal: goal)
+                    vm.deleteGoal(role: role, goal: goal, isEdit: true)
                     
                     vm.objectWillChange.send()
                     self.presentationMode.wrappedValue.dismiss()

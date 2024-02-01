@@ -11,6 +11,8 @@ enum CreateProjectError : Error {
     case titleMissing
     case summaryMissing
     case milestoneMissing
+    case goalsMissing(Milestone)
+    case taskMissing(Goal)
     case firestoreError(Error)
 }
 
@@ -25,7 +27,12 @@ extension CreateProjectError : LocalizedError {
             return NSLocalizedString("No role assigned yet", comment: "")
         case .firestoreError(let error):
             return NSLocalizedString(error.localizedDescription, comment: "")
+        case .goalsMissing(let milestone):
+            return NSLocalizedString("Goal missing in \(milestone.role.rawValue) role", comment: "")
+        case .taskMissing(let goal):
+            return NSLocalizedString("Task missing in \(goal.name)", comment: "")
         }
+        
     }
     
     public var recoverySuggestion: String? {
@@ -38,6 +45,10 @@ extension CreateProjectError : LocalizedError {
             return NSLocalizedString("Assign roles in the project", comment: "")
         case .firestoreError(let error):
             return NSLocalizedString(error.localizedDescription, comment: "")
+        case .goalsMissing(let milestone):
+            return NSLocalizedString("Please fill in the goals for \(milestone.role.rawValue) role", comment: "")
+        case .taskMissing(let goal):
+            return NSLocalizedString("Please fill in tasks for \(goal.name)", comment: "")
         }
     }
 }

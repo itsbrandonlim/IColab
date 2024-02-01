@@ -42,7 +42,7 @@ struct MilestonesView: View {
                 if vm.project.owner == AccountManager.shared.account?.id{
                     ToolbarItem(placement: .topBarTrailing) {
                         NavigationLink {
-                            AddGoalView(vm: vm, role: picker)
+                            AddGoalView(vm: vm, isEdit: true, role: picker)
                         } label: {
                             Image(systemName: "plus.circle.fill")
                                 .font(.title)

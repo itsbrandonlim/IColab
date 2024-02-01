@@ -72,14 +72,13 @@ class EditProjectViewModel: ObservableObject {
         
         project.milestones[index!].goals.append(Goal(name: title, nominal: nominal, desc: desc, endDate: dueDate, isAchieved: false, tasks: tasks))
         
-        var goalIndex = project.milestones[index!].goals.endIndex-1
-        self.setPayment(amount: Double(nominal), owner: project.owner ?? "Placeholder Owner", worker: "Placeholder Worker", project: project.id, goal: project.milestones[index!].goals[goalIndex].id)
-        
-        updateProjectToFirestore()
+        if isEdit {
+            updateProjectToFirestore()
+        }
         self.objectWillChange.send()
     }
     
-    func editGoal(role: Role, goal: Goal) {
+    func editGoal(role: Role, goal: Goal, isEdit : Bool) {
         let index = self.milestones.firstIndex(where: {$0.role == role})
         let goalIndex = self.milestones[index!].goals.firstIndex(where: {$0.id == goal.id})
         
@@ -87,21 +86,22 @@ class EditProjectViewModel: ObservableObject {
         
         project.milestones[index!].goals[goalIndex!] = Goal(name: title, nominal: nominal, desc: desc, endDate: dueDate, isAchieved: goal.isAchieved, tasks: tasks)
         
-        self.setPayment(amount: Double(nominal), owner: project.owner ?? "Placeholder Owner", worker: "Placeholder Worker", project: project.id, goal: project.milestones[index!].goals[goalIndex ?? 0].id)
-        
-        updateProjectToFirestore()
+        if isEdit {
+            updateProjectToFirestore()
+        }
         self.milestones = self.project.milestones
         
         self.objectWillChange.send()
     }
     
-    func deleteGoal(role: Role, goal: Goal) {
+    func deleteGoal(role: Role, goal: Goal, isEdit : Bool) {
         let index = self.milestones.firstIndex(where: {$0.role == role})
         let goalIndex = self.milestones[index!].goals.firstIndex(where: {$0.id == goal.id})!
         
         project.milestones[index!].goals.remove(at: goalIndex)
-        
-        updateProjectToFirestore()
+        if isEdit {
+            updateProjectToFirestore()
+        }
         self.milestones = self.project.milestones
         self.objectWillChange.send()
     }
