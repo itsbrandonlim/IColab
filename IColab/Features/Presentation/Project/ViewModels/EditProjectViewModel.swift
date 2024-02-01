@@ -67,7 +67,7 @@ class EditProjectViewModel: ObservableObject {
         }
     }
     
-    func addGoal(role: Role) {
+    func addGoal(role: Role, isEdit: Bool) {
         let index = self.milestones.firstIndex(where: {$0.role == role})
         
         project.milestones[index!].goals.append(Goal(name: title, nominal: nominal, desc: desc, endDate: dueDate, isAchieved: false, tasks: tasks))
