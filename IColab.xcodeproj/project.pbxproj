@@ -90,6 +90,7 @@
 		6CC7F2AA2AC048A500AF0A12 /* InputTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC7F2A92AC048A500AF0A12 /* InputTaskView.swift */; };
 		6CCD80262ADCE34B0050D1CD /* InputRoleToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCD80252ADCE34B0050D1CD /* InputRoleToggleView.swift */; };
 		6CCF86002AC167260090D1B3 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCF85FF2AC167260090D1B3 /* Task.swift */; };
+		6CEDE83D2B6CE9350054BBB4 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEDE83C2B6CE9350054BBB4 /* UserDataManager.swift */; };
 		6CFC72DB2ACD607700930E74 /* MockMembers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFC72DA2ACD607700930E74 /* MockMembers.swift */; };
 		6CFC72DD2ACD6FEA00930E74 /* CreateChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFC72DC2ACD6FEA00930E74 /* CreateChatView.swift */; };
 		6CFC72DF2ACD759F00930E74 /* ProjectContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFC72DE2ACD759F00930E74 /* ProjectContactView.swift */; };
@@ -309,6 +310,7 @@
 		6CC7F2A92AC048A500AF0A12 /* InputTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTaskView.swift; sourceTree = "<group>"; };
 		6CCD80252ADCE34B0050D1CD /* InputRoleToggleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputRoleToggleView.swift; sourceTree = "<group>"; };
 		6CCF85FF2AC167260090D1B3 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		6CEDE83C2B6CE9350054BBB4 /* UserDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		6CFC72DA2ACD607700930E74 /* MockMembers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMembers.swift; sourceTree = "<group>"; };
 		6CFC72DC2ACD6FEA00930E74 /* CreateChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChatView.swift; sourceTree = "<group>"; };
 		6CFC72DE2ACD759F00930E74 /* ProjectContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectContactView.swift; sourceTree = "<group>"; };
@@ -822,6 +824,22 @@
 			path = InputMemberView;
 			sourceTree = "<group>";
 		};
+		6CEDE83A2B6CE91A0054BBB4 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				6C87F4572B501F4C00ED23C4 /* UserDataManager.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		6CEDE83B2B6CE9350054BBB4 /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				6CEDE83C2B6CE9350054BBB4 /* UserDataManager.swift */,
+			);
+			path = Firestore;
+			sourceTree = "<group>";
+		};
 		6CEF9EA92ACC00200008CF2D /* GroupedContact */ = {
 			isa = PBXGroup;
 			children = (
@@ -874,6 +892,7 @@
 				B7A2A5EE2A7602D7001F392F /* IColab */,
 				D8FCE0882AAC41B700B19B95 /* IColabTests */,
 				B7A2A5ED2A7602D7001F392F /* Products */,
+				6CEDE83A2B6CE91A0054BBB4 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1025,15 +1044,6 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		D819F7BD2B22F19200287D60 /* Firestore */ = {
-			isa = PBXGroup;
-			children = (
-				D819F7BE2B22F1A700287D60 /* FireStoreManager.swift */,
-				6C87F4572B501F4C00ED23C4 /* UserDataManager.swift */,
-			);
-			path = Firestore;
-			sourceTree = "<group>";
-		};
 		D82C0D542AB976E5009802D9 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -1078,6 +1088,7 @@
 		D8385A502AD51D790013D90F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				6CEDE83B2B6CE9350054BBB4 /* Firestore */,
 				D819F7BC2B22F18800287D60 /* Authentication */,
 			);
 			path = Services;
@@ -1681,6 +1692,7 @@
 				6C9665622B51D28000E3B3E3 /* UserAdminCardView.swift in Sources */,
 				D87A67B82AA7059F000586A1 /* MilestoneDetailCard.swift in Sources */,
 				D8A3AF362AA4664E00AC06C9 /* Account.swift in Sources */,
+				6CEDE83D2B6CE9350054BBB4 /* UserDataManager.swift in Sources */,
 				6C745EB82AC980BD00646574 /* MockMilestones.swift in Sources */,
 				6C74DB9A2AC0323700FD5D3F /* InputFieldView.swift in Sources */,
 				6C726A142AC82FDB00E14230 /* ChatListView.swift in Sources */,
@@ -1708,7 +1720,7 @@
 				6CC7F2A02AC0344A00AF0A12 /* InputDescriptionView.swift in Sources */,
 				D87A67B42AA63B4E000586A1 /* ButtonComponent.swift in Sources */,
 				D81DCE282AC3FAE900D65604 /* EditSkillFormView.swift in Sources */,
-				D8A3AF1F2AA31C9000AC06C9 /* HomeViewModel.swift in Sources */,
+				D8A3AF1F2AA31C9000AC06C9 /* BrowseViewModel.swift in Sources */,
 				6C36DB912B56802E005A524E /* Payment.swift in Sources */,
 				D8A3AF1F2AA31C9000AC06C9 /* BrowseViewModel.swift in Sources */,
 				D895870E2AB2C1720064629B /* Experience.swift in Sources */,
