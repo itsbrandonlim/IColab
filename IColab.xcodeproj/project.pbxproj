@@ -1025,7 +1025,6 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-<<<<<<< HEAD
 		D819F7BD2B22F19200287D60 /* Firestore */ = {
 			isa = PBXGroup;
 			children = (
@@ -1035,8 +1034,6 @@
 			path = Firestore;
 			sourceTree = "<group>";
 		};
-=======
->>>>>>> Development
 		D82C0D542AB976E5009802D9 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -1711,12 +1708,9 @@
 				6CC7F2A02AC0344A00AF0A12 /* InputDescriptionView.swift in Sources */,
 				D87A67B42AA63B4E000586A1 /* ButtonComponent.swift in Sources */,
 				D81DCE282AC3FAE900D65604 /* EditSkillFormView.swift in Sources */,
-<<<<<<< HEAD
 				D8A3AF1F2AA31C9000AC06C9 /* HomeViewModel.swift in Sources */,
 				6C36DB912B56802E005A524E /* Payment.swift in Sources */,
-=======
 				D8A3AF1F2AA31C9000AC06C9 /* BrowseViewModel.swift in Sources */,
->>>>>>> Development
 				D895870E2AB2C1720064629B /* Experience.swift in Sources */,
 				B7A2A5F22A7602D7001F392F /* ContentView.swift in Sources */,
 				D8155B2B2B36B7D4000E6267 /* DatabaseRepositoryProtocol.swift in Sources */,
