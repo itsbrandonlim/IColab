@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-class HomeViewModel : ObservableObject{
+class BrowseViewModel : ObservableObject{
     @Published var projects : [Project] = []
     @Published var selectedProjects : [Project] = []
     @Published var searchText : String = ""

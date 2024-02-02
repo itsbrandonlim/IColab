@@ -46,7 +46,7 @@ class LoginViewModel: ObservableObject {
                 self.showError(error: .firebaseError(error))
                 return
             } else{
-                AccountManager.shared.getAccount{
+                AccountManager.shared.getAccount(){
                     self.isLoading = false
                     self.showSignIn = false
                 }

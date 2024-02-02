@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct HomeView: View {
-    @StateObject var homeViewModel = HomeViewModel()
+struct BrowseView: View {
+    @StateObject var homeViewModel = BrowseViewModel()
     @FocusState var isInputActive: Bool
     @State var isLoading = true
     var body: some View {
@@ -82,7 +82,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
-            HomeView()
+            BrowseView()
         }
     }
 }

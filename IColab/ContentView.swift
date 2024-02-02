@@ -24,7 +24,7 @@ struct ContentView: View {
                             VStack{
                                 switch selectedTabBar {
                                 case .home:
-                                    HomeView()
+                                    BrowseView()
                                 case .projects:
                                     ProjectMainView()
                                 case .chats:

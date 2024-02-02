@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ResourceRequirementView: View {
-    @StateObject var homeViewModel = HomeViewModel()
+    @StateObject var homeViewModel = BrowseViewModel()
     @FocusState var isInputActive: Bool
     
     var body: some View {

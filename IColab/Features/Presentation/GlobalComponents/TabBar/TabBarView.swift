@@ -39,8 +39,13 @@ struct TabBarView: View {
 struct TabBarView_Previews: PreviewProvider {
     static var previews: some View {
         VStack{
+<<<<<<< HEAD
             HomeView()
             TabBarView(selectedTabItem: .constant(.home), tabBarItems: [.home])
+=======
+            BrowseView()
+            TabBarView(selectedTabItem: .constant(.home))
+>>>>>>> Development
         }
         
     }
