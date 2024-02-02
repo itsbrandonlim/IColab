@@ -14,7 +14,7 @@ struct ContactListView: View {
     @State var toggle : Bool = true
     @State var isLoading : Bool = false
     
-    @StateObject var homeViewModel = HomeViewModel()
+    @StateObject var homeViewModel = BrowseViewModel()
         
     var body: some View {
         VStack {

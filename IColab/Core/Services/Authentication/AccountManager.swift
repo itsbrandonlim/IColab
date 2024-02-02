@@ -18,7 +18,7 @@ class AccountManager : ObservableObject {
     var detailConstants = FireStoreConstant.AccountDetailConstants()
     
     public func getAccount(completion: @escaping ()-> Void) {
-        if let user = Auth.auth().currentUser {
+        if let user = AuthenticationManager.shared.getLoggedInUser() {
             let fetchDocument = FetchDocumentFromIDUseCase()
             fetchDocument.call(collectionName: detailConstants.collectionName, id: user.uid) { doc in
                 if let document = doc.data(){
