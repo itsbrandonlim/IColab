@@ -73,4 +73,5 @@ struct FireStoreRepository : FireStoreRepositoryProtocol {
     func setPayment(collectionName: String, payment: Payment) throws {
         try firestoreDataSource.setPayment(collectionName: collectionName, payment: payment)
     }
+
 }

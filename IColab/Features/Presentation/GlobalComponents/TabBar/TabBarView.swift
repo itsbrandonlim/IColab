@@ -9,7 +9,8 @@ import SwiftUI
 
 struct TabBarView: View {
     @Binding var selectedTabItem : TabBarType
-    private let tabBarItems: [TabBarType] = TabBarType.getUserTabs()
+    @State var tabBarItems: [TabBarType]
+    
     var body: some View {
         GeometryReader { geometry in
             HStack(spacing: 0) {
@@ -20,11 +21,18 @@ struct TabBarView: View {
                     }
                     .frame(width: geometry.size.width * 0.2)
                     .foregroundColor(tabBarType == selectedTabItem ? .blue : .primary)
+                    .onAppear {
+//                        self.getTabBars()
+                    }
                 }.offset(y: 5)
                 Spacer()
             }
         }
         .frame(height: 50)
+    }
+    
+    func getTabBars() {
+        tabBarItems = TabBarType.getTabs(userId: AuthenticationManager.shared.getLoggedInUser()?.uid ?? "-")
     }
 }
 
@@ -32,7 +40,7 @@ struct TabBarView_Previews: PreviewProvider {
     static var previews: some View {
         VStack{
             HomeView()
-            TabBarView(selectedTabItem: .constant(.home))
+            TabBarView(selectedTabItem: .constant(.home), tabBarItems: [.home])
         }
         
     }

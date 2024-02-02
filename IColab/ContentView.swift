@@ -12,6 +12,9 @@ struct ContentView: View {
     @ObservedObject var accountManager = AccountManager.shared
     @State var showSignIn : Bool = false
     @State var isLoading : Bool = false
+    @State var tabBarItems: [TabBarType] = []
+    var fetchTabBars = FetchDocumentFromIDUseCase()
+    
     var body: some View {
         ZStack{
             if !isLoading {
@@ -39,14 +42,36 @@ struct ContentView: View {
                                 }
                             }
                         }
-                        TabBarView(selectedTabItem: $selectedTabBar)
+                        TabBarView(selectedTabItem: $selectedTabBar, tabBarItems: tabBarItems)
                     }
                     .navigationBarBackButtonHidden()
                     .navigationBarTitleDisplayMode(.large)
                 }
                 
-            } else{
+            } 
+            else{
                 LoadingView()
+                    .onAppear {
+                        self.fetchTabBars.call(collectionName: "users", id: AuthenticationManager.shared.getLoggedInUser()?.uid ?? "-") { doc in
+                            if doc.exists {
+                                if let data = doc.data() {
+                                    if data["isAdmin"] as? Bool == true {
+                                        self.tabBarItems = TabBarType.getAdminTabs()
+                                    }
+                                    else {
+                                        self.tabBarItems = TabBarType.getUserTabs()
+                                    }
+                                }
+                                isLoading = false
+                            }
+                            else {
+                                isLoading = true
+                            }
+                        }
+                        if self.tabBarItems.isEmpty {
+                            isLoading = true
+                        }
+                    }
             }
         }
         .accentColor(.primary)
@@ -60,10 +85,12 @@ struct ContentView: View {
                     }
                 }
                 self.showSignIn = false
+                
             } else {
                 withAnimation {
                     self.isLoading = false
                     self.showSignIn = true
+                    
                 }
             }
 //            AccountManager.shared.getAccount(id: "ubDASCnrj2SyV419SwpJ39h7xby1") {

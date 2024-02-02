@@ -15,6 +15,7 @@ class CurrentTaskViewModel: ObservableObject {
     @Published var isOwner : Bool = false
     
     let updateProjectUseCase = UpdateProjectUseCase()
+    let setPaymentUseCase = SetPaymentUseCase()
     
     init(project : Project, goal : Goal){
         self.project = project
@@ -71,6 +72,8 @@ class CurrentTaskViewModel: ObservableObject {
         self.goal = project.milestones[milestoneIndex].goals[goalIndex]
         self.tasks = initToggle(tasks: self.goal.tasks)
         self.objectWillChange.send()
+        
+        self.checkIfGoalFinished()
     }
     
     func checkIfGoalFinished() {
@@ -79,6 +82,16 @@ class CurrentTaskViewModel: ObservableObject {
         
         if tasks.count == tasks.map({$0.key.status == .completed}).count {
             print("All tasks completed")
+            for member in project.members {
+                do {
+                    try self.setPaymentUseCase.call(payment: Payment(amount: 1234, owner: project.owner ?? "Owner ID not found", worker: member.workerID, project: project.id, goal: project.milestones[milestoneIndex].goals[goalIndex].id))
+                    self.objectWillChange.send()
+                }
+                catch {
+                    print("Failed creating Payment")
+                }
+            }
+            
         }
     }
     

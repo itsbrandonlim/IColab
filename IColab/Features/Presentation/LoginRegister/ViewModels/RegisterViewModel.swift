@@ -36,9 +36,9 @@ class RegisterViewModel : ObservableObject {
         self.showError = showError
     }
     
-    public func saveToDatabase() {
+    public func saveToDatabase(userId: String) {
         if registrationValidation() {
-            UserDataManager.shared.addUser(username: self.username, email: self.email, phone: self.phoneNumber, region: self.region)
+            UserDataManager.shared.addUser(userId: userId, username: self.username, email: self.email, phone: self.phoneNumber, region: self.region)
             print("called")
         }
     }
@@ -46,7 +46,7 @@ class RegisterViewModel : ObservableObject {
     public func register(){
         self.isLoading = true
         if registrationValidation() {
-            self.saveToDatabase()
+            
             
             AuthenticationManager.shared.createUser(email: self.email, password: self.password) { authDataResult, error in
                 if let error = error {
@@ -66,8 +66,12 @@ class RegisterViewModel : ObservableObject {
                         }
                        
                     }
+                    
+                    self.saveToDatabase(userId: result.user.uid)
                 }
             }
+            
+            
         }
     }
     

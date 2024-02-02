@@ -17,12 +17,43 @@ enum TabBarType {
     case payment
     case user
     
+    static func getTabs(userId: String) -> [TabBarType] {
+        var checkAdmin = FetchDocumentFromIDUseCase()
+        print("authentichaed id is: \(userId)")
+        
+        var tabBars: [TabBarType] = []
+        
+        checkAdmin.call(collectionName: "users", id: userId) { doc in
+            if doc.exists {
+                tabBars = [.home, .payment, .user]
+            }
+            else {
+                tabBars = [.home, .projects, .chats, .notifications, .profile]
+            }
+        }
+        print("Done")
+        
+        return tabBars
+    }
+    
+//    static func getTabs(userId: String) -> [TabBarType] {
+//        var checkAdmin = CheckAdminUseCase()
+//        print("authentichaed id is: \(userId)")
+//        
+//        if checkAdmin.call(userId: userId) {
+//            return [.home, .payment, .user]
+//        }
+//        else {
+//            return [.home, .projects, .chats, .notifications, .profile]
+//        }
+//    }
+    
     static func getUserTabs() -> [TabBarType] {
         return [.home, .projects, .chats, .notifications, .profile]
     }
     
     static func getAdminTabs() -> [TabBarType] {
-        return [.home, .payment, .user]
+        return [.home, .payment, .user, .profile]
     }
 }
 

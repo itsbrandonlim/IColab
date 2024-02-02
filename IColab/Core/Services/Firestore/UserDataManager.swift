@@ -21,8 +21,8 @@ class UserDataManager {
     
     let db = Firestore.firestore()
     
-    func addUser(username: String = "", email: String = "", phone: String = "", region: String = "", isAdmin: Bool = false) {
-        db.collection("users").addDocument(data: [
+    func addUser(userId: String, username: String = "", email: String = "", phone: String = "", region: String = "", isAdmin: Bool = false) {
+        db.collection("users").document(userId).setData([
             "username" : username,
             "email" : email,
             "phone" : phone,
