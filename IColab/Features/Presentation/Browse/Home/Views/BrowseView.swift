@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BrowseView: View {
     @StateObject var homeViewModel = BrowseViewModel()
+    
     @FocusState var isInputActive: Bool
     @State var isLoading = true
     var body: some View {

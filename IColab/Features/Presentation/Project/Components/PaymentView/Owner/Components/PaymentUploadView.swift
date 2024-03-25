@@ -38,9 +38,13 @@ struct PaymentUploadView: View {
                    if !gotAccess { return }
                    // access the directory URL
                    // (read templates in the directory, make a bookmark, etc.)
-                    print("File is")
-                    print(file)
-                    dataManager.uploadFile(url: file)
+                    print("File is: ", file)
+                    do {
+                        try dataManager.upload(url: file)
+                    }
+                    catch {
+                        print("Error while uploading")
+                    }
                    // release access
                    file.stopAccessingSecurityScopedResource()
                 case .failure(let error):

@@ -37,15 +37,15 @@ struct InputDescriptionView: View {
                     .font(.caption2)
             }
         }
-        .toolbar {
-            ToolbarItem(placement: .keyboard) {
-                if isFocused {
-                    Button("Done") {
-                        isFocused = false
-                    }
-                }
-            }
-        }
+//        .toolbar {
+//            ToolbarItem(placement: .keyboard) {
+//                if isFocused {
+//                    Button("Done") {
+//                        isFocused = false
+//                    }
+//                }
+//            }
+//        }
     }
 }
 
