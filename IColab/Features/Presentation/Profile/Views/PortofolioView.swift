@@ -14,7 +14,11 @@ struct PortofolioView: View {
             GridView(rows: (account.accountDetail.projectsOwned.count) / 2 + 1, columns: 2) { row, column in
                 let objectIndex = row * 2 + column
                 if objectIndex < pvm.account?.accountDetail.projectsOwned.count ?? 0 {
-                    PortofolioCard(project: pvm.account!.accountDetail.projectsOwned[objectIndex])
+                    NavigationLink{
+                        ProjectDetailView(project: pvm.account!.accountDetail.projectsOwned[objectIndex])
+                    } label: {
+                        PortofolioCard(project: pvm.account!.accountDetail.projectsOwned[objectIndex])
+                    }
                 } else {
                     EmptyView()
                 }
