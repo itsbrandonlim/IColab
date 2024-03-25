@@ -22,7 +22,6 @@ struct PaymentAdminView: View {
                             ForEach(vm.payments) { payment in
                                 PaymentAdminCardView(payment: payment)
                                     .frame(maxWidth: .infinity)
-                                    
                             }
                         }
                         .environmentObject(vm)

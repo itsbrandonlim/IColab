@@ -22,6 +22,7 @@ class AuthenticationManager {
     }
     
     func getLoggedInUser() -> User?{
+        print(Auth.auth().currentUser?.uid)
         return Auth.auth().currentUser
     }
     

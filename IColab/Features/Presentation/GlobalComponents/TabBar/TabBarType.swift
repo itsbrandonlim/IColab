@@ -18,11 +18,9 @@ enum TabBarType {
     case user
     
     static func getTabs(userId: String) -> [TabBarType] {
-        var checkAdmin = FetchDocumentFromIDUseCase()
-        print("authentichaed id is: \(userId)")
+        let checkAdmin = FetchDocumentFromIDUseCase()
         
         var tabBars: [TabBarType] = []
-        
         checkAdmin.call(collectionName: "users", id: userId) { doc in
             if doc.exists {
                 tabBars = [.home, .payment, .user]

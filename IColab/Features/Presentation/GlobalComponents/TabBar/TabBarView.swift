@@ -22,7 +22,7 @@ struct TabBarView: View {
                     .frame(width: geometry.size.width * 0.2)
                     .foregroundColor(tabBarType == selectedTabItem ? .blue : .primary)
                     .onAppear {
-//                        self.getTabBars()
+//                        self.getTabBars() 
                     }
                 }.offset(y: 5)
                 Spacer()

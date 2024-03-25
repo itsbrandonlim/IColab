@@ -12,7 +12,7 @@ struct ContentView: View {
     @ObservedObject var accountManager = AccountManager.shared
     @State var showSignIn : Bool = false
     @State var isLoading : Bool = false
-    @State var tabBarItems: [TabBarType] = []
+    @State var tabBarItems: [TabBarType] = [.home, .projects, .chats, .notifications, .profile]
     var fetchTabBars = FetchDocumentFromIDUseCase()
     
     var body: some View {
@@ -99,7 +99,7 @@ struct ContentView: View {
 //                }
 //            }
 //            self.showSignIn = false
-            
+
         }
         .fullScreenCover(isPresented: $showSignIn) {
             NavigationStack{

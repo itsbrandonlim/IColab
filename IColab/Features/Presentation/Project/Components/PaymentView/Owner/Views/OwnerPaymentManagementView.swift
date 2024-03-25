@@ -27,7 +27,11 @@ struct OwnerPaymentManagementView: View {
             VStack {
                 ScrollView {
                     ForEach(0..<7) { _ in
-                        PaymentStatusCardView(status: PaymentStatusEnum.allCases.randomElement()!)
+                        NavigationLink {
+                            PaymentUploadView()
+                        } label: {
+                            PaymentStatusCardView(status: PaymentStatusEnum.allCases.randomElement()!)
+                        }
                     }
                 }
             }
@@ -35,7 +39,6 @@ struct OwnerPaymentManagementView: View {
             
             Spacer()
         }
-        
         .navigationTitle("Payment Management").navigationBarTitleDisplayMode(.inline)
     }
 }

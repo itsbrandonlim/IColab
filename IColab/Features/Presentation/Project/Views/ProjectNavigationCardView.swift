@@ -41,15 +41,15 @@ struct ProjectNavigationCardView: View {
                     description: "See how far the project have gone, and details about the milestones"
                 )
             }
-            NavigationLink {
-                ResourceRequirementView()
-            } label: {
-                ProjectButtonView(
-                    icon: "folder.circle",
-                    title: "Resource Requirements",
-                    description: "Information on the personnel, equipment, materials, and budget needed to complete the project."
-                )
-            }
+//            NavigationLink {
+//                ResourceRequirementView()
+//            } label: {
+//                ProjectButtonView(
+//                    icon: "folder.circle",
+//                    title: "Resource Requirements",
+//                    description: "Information on the personnel, equipment, materials, and budget needed to complete the project."
+//                )
+//            }
             NavigationLink {
                 CurrentTaskView(vm: CurrentTaskViewModel(project: vm.project, goal: vm.getCurrentGoal()))
             } label: {
