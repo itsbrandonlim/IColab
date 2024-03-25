@@ -18,13 +18,13 @@ struct ChatListView: View {
                 Text("Chats")
                     .font(.largeTitle)
                     .bold()
-                NavigationLink {
-                    CreateChatView()
-                        .environmentObject(vm)
-                } label: {
-                    Image(systemName: "plus.circle")
-                        .font(.largeTitle)
-                }
+//                NavigationLink {
+//                    CreateChatView()
+//                        .environmentObject(vm)
+//                } label: {
+//                    Image(systemName: "plus.circle")
+//                        .font(.largeTitle)
+//                }
                 Spacer()
             }
             SearchView(
