@@ -12,7 +12,7 @@ struct MockMembers: Randomizeable {
     
     static var array: [Member] {
         MockMembers.initArray(count: 5) {
-            return Member(account: Mock.accounts.randomElement()!, role: Role.allCases.randomElement()!)
+            return Member(workerID: UUID().uuidString, role: Role.allCases.randomElement()!)
         }
     }
 }

@@ -12,7 +12,6 @@ struct MockAccountDetails: Randomizeable {
     
     static var names: [String] = [
         "John",
-        "Doe",
         "Kevin",
         "Dallian",
         "Gregorius",
@@ -25,13 +24,14 @@ struct MockAccountDetails: Randomizeable {
     ]
     
     static var array: [AccountDetail] {
-        MockAccountDetails.initArray(count: 7) {
-            return AccountDetail (
-                name: names.randomElement()!,
+        var accountDetails : [AccountDetail] = []
+        for name in names {
+            let accountDetail = AccountDetail(
+                name: name,
                 desc: "Lorem ipsum dolor sit amet consectetur. Lobortis sit aliquam est lorem leo. Sollicitudin risus ornare sapien.",
                 location: "Indonesia",
                 bankAccount: "bankaccount",
-                cvLink: "CVLink",
+                phoneNumber: "phoneNumber",
                 skills: ["SwiftUI", "CoreML", "Vision"],
                 educations: [
                     Education(title: "BINUS University", company: "", startDate: Date.now, endDate: Date.now, desc: "Bachelor of Science - Data Science and Analytics"),
@@ -42,7 +42,9 @@ struct MockAccountDetails: Randomizeable {
                     Experience(title: "Junior Developer Intern", company: "Samsung Korea", startDate: Date.now, endDate: Date.now, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
                 ]
             )
+            accountDetails.append(accountDetail)
         }
+        return accountDetails
     }
     
 }

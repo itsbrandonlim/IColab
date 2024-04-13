@@ -7,13 +7,22 @@
 
 import Foundation
 
-struct Member: Identifiable, Equatable {
+struct Member: Identifiable, Equatable{
     let id: UUID = UUID()
     
-    var account: Account
+    var workerID : String
     var role: Role
     
-    mutating func setAccount(account: Account) {
-        self.account = account
+    static func decode(from data: [String:Any]) -> Member {
+        let workerID = data["workerID"] as! String
+        let role = Role(rawValue: (data["role"] as! String))
+        return Member(workerID: workerID, role: role!)
+    }
+    
+    func toDict() -> [String:Any]{
+        return [
+            "workerID" : self.workerID,
+            "role" : self.role.rawValue
+        ]
     }
 }

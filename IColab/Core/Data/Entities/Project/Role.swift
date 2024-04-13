@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Role: String, CaseIterable {
+enum Role: String, CaseIterable, Codable{
     case frontend = "Front-End"
     case backend = "Back-End"
     case design = "Designer"

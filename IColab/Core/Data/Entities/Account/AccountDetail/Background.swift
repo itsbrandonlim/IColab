@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 class Background : Hashable{
     var title : String
@@ -13,6 +14,14 @@ class Background : Hashable{
     var startDate : Date
     var endDate : Date
     var desc : String
+    
+    private enum CodingKeys: String, CodingKey {
+        case title
+        case company
+        case startDate
+        case endDate
+        case desc
+    }
     
     init(title: String, company: String, startDate: Date, endDate: Date, desc: String) {
         self.title = title

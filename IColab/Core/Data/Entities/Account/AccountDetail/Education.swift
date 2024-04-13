@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
-class Education : Background {
+class Education : Background{
     override init(title: String, company: String, startDate: Date, endDate: Date, desc: String) {
         super.init(title: title, company: company, startDate: startDate, endDate: endDate, desc: desc)
     }
@@ -16,4 +17,29 @@ class Education : Background {
         super.init(copyFrom: other)
     }
     
+    public func toDict() -> [String : Any] {
+        return [
+            "title" : self.title,
+            "company" : self.company,
+            "startDate" : Timestamp(date: self.startDate),
+            "endDate" : Timestamp(date: self.endDate),
+            "desc" : self.desc
+        ]
+    }
+    
+    static public func decode(from data: [String: Any]) -> Education{
+        let title = data["title"] as! String
+        let company = data["company"] as! String
+
+        let startDateTimestamp = data["startDate"] as! Timestamp
+        let startDate = startDateTimestamp.dateValue()
+        let endDateTimestamp = data["endDate"] as! Timestamp
+        let endDate = endDateTimestamp.dateValue()
+
+        let desc = data["desc"] as! String
+
+        let education = Education(title: title, company: company, startDate: startDate, endDate: endDate, desc: desc)
+       
+        return education
+    }
 }

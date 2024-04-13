@@ -9,44 +9,75 @@ import SwiftUI
 
 struct ContentView: View {
     @State var selectedTabBar : TabBarType = .home
-    @StateObject var accountManager = AccountManager.shared
+    @ObservedObject var accountManager = AccountManager.shared
     @State var showSignIn : Bool = false
-    init() {
-        Mock.init()
-    }
+    @State var isLoading : Bool = false
     var body: some View {
         ZStack{
-            NavigationStack {
-                ScrollView{
-                    VStack{
-                        switch selectedTabBar {
-                        case .home:
-                            HomeView()
-                        case .projects:
-                            ProjectMainView()
-                        case .chats:
-                            ChatListView()
-                        case .notifications:
-                            NotificationView()
-                        case .profile:
-                            let pvm = ProfileViewModel(uid: accountManager.account?.id ?? "")
-                            ProfileView(pvm: pvm)
-                                .environmentObject(pvm)
+            if !isLoading {
+                if !showSignIn {
+                    NavigationStack {
+                        VStack{
+                            VStack{
+                                switch selectedTabBar {
+                                case .home:
+                                    BrowseView()
+                                case .projects:
+                                    ProjectMainView()
+                                case .chats:
+                                    ChatListView()
+                                case .notifications:
+                                    NotificationView()
+                                case .profile:
+                                    let pvm = ProfileViewModel()
+                                    ProfileView(pvm: pvm, showSignIn: $showSignIn)
+                                        .environmentObject(pvm)
+                                }
+                            }
                         }
+                        TabBarView(selectedTabItem: $selectedTabBar)
                     }
+                    .navigationBarBackButtonHidden()
+                    .navigationBarTitleDisplayMode(.large)
                 }
-                TabBarView(selectedTabItem: $selectedTabBar)
+                
+            } else{
+                LoadingView()
             }
-            .navigationBarBackButtonHidden()
-            .navigationBarTitleDisplayMode(.large)
         }
         .accentColor(.primary)
         .onAppear {
-            self.showSignIn = true
+            self.isLoading = true
+            
+            if AuthenticationManager.shared.getLoggedInUser() != nil {
+                AccountManager.shared.getAccount {
+                    withAnimation {
+                        self.isLoading = false
+                    }
+                }
+                self.showSignIn = false
+            } else {
+                withAnimation {
+                    self.isLoading = false
+                    self.showSignIn = true
+                }
+            }
+//            AccountManager.shared.getAccount(id: "ubDASCnrj2SyV419SwpJ39h7xby1") {
+//                withAnimation {
+//                    self.isLoading = false
+//                }
+//            }
+//            self.showSignIn = false
+            
         }
         .fullScreenCover(isPresented: $showSignIn) {
             NavigationStack{
-                OnboardingView(showSignIn: $showSignIn)
+                LoginView(lvm: LoginViewModel(showSignIn: $showSignIn))
+            }
+        }
+        .onChange(of: showSignIn) { _ in
+            if showSignIn {
+                selectedTabBar = .home
             }
         }
     }
